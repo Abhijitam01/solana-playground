@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - RUNNER_URL=http://runner:3002
+      - CORS_ORIGIN=http://localhost:3000
+    depends_on:
+      - runner
+
+  runner:
+    build:
+      context: .
+      dockerfile: apps/runner/Dockerfile
+    ports:
+      - "3002:3002"
+      - "8899:8899"
+    environment:
+      - PORT=3002
+      - MAX_EXECUTION_TIME_MS=30000
+      - VALIDATOR_PORT=8899
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    depends_on:
+      - api
+
