@@ -1,0 +1,48 @@
+[
+  {
+    "lineNumber": 1,
+    "what": "Import Anchor SPL token and metadata modules",
+    "why": "SPL Token provides token functionality, while Metaplex metadata provides NFT metadata standards",
+    "solanaConcept": "SPL Token and Metaplex",
+    "rustConcept": "Module imports",
+    "whatBreaksIfRemoved": "Can't use token or metadata types - compilation error",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 12,
+    "what": "Instruction to create an NFT with metadata",
+    "why": "NFTs on Solana are SPL tokens with metadata. This instruction creates both the token and its metadata",
+    "solanaConcept": "NFT Creation",
+    "rustConcept": "Function parameters",
+    "whatBreaksIfRemoved": "No way to create NFTs - core functionality missing",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 18,
+    "what": "CPI call to Metaplex's create_metadata_accounts_v3",
+    "why": "Metaplex is the standard for NFT metadata on Solana. This CPI creates the metadata account that stores NFT information",
+    "solanaConcept": "Metaplex CPI",
+    "rustConcept": "Cross-program invocation",
+    "whatBreaksIfRemoved": "NFT is created but has no metadata - not a proper NFT",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 44,
+    "what": "Mint account with 0 decimals",
+    "why": "NFTs must have 0 decimals - they are indivisible. Each NFT is exactly 1 token",
+    "solanaConcept": "NFT Decimals",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "Token has wrong decimals - not a valid NFT",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 55,
+    "what": "Unchecked account for metadata",
+    "why": "The metadata account is created by Metaplex, so we don't validate it in Anchor. It's a PDA derived by Metaplex",
+    "solanaConcept": "PDA Accounts",
+    "rustConcept": "UncheckedAccount type",
+    "whatBreaksIfRemoved": "Can't pass metadata account to Metaplex - CPI fails",
+    "isImportant": true
+  }
+]
+

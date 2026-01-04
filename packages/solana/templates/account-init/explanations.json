@@ -1,0 +1,102 @@
+[
+  {
+    "lineNumber": 8,
+    "what": "Instruction handler that initializes a new account with initial data",
+    "why": "This demonstrates the core pattern of account initialization in Solana - creating on-chain state that persists across transactions",
+    "solanaConcept": "Account Initialization",
+    "rustConcept": "Function parameters and mutability",
+    "whatBreaksIfRemoved": "No way to create accounts - the program can't store any state",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 9,
+    "what": "Mutable reference to the account being initialized",
+    "why": "We need mut to write data to the account. The &mut allows us to modify the account's fields",
+    "solanaConcept": "Account Mutability",
+    "rustConcept": "Mutable references",
+    "whatBreaksIfRemoved": "Can't modify the account - compilation error",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 10,
+    "what": "Sets the data field of the account",
+    "why": "This stores the u64 value on-chain. This data persists and can be read in future transactions",
+    "solanaConcept": "Account Data Storage",
+    "rustConcept": "Struct field assignment",
+    "whatBreaksIfRemoved": "Account is created but empty - no data stored",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 11,
+    "what": "Stores the authority (user's public key) in the account",
+    "why": "This enables access control - we can check who created the account and allow only them to update it",
+    "solanaConcept": "Account Authority",
+    "rustConcept": "Public key access",
+    "whatBreaksIfRemoved": "No way to track who owns the account - access control breaks",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 18,
+    "what": "Instruction handler that updates existing account data",
+    "why": "Shows how to modify account state after initialization, with proper access control",
+    "solanaConcept": "Account Updates",
+    "rustConcept": "Function implementation",
+    "whatBreaksIfRemoved": "Can't modify accounts after creation - read-only program",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 20,
+    "what": "Access control check using require! macro",
+    "why": "Ensures only the account's authority can update it. This is critical for security",
+    "solanaConcept": "Access Control",
+    "rustConcept": "Macros and error handling",
+    "whatBreaksIfRemoved": "Security vulnerability - anyone can update any account",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 25,
+    "what": "Account struct for initialization with init constraint",
+    "why": "The init constraint tells Anchor to create this account if it doesn't exist, allocate space, and set the owner",
+    "solanaConcept": "Account Initialization Constraint",
+    "rustConcept": "Struct definitions and attributes",
+    "whatBreaksIfRemoved": "Account won't be created automatically - manual account creation required",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 26,
+    "what": "Specifies the payer for account creation",
+    "why": "Account creation costs lamports (rent). The payer is the account that pays for the rent-exempt minimum",
+    "solanaConcept": "Account Rent",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "Anchor doesn't know who pays - compilation error",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 27,
+    "what": "Specifies the space needed for the account",
+    "why": "Solana requires accounts to be rent-exempt. We must specify exactly how much space the account needs",
+    "solanaConcept": "Account Space",
+    "rustConcept": "Arithmetic expressions",
+    "whatBreaksIfRemoved": "Anchor doesn't know how much space to allocate - compilation error",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 40,
+    "what": "Account struct definition with #[account] attribute",
+    "why": "This marks the struct as an Anchor account type. Anchor generates serialization/deserialization code",
+    "solanaConcept": "Account Types",
+    "rustConcept": "Derive macros and attributes",
+    "whatBreaksIfRemoved": "Not recognized as an account type - serialization fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 46,
+    "what": "Implementation block defining the account's size",
+    "why": "LEN constant is used in the init constraint to specify space. 8 bytes for discriminator + data fields",
+    "solanaConcept": "Account Discriminator",
+    "rustConcept": "Associated constants",
+    "whatBreaksIfRemoved": "Can't calculate account size - space allocation fails",
+    "isImportant": true
+  }
+]
+

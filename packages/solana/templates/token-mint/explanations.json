@@ -1,0 +1,120 @@
+[
+  {
+    "lineNumber": 1,
+    "what": "Import Anchor SPL token module",
+    "why": "Provides types and functions for interacting with the SPL Token program, including Mint, TokenAccount, and CPI helpers",
+    "solanaConcept": "SPL Token Program",
+    "rustConcept": "Module imports",
+    "whatBreaksIfRemoved": "Can't use SPL Token types or functions - compilation error",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 8,
+    "what": "Instruction to create a new token mint",
+    "why": "A token mint is the source of truth for a token type. It defines the token's properties (decimals, supply, etc.)",
+    "solanaConcept": "Token Mint",
+    "rustConcept": "Function implementation",
+    "whatBreaksIfRemoved": "No way to create tokens - core functionality missing",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 13,
+    "what": "Instruction to mint new tokens into a token account",
+    "why": "Minting creates new tokens and adds them to the total supply. Only the mint authority can mint",
+    "solanaConcept": "Token Minting",
+    "rustConcept": "Function parameters",
+    "whatBreaksIfRemoved": "Can't create new tokens - supply is fixed at zero",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 14,
+    "what": "CPI call to the SPL Token program's mint_to instruction",
+    "why": "This is a Cross-Program Invocation - our program calls into the SPL Token program to perform the minting",
+    "solanaConcept": "Cross-Program Invocation (CPI)",
+    "rustConcept": "Function calls and error propagation",
+    "whatBreaksIfRemoved": "Tokens aren't actually minted - just a log message",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 15,
+    "what": "Creates a CPI context with the required accounts",
+    "why": "CPI contexts specify which accounts the called program needs and their roles (mint, to, authority)",
+    "solanaConcept": "CPI Context",
+    "rustConcept": "Struct initialization",
+    "whatBreaksIfRemoved": "Can't pass accounts to SPL Token program - CPI fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 25,
+    "what": "Instruction to transfer tokens between token accounts",
+    "why": "Demonstrates how to move tokens from one account to another, which is fundamental to token operations",
+    "solanaConcept": "Token Transfers",
+    "rustConcept": "Function implementation",
+    "whatBreaksIfRemoved": "Can't move tokens - they're locked in accounts",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 26,
+    "what": "CPI call to the SPL Token program's transfer instruction",
+    "why": "Transfers tokens by calling into the SPL Token program, which handles all the account updates",
+    "solanaConcept": "Token Transfers via CPI",
+    "rustConcept": "Function calls",
+    "whatBreaksIfRemoved": "Tokens don't actually move - transfer fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 40,
+    "what": "Account struct for creating a token mint",
+    "why": "Defines all accounts needed to create a mint, with Anchor constraints that handle initialization",
+    "solanaConcept": "Token Mint Creation",
+    "rustConcept": "Struct definitions",
+    "whatBreaksIfRemoved": "Can't create mints - missing account structure",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 41,
+    "what": "Init constraint for the mint account",
+    "why": "Tells Anchor to initialize the mint account if it doesn't exist",
+    "solanaConcept": "Account Initialization",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "Mint account isn't created - initialization fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 43,
+    "what": "Sets the mint's decimals to 9",
+    "why": "Decimals define the smallest unit of the token. 9 is standard (like SOL). 1 token = 1,000,000,000 base units",
+    "solanaConcept": "Token Decimals",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "Mint has wrong decimals - token amounts are incorrect",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 44,
+    "what": "Sets the mint authority",
+    "why": "The mint authority is the only account that can mint new tokens. This is critical for supply control",
+    "solanaConcept": "Mint Authority",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "No mint authority set - can't mint tokens",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 50,
+    "what": "Account struct for minting tokens",
+    "why": "Defines accounts needed: the mint, destination token account, and mint authority",
+    "solanaConcept": "Token Minting",
+    "rustConcept": "Struct definitions",
+    "whatBreaksIfRemoved": "Can't specify accounts for minting - CPI fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 58,
+    "what": "Account struct for transferring tokens",
+    "why": "Defines source, destination, and authority accounts needed for a token transfer",
+    "solanaConcept": "Token Transfers",
+    "rustConcept": "Struct definitions",
+    "whatBreaksIfRemoved": "Can't specify accounts for transfer - CPI fails",
+    "isImportant": true
+  }
+]
+

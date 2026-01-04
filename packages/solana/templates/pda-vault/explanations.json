@@ -1,0 +1,111 @@
+[
+  {
+    "lineNumber": 8,
+    "what": "Initializes a PDA vault account",
+    "why": "PDAs are accounts owned by programs that don't have private keys. They're derived deterministically from seeds",
+    "solanaConcept": "PDA Initialization",
+    "rustConcept": "Function implementation",
+    "whatBreaksIfRemoved": "No way to create the vault - core functionality missing",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 9,
+    "what": "Stores the authority's public key in the vault",
+    "why": "The authority is who can control the vault (deposit/withdraw). This enables access control",
+    "solanaConcept": "Account Authority",
+    "rustConcept": "Struct field assignment",
+    "whatBreaksIfRemoved": "No way to track who owns the vault - access control breaks",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 10,
+    "what": "Stores the bump seed used to derive the PDA",
+    "why": "The bump is needed to re-derive the PDA address in future transactions. It's stored for convenience",
+    "solanaConcept": "Bump Seed",
+    "rustConcept": "Struct field assignment",
+    "whatBreaksIfRemoved": "Can't re-derive the PDA in withdraw instruction - would need to find bump again",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 15,
+    "what": "Deposits lamports into the vault PDA",
+    "why": "Demonstrates how to transfer lamports to a PDA account. PDAs can hold lamports like any account",
+    "solanaConcept": "Lamport Transfers",
+    "rustConcept": "Mutable borrows and arithmetic",
+    "whatBreaksIfRemoved": "No way to fund the vault - core functionality missing",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 16,
+    "what": "Borrows mutable lamports from the vault account and adds amount",
+    "why": "This directly manipulates the account's lamport balance. The PDA can hold SOL (lamports)",
+    "solanaConcept": "Account Lamports",
+    "rustConcept": "Try borrow mut pattern and dereferencing",
+    "whatBreaksIfRemoved": "Vault doesn't receive lamports - deposit fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 17,
+    "what": "Subtracts lamports from the authority's account",
+    "why": "The authority pays for the deposit. Their account balance decreases",
+    "solanaConcept": "Lamport Transfers",
+    "rustConcept": "Mutable borrows and arithmetic",
+    "whatBreaksIfRemoved": "Authority's balance doesn't decrease - money appears from nowhere",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 22,
+    "what": "Withdraws lamports from the vault PDA",
+    "why": "Demonstrates how to transfer lamports out of a PDA back to the authority",
+    "solanaConcept": "PDA Withdrawals",
+    "rustConcept": "Function implementation",
+    "whatBreaksIfRemoved": "No way to get lamports out - funds are locked forever",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 24,
+    "what": "Access control check - only vault authority can withdraw",
+    "why": "Security critical - prevents unauthorized withdrawals from the vault",
+    "solanaConcept": "Access Control",
+    "rustConcept": "Require macro",
+    "whatBreaksIfRemoved": "Security vulnerability - anyone can drain the vault",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 31,
+    "what": "Account constraint for PDA initialization with seeds",
+    "why": "The seeds parameter tells Anchor how to derive the PDA. The bump is found automatically",
+    "solanaConcept": "PDA Derivation",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "Account isn't recognized as a PDA - derivation fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 32,
+    "what": "Seed array for PDA derivation",
+    "why": "PDAs are derived from seeds. Here we use 'vault' + authority's key as seeds for uniqueness",
+    "solanaConcept": "PDA Seeds",
+    "rustConcept": "Byte string literals and references",
+    "whatBreaksIfRemoved": "Can't derive the PDA - compilation error",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 33,
+    "what": "Bump parameter - Anchor finds the canonical bump automatically",
+    "why": "The bump is the value that makes the hash fall on the ed25519 curve. Anchor finds it for us",
+    "solanaConcept": "Bump Seed",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "Can't find valid PDA - derivation fails",
+    "isImportant": true
+  },
+  {
+    "lineNumber": 50,
+    "what": "PDA constraint for withdraw - re-derives the PDA",
+    "why": "In withdraw, we need to verify we're using the correct PDA. The seeds + bump re-derive it",
+    "solanaConcept": "PDA Verification",
+    "rustConcept": "Attribute parameters",
+    "whatBreaksIfRemoved": "Can't verify PDA ownership - security risk",
+    "isImportant": true
+  }
+]
+

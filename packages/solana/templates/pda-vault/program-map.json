@@ -1,0 +1,99 @@
+{
+  "instructions": [
+    {
+      "name": "initialize",
+      "lineStart": 8,
+      "lineEnd": 13,
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false,
+          "isPda": true,
+          "seeds": ["vault", "authority.key()"]
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true,
+          "isPda": false
+        },
+        {
+          "name": "system_program",
+          "isMut": false,
+          "isSigner": false,
+          "isPda": false
+        }
+      ],
+      "description": "Initializes a PDA vault account with the authority's public key"
+    },
+    {
+      "name": "deposit",
+      "lineStart": 15,
+      "lineEnd": 19,
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false,
+          "isPda": true
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true,
+          "isPda": false
+        },
+        {
+          "name": "system_program",
+          "isMut": false,
+          "isSigner": false,
+          "isPda": false
+        }
+      ],
+      "description": "Deposits lamports into the vault PDA"
+    },
+    {
+      "name": "withdraw",
+      "lineStart": 22,
+      "lineEnd": 28,
+      "accounts": [
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false,
+          "isPda": true,
+          "seeds": ["vault", "authority.key()"]
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true,
+          "isPda": false
+        }
+      ],
+      "description": "Withdraws lamports from the vault PDA (authority only)"
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Vault",
+      "lineStart": 58,
+      "lineEnd": 63,
+      "fields": [
+        {
+          "name": "authority",
+          "type": "Pubkey",
+          "description": "The public key of the vault's authority"
+        },
+        {
+          "name": "bump",
+          "type": "u8",
+          "description": "The bump seed used to derive this PDA"
+        }
+      ]
+    }
+  ],
+  "cpiCalls": []
+}
+
