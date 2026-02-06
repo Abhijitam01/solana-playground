@@ -29,10 +29,12 @@ export default function Home() {
   }, [templates, searchQuery, difficultyFilter]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-background via-primary-light/5 to-accent/5 dark:from-background dark:via-primary-light/10 dark:to-accent/10">
+    <main className="relative min-h-screen bg-gradient-to-b from-background via-muted/20 to-background">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_15%_20%,rgba(16,185,129,0.08),transparent_35%),radial-gradient(circle_at_85%_0%,rgba(14,165,233,0.08),transparent_35%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-60 [background:linear-gradient(180deg,rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:48px_48px]" />
       {/* Hero Section */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="absolute inset-0 opacity-10 [background:radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.2),transparent_45%)]"></div>
         <div className="container mx-auto px-4 py-16 md:py-24 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,15 +42,15 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-5xl md:text-6xl font-semibold mb-6">
               <span className="gradient-text">Solana Developer</span>
               <br />
               <span className="text-foreground">Playground</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
               Learn Solana programming through interactive, explorable code.
-              Master on-chain concepts with line-by-line explanations and
-              visual state tracking.
+              Master on-chain concepts with line-by-line explanations, visual
+              state tracking, and a UI built for flow.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
@@ -84,7 +86,7 @@ export default function Home() {
                 placeholder="Search templates by name or description..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-card text-foreground placeholder:text-muted-foreground focus-ring transition-all duration-fast focus:border-primary"
+                className="w-full rounded-xl border border-border bg-card/90 py-3 pl-10 pr-4 text-foreground placeholder:text-muted-foreground transition-all duration-fast focus:border-primary focus-ring"
               />
             </div>
             <div className="relative">
@@ -96,7 +98,7 @@ export default function Home() {
                     e.target.value as "all" | "beginner" | "intermediate"
                   )
                 }
-                className="pl-10 pr-8 py-3 rounded-lg border border-border bg-card text-foreground focus-ring transition-all duration-fast focus:border-primary appearance-none cursor-pointer"
+                className="cursor-pointer appearance-none rounded-xl border border-border bg-card/90 py-3 pl-10 pr-8 text-foreground transition-all duration-fast focus:border-primary focus-ring"
               >
                 <option value="all">All Levels</option>
                 <option value="beginner">Beginner</option>
@@ -147,7 +149,7 @@ export default function Home() {
                   href={`/playground/${template.id}`}
                   className="group block h-full"
                 >
-                  <div className="h-full p-6 bg-card rounded-xl border border-border hover:border-primary/50 transition-all duration-normal shadow-sm hover:shadow-lg hover:shadow-primary/5 flex flex-col">
+                  <div className="flex h-full flex-col rounded-2xl border border-border bg-card/90 p-6 shadow-sm transition-all duration-normal hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
                     <div className="flex items-start justify-between mb-4">
                       <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-fast">
                         {template.name}
@@ -181,4 +183,3 @@ export default function Home() {
     </main>
   );
 }
-

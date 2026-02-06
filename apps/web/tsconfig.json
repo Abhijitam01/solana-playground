@@ -5,7 +5,8 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@solana-playground/*": ["../../packages/*/src"]
     },
     "noEmit": true,
     "incremental": true
