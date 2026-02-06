@@ -11,14 +11,12 @@ Rules:
 
 Return an array of LineExplanation objects with this structure:
 {
-  "lineNumber": number,
-  "what": string,
-  "why": string,
-  "solanaConcept": string (optional),
-  "rustConcept": string (optional),
-  "whatBreaksIfRemoved": string (optional),
-  "isImportant": boolean,
-  "relatedLines": number[] (optional)
+  "line": number,
+  "type": "instruction | account | macro | logic | security",
+  "summary": string,
+  "why": string (optional),
+  "risk": string (optional),
+  "concepts": string[] (optional)
 }`;
 
 interface ExplainRequest {
@@ -88,4 +86,3 @@ Return ONLY the JSON array, no markdown, no code blocks.`;
     throw new Error("Failed to generate explanation");
   }
 }
-
