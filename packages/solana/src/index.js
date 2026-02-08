@@ -42,7 +42,7 @@ async function loadTemplate(id) {
                 .catch((err) => {
                 throw new Error(`Invalid metadata: ${err instanceof Error ? err.message : String(err)}`);
             }),
-            readJSON((0, path_1.join)(basePath, "explanations.json"))
+            readJSON((0, path_1.join)(basePath, "line-explanations.json"))
                 .then((data) => zod_1.z.array(types_1.LineExplanationSchema).parse(data))
                 .catch((err) => {
                 throw new Error(`Invalid explanations: ${err instanceof Error ? err.message : String(err)}`);

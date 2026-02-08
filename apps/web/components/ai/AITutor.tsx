@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/Badge";
 import { usePlaygroundStore } from "@/stores/playground";
 import { shallow } from "zustand/shallow";
+import { generateAIResponse } from "@/app/actions/ai";
 
 interface Message {
   id: string;
@@ -50,6 +51,8 @@ export function AITutor({ }: AITutorProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+
+
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -64,18 +67,28 @@ export function AITutor({ }: AITutorProps) {
     setInput("");
     setIsLoading(true);
 
-    // TODO: Call AI tutor API
-    // Simulated response
-    setTimeout(() => {
+    try {
+      const responseText = await generateAIResponse(userMessage.content);
+      
       const assistantMessage: Message = {
         id: `assistant-${Date.now()}`,
         role: "assistant",
-        content: `I understand you're asking about "${input}". Let me help you with that. In Solana, this relates to how accounts and programs interact. Would you like me to explain more about this concept?`,
+        content: responseText,
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, assistantMessage]);
+    } catch (error) {
+      console.error("Failed to get AI response:", error);
+      const errorMessage: Message = {
+        id: `error-${Date.now()}`,
+        role: "assistant",
+        content: "Sorry, I encountered an error while processing your request. Please try again later.",
+        timestamp: new Date(),
+      };
+       setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleQuickHint = () => {

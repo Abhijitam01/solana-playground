@@ -15,6 +15,7 @@ import { useSettingsStore } from "@/stores/settings";
 import { useProgramStore } from "@/stores/programs";
 import { shallow } from "zustand/shallow";
 import { useLayoutStore } from "@/stores/layout";
+import { generateCodeCompletion } from "@/app/actions/ai";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -198,7 +199,9 @@ export function CodePanel() {
   const hoverDecorationsRef = useRef<string[]>([]);
   const todoDecorationsRef = useRef<string[]>([]);
   const hoverTimeoutRef = useRef<number | null>(null);
+
   const lastHoverLineRef = useRef<number | null>(null);
+  const completionProviderRef = useRef<Monaco.IDisposable | null>(null);
 
   // Computed values
   const monacoTheme = useMemo(
@@ -372,6 +375,58 @@ export function CodePanel() {
 
       // Handle mouse leave
       editor.onMouseLeave(handleMouseLeave);
+
+      // Register inline completion provider
+      if (completionProviderRef.current) {
+        completionProviderRef.current.dispose();
+      }
+
+      completionProviderRef.current = monaco.languages.registerInlineCompletionsProvider("rust", {
+        provideInlineCompletions: async (model, position, _context, token) => {
+          const textUntilPosition = model.getValueInRange({
+            startLineNumber: 1,
+            startColumn: 1,
+            endLineNumber: position.lineNumber,
+            endColumn: position.column,
+          });
+
+          const textAfterPosition = model.getValueInRange({
+            startLineNumber: position.lineNumber,
+            startColumn: position.column,
+            endLineNumber: model.getLineCount(),
+            endColumn: model.getLineMaxColumn(model.getLineCount()),
+          });
+
+          if (!textUntilPosition.trim()) return { items: [] };
+          if (token.isCancellationRequested) return { items: [] };
+
+          console.log("[AI Completion] Requesting completion...");
+
+          try {
+            const completion = await generateCodeCompletion(textUntilPosition, textAfterPosition);
+            
+            console.log("[AI Completion] Got completion:", completion);
+            
+            if (!completion || token.isCancellationRequested) return { items: [] };
+
+            return {
+              items: [{
+                insertText: completion,
+                range: new monaco.Range(
+                  position.lineNumber,
+                  position.column,
+                  position.lineNumber,
+                  position.column + completion.length
+                )
+              }]
+            };
+          } catch (error) {
+            console.error("Error providing inline completion:", error);
+            return { items: [] };
+          }
+        },
+        disposeInlineCompletions: () => {},
+      });
     },
     [
       monacoTheme,
@@ -407,6 +462,11 @@ export function CodePanel() {
    */
   useEffect(() => {
     if (!editorRef.current || selectedLine === null) return;
+
+    const currentPosition = editorRef.current.getPosition();
+    if (currentPosition?.lineNumber === selectedLine) {
+      return;
+    }
 
     editorRef.current.revealLineInCenter(selectedLine);
     editorRef.current.setPosition({ lineNumber: selectedLine, column: 1 });
@@ -549,6 +609,9 @@ export function CodePanel() {
   useEffect(() => {
     return () => {
       clearHoverTimeout();
+      if (completionProviderRef.current) {
+        completionProviderRef.current.dispose();
+      }
     };
   }, [clearHoverTimeout]);
 
@@ -651,6 +714,10 @@ export function CodePanel() {
             mouseWheelZoom: false,
             contextmenu: true,
             accessibilitySupport: "auto",
+            inlineSuggest: {
+              enabled: true,
+              mode: "subword",
+            },
           }}
           onMount={handleEditorDidMount}
         />
