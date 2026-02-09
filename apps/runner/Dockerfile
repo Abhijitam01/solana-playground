@@ -25,6 +25,7 @@ COPY turbo.json ./
 
 # Copy package files
 COPY packages/types/package.json ./packages/types/
+COPY packages/solana/package.json ./packages/solana/
 COPY apps/runner/package.json ./apps/runner/
 
 # Install dependencies
