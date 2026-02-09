@@ -1,0 +1,776 @@
+
+> @solana-playground/web@1.0.0 test /home/abhijitam/Desktop/solana-playgorund/apps/web
+> pnpm exec vitest run
+
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+
+ RUN  v1.6.1 /home/abhijitam/Desktop/solana-playgorund/apps/web
+
+ ✓ tests/unit/playground-ui.test.tsx  (1 test) 3ms
+ ❯ tests/unit/landing-page.test.tsx  (2 tests | 2 failed) 74ms
+   ❯ tests/unit/landing-page.test.tsx > Landing page > renders the hero content
+     → React is not defined
+   ❯ tests/unit/landing-page.test.tsx > Landing page > renders feature cards and timeline
+     → React is not defined
+stderr | tests/unit/landing-page.test.tsx > Landing page > renders the hero content
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <SolanaPlaygroundLanding> component:
+
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:219:67)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/unit/landing-page.test.tsx > Landing page > renders feature cards and timeline
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <SolanaPlaygroundLanding> component:
+
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:219:67)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/unit/template-header.test.tsx > TemplateHeader > renders template metadata
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at TemplateHeader (/home/abhijitam/Desktop/solana-playgorund/apps/web/components/TemplateHeader.tsx:45:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at TemplateHeader (/home/abhijitam/Desktop/solana-playgorund/apps/web/components/TemplateHeader.tsx:45:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <TemplateHeader> component:
+
+    at TemplateHeader (/home/abhijitam/Desktop/solana-playgorund/apps/web/components/TemplateHeader.tsx:22:27)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ❯ tests/unit/template-header.test.tsx  (1 test | 1 failed) 52ms
+   ❯ tests/unit/template-header.test.tsx > TemplateHeader > renders template metadata
+     → React is not defined
+ ❯ tests/unit/landing.test.tsx  (2 tests | 2 failed) 70ms
+   ❯ tests/unit/landing.test.tsx > LandingPage > renders hero headline and primary CTA
+     → React is not defined
+   ❯ tests/unit/landing.test.tsx > LandingPage > shows feature section anchors
+     → React is not defined
+stderr | tests/unit/landing.test.tsx > LandingPage > renders hero headline and primary CTA
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <SolanaPlaygroundLanding> component:
+
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:219:67)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/unit/landing.test.tsx > LandingPage > shows feature section anchors
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:295:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <SolanaPlaygroundLanding> component:
+
+    at SolanaPlaygroundLanding (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/landing/page.tsx:219:67)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ✓ tests/example.test.tsx  (1 test) 3ms
+stderr | tests/unit/home-page.test.tsx > Home page > renders the template search and filter controls
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <LandingPage> component:
+
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:31:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/unit/home-page.test.tsx > Home page > renders the template grid
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <LandingPage> component:
+
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:31:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ❯ tests/unit/home-page.test.tsx  (2 tests | 2 failed) 62ms
+   ❯ tests/unit/home-page.test.tsx > Home page > renders the template search and filter controls
+     → React is not defined
+   ❯ tests/unit/home-page.test.tsx > Home page > renders the template grid
+     → React is not defined
+stderr | tests/unit/home.test.tsx > Home (template catalog) > filters templates by search
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <LandingPage> component:
+
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:31:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/unit/home.test.tsx > Home (template catalog) > filters templates by difficulty
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+Error: Uncaught [ReferenceError: React is not defined]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) ReferenceError: React is not defined
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:19:3)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+The above error occurred in the <LandingPage> component:
+
+    at LandingPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/page.tsx:31:3)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ❯ tests/unit/home.test.tsx  (2 tests | 2 failed) 51ms
+   ❯ tests/unit/home.test.tsx > Home (template catalog) > filters templates by search
+     → React is not defined
+   ❯ tests/unit/home.test.tsx > Home (template catalog) > filters templates by difficulty
+     → React is not defined
+ ❯ tests/unit/playground-page.test.tsx  (2 tests | 2 failed) 59ms
+   ❯ tests/unit/playground-page.test.tsx > Playground page > renders the three-panel layout
+     → Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?
+   ❯ tests/unit/playground-page.test.tsx > Playground page > renders command palette and assistants
+     → Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?
+stderr | tests/unit/playground-page.test.tsx > Playground page > renders the three-panel layout
+Error: Uncaught [Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?
+    at useContext (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:146:13)
+    at Object.useQuery$1 [as useQuery] (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:176:21)
+    at file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/proxy/decorationProxy.ts:33:27
+    at Object.apply (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+server@11.9.0_typescript@5.9.3/node_modules/@trpc/server/src/unstable-core-do-not-import/createProxy.ts:53:14)
+    at PlaygroundPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/playground/[templateId]/page.tsx:41:84)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+Error: Uncaught [Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?
+    at useContext (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:146:13)
+    at Object.useQuery$1 [as useQuery] (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:176:21)
+    at file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/proxy/decorationProxy.ts:33:27
+    at Object.apply (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+server@11.9.0_typescript@5.9.3/node_modules/@trpc/server/src/unstable-core-do-not-import/createProxy.ts:53:14)
+    at PlaygroundPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/playground/[templateId]/page.tsx:41:84)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+The above error occurred in the <PlaygroundPage> component:
+
+    at PlaygroundPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/playground/[templateId]/page.tsx:56:106)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+stderr | tests/unit/playground-page.test.tsx > Playground page > renders command palette and assistants
+Error: Uncaught [Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?
+    at useContext (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:146:13)
+    at Object.useQuery$1 [as useQuery] (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:176:21)
+    at file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/proxy/decorationProxy.ts:33:27
+    at Object.apply (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+server@11.9.0_typescript@5.9.3/node_modules/@trpc/server/src/unstable-core-do-not-import/createProxy.ts:53:14)
+    at PlaygroundPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/playground/[templateId]/page.tsx:41:84)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+Error: Uncaught [Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?]
+    at reportException (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:66:24)
+    at innerInvokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+    at invokeEventListeners (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at beginWork$1 (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27490:7)
+    at performUnitOfWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12) Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?
+    at useContext (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:146:13)
+    at Object.useQuery$1 [as useQuery] (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:176:21)
+    at file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/proxy/decorationProxy.ts:33:27
+    at Object.apply (file:///home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/@trpc+server@11.9.0_typescript@5.9.3/node_modules/@trpc/server/src/unstable-core-do-not-import/createProxy.ts:53:14)
+    at PlaygroundPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/playground/[templateId]/page.tsx:41:84)
+    at renderWithHooks (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at HTMLUnknownElement.callCallback (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/home/abhijitam/Desktop/solana-playgorund/node_modules/.pnpm/jsdom@24.1.3/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+The above error occurred in the <PlaygroundPage> component:
+
+    at PlaygroundPage (/home/abhijitam/Desktop/solana-playgorund/apps/web/app/playground/[templateId]/page.tsx:56:106)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+ ❯ tests/e2e/styleguide.spec.ts  (0 test)
+ ❯ tests/e2e/landing.spec.ts  (0 test)
+ ❯ tests/e2e/playground.spec.ts  (0 test)
+ ❯ tests/e2e/home.spec.ts  (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/e2e/home.spec.ts [ tests/e2e/home.spec.ts ]
+Error: Playwright Test did not expect test.describe() to be called here.
+Most common reasons include:
+- You are calling test.describe() in a configuration file.
+- You are calling test.describe() in a file that is imported by the configuration file.
+- You have two different versions of @playwright/test. This usually happens
+  when one of the dependencies in your package.json depends on @playwright/test.
+ ❯ TestTypeImpl._currentSuite ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:75:13
+ ❯ TestTypeImpl._describe ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:115:24
+ ❯ Function.describe ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/transform/transform.js:275:12
+ ❯ tests/e2e/home.spec.ts:3:6
+      1| import { test, expect } from "@playwright/test";
+      2| 
+      3| test.describe("Home visual regression", () => {
+       |      ^
+      4|   test("home renders consistently", async ({ page }) => {
+      5|     await page.goto("/", { waitUntil: "networkidle" });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/15]⎯
+
+ FAIL  tests/e2e/landing.spec.ts [ tests/e2e/landing.spec.ts ]
+Error: Playwright Test did not expect test() to be called here.
+Most common reasons include:
+- You are calling test() in a configuration file.
+- You are calling test() in a file that is imported by the configuration file.
+- You have two different versions of @playwright/test. This usually happens
+  when one of the dependencies in your package.json depends on @playwright/test.
+ ❯ TestTypeImpl._currentSuite ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:75:13
+ ❯ TestTypeImpl._createTest ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:88:24
+ ❯ Module.<anonymous> ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/transform/transform.js:275:12
+ ❯ tests/e2e/landing.spec.ts:3:1
+      1| import { test, expect } from "@playwright/test";
+      2| 
+      3| test("landing loads and CTA points to playground", async ({ page }) =>…
+       | ^
+      4|   await page.goto("/landing");
+      5| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/15]⎯
+
+ FAIL  tests/e2e/playground.spec.ts [ tests/e2e/playground.spec.ts ]
+Error: Playwright Test did not expect test.describe() to be called here.
+Most common reasons include:
+- You are calling test.describe() in a configuration file.
+- You are calling test.describe() in a file that is imported by the configuration file.
+- You have two different versions of @playwright/test. This usually happens
+  when one of the dependencies in your package.json depends on @playwright/test.
+ ❯ TestTypeImpl._currentSuite ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:75:13
+ ❯ TestTypeImpl._describe ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:115:24
+ ❯ Function.describe ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/transform/transform.js:275:12
+ ❯ tests/e2e/playground.spec.ts:3:6
+      1| import { test, expect } from "@playwright/test";
+      2| 
+      3| test.describe("Playground visual regression", () => {
+       |      ^
+      4|   test("playground renders consistently", async ({ page }) => {
+      5|     await page.goto("/playground/hello-solana", { waitUntil: "networki…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/15]⎯
+
+ FAIL  tests/e2e/styleguide.spec.ts [ tests/e2e/styleguide.spec.ts ]
+Error: Playwright Test did not expect test.describe() to be called here.
+Most common reasons include:
+- You are calling test.describe() in a configuration file.
+- You are calling test.describe() in a file that is imported by the configuration file.
+- You have two different versions of @playwright/test. This usually happens
+  when one of the dependencies in your package.json depends on @playwright/test.
+ ❯ TestTypeImpl._currentSuite ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:75:13
+ ❯ TestTypeImpl._describe ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/common/testType.js:115:24
+ ❯ Function.describe ../../node_modules/.pnpm/playwright@1.57.0/node_modules/playwright/lib/transform/transform.js:275:12
+ ❯ tests/e2e/styleguide.spec.ts:3:6
+      1| import { test, expect } from "@playwright/test";
+      2| 
+      3| test.describe("Styleguide visual regression", () => {
+       |      ^
+      4|   test("styleguide renders consistently", async ({ page }) => {
+      5|     await page.goto("/styleguide", { waitUntil: "networkidle" });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/15]⎯
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/unit/home-page.test.tsx > Home page > renders the template search and filter controls
+ FAIL  tests/unit/home-page.test.tsx > Home page > renders the template grid
+ FAIL  tests/unit/home.test.tsx > Home (template catalog) > filters templates by search
+ FAIL  tests/unit/home.test.tsx > Home (template catalog) > filters templates by difficulty
+ReferenceError: React is not defined
+ ❯ LandingPage app/page.tsx:19:3
+     17| 
+     18| export default function LandingPage() {
+     19|   return (
+       |   ^
+     20|     <LandingRedirect>
+     21|       <div className="min-h-screen bg-[#FAFAFA] text-[#0A0A0A] font-sa…
+ ❯ renderWithHooks ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18
+ ❯ mountIndeterminateComponent ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13
+ ❯ beginWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16
+ ❯ beginWork$1 ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27465:14
+ ❯ performUnitOfWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12
+ ❯ workLoopSync ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26505:5
+ ❯ renderRootSync ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26473:7
+ ❯ recoverFromConcurrentError ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:25889:20
+ ❯ performConcurrentWorkOnRoot ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:25789:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/15]⎯
+
+ FAIL  tests/unit/landing-page.test.tsx > Landing page > renders the hero content
+ FAIL  tests/unit/landing-page.test.tsx > Landing page > renders feature cards and timeline
+ FAIL  tests/unit/landing.test.tsx > LandingPage > renders hero headline and primary CTA
+ FAIL  tests/unit/landing.test.tsx > LandingPage > shows feature section anchors
+ReferenceError: React is not defined
+ ❯ SolanaPlaygroundLanding app/landing/page.tsx:295:3
+    293|   }, []);
+    294| 
+    295|   return (
+       |   ^
+    296|     <div className="min-h-screen bg-black text-white font-sans antiali…
+    297|       {/* Animated cursor follower */}
+ ❯ renderWithHooks ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18
+ ❯ mountIndeterminateComponent ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13
+ ❯ beginWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16
+ ❯ beginWork$1 ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27465:14
+ ❯ performUnitOfWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12
+ ❯ workLoopSync ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26505:5
+ ❯ renderRootSync ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26473:7
+ ❯ recoverFromConcurrentError ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:25889:20
+ ❯ performConcurrentWorkOnRoot ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:25789:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/15]⎯
+
+ FAIL  tests/unit/playground-page.test.tsx > Playground page > renders the three-panel layout
+ FAIL  tests/unit/playground-page.test.tsx > Playground page > renders command palette and assistants
+Error: Unable to find tRPC Context. Did you forget to wrap your App inside `withTRPC` HoC?
+ ❯ useContext ../../node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:146:13
+ ❯ Object.useQuery$1 [as useQuery] ../../node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/hooks/createHooksInternal.tsx:176:21
+ ❯ ../../node_modules/.pnpm/@trpc+react-query@11.9.0_@tanstack+react-query@5.90.16_@trpc+client@11.9.0_@trpc+server@11.9._dwfhutovunbhrk3uhezm67vwjm/node_modules/@trpc/react-query/src/shared/proxy/decorationProxy.ts:33:27
+ ❯ Object.apply ../../node_modules/.pnpm/@trpc+server@11.9.0_typescript@5.9.3/node_modules/@trpc/server/src/unstable-core-do-not-import/createProxy.ts:53:14
+ ❯ PlaygroundPage app/playground/[templateId]/page.tsx:41:84
+     39|   const { data: routeTemplate, isLoading: isTemplateLoading } = useTem…
+     40|   
+     41|   const { data: userProject, isLoading: isUserProjectLoading } = trpc.…
+       |                                                                                    ^
+     42|     { id: programId },
+     43|     { enabled: isUUID }
+ ❯ renderWithHooks ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18
+ ❯ mountIndeterminateComponent ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13
+ ❯ beginWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16
+ ❯ beginWork$1 ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27465:14
+ ❯ performUnitOfWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/15]⎯
+
+ FAIL  tests/unit/template-header.test.tsx > TemplateHeader > renders template metadata
+ReferenceError: React is not defined
+ ❯ TemplateHeader components/TemplateHeader.tsx:45:3
+     43|   const prevTemplate = hasPrev ? templates?.[currentIndex - 1] : null;
+     44| 
+     45|   return (
+       |   ^
+     46|     <header className="sticky top-0 z-30 border-b border-border/70 bg-…
+     47|       <div className="pointer-events-none absolute inset-x-0 top-0 h-p…
+ ❯ renderWithHooks ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:15486:18
+ ❯ mountIndeterminateComponent ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:20103:13
+ ❯ beginWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:21626:16
+ ❯ beginWork$1 ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:27465:14
+ ❯ performUnitOfWork ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26599:12
+ ❯ workLoopSync ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26505:5
+ ❯ renderRootSync ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:26473:7
+ ❯ recoverFromConcurrentError ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:25889:20
+ ❯ performConcurrentWorkOnRoot ../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/cjs/react-dom.development.js:25789:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/15]⎯
+
+ Test Files  10 failed | 2 passed (12)
+      Tests  11 failed | 2 passed (13)
+   Start at  06:16:13
+   Duration  4.66s (transform 1.49s, setup 2.05s, collect 8.65s, tests 374ms, environment 10.66s, prepare 5.26s)
+
+/home/abhijitam/Desktop/solana-playgorund/apps/web:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @solana-playground/web@1.0.0 test: `pnpm exec vitest run`
+Exit status 1
