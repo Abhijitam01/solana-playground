@@ -42,7 +42,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Copy built files
 COPY --from=builder /app/apps/web/.next/standalone ./
 COPY --from=builder /app/apps/web/.next/static ./apps/web/.next/static
-COPY --from=builder /app/apps/web/public ./apps/web/public
+# In standalone mode, public folder should be at root level
+COPY --from=builder /app/apps/web/public ./public
 
 EXPOSE 3000
 
