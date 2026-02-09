@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface LogoProps {
-  /** Size of the square logo mark in pixels */
-  size?: number;
+  /** Height of the logo in pixels */
+  height?: number;
   /** If true, shows the SOLANA ATLAS wordmark next to the icon */
   showWordmark?: boolean;
   /** Optional className for the outer wrapper */
@@ -18,41 +18,43 @@ interface LogoProps {
 /**
  * Brand logo used in the main navigation and app headers.
  * Uses the actual logo image files from /public/logo/
+ * The full logo includes the compass icon with N/E/S/W and "SOLANA ATLAS" text on black background.
  */
 export function Logo({ 
-  size = 40, 
+  height = 40, 
   showWordmark = true, 
   className = "",
-  useFullLogo = false 
+  useFullLogo = true 
 }: LogoProps) {
-  // If using full logo, show the complete logo with text
+  // Use full logo by default - shows the complete logo with compass + "SOLANA ATLAS" text
   if (useFullLogo) {
     return (
       <Link href="/" className={`flex items-center ${className}`}>
         <Image
           src="/logo/solana-atlas-full.png"
           alt="Solana Atlas"
-          width={size * 4}
-          height={size}
-          className="h-auto w-auto max-h-[60px] object-contain"
+          width={height * 4}
+          height={height}
+          className="h-auto w-auto object-contain"
+          style={{ height: `${height}px`, width: "auto" }}
           priority
         />
       </Link>
     );
   }
 
-  // Otherwise, show icon + optional wordmark
+  // Icon-only fallback
   return (
     <Link href="/" className={`flex items-center gap-3 ${className}`}>
       <div
         className="relative flex items-center justify-center"
-        style={{ width: size, height: size }}
+        style={{ width: height, height: height }}
       >
         <Image
           src="/logo/icon.png"
           alt="Solana Atlas"
-          width={size}
-          height={size}
+          width={height}
+          height={height}
           className="w-full h-full object-contain"
           priority
         />
