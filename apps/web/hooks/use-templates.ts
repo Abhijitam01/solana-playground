@@ -8,13 +8,15 @@ export interface TemplateListItem {
   name: string;
   description: string;
   difficulty: "beginner" | "intermediate";
+  featured?: boolean;
 }
 
-export function useTemplates() {
+export function useTemplates(featuredOnly: boolean = false) {
   return useQuery<TemplateListItem[]>({
-    queryKey: ["templates"],
+    queryKey: ["templates", featuredOnly ? "featured" : "all"],
     queryFn: async () => {
-      const res = await fetch(`${API_URL}/templates`);
+      const url = featuredOnly ? `${API_URL}/templates?featured=true` : `${API_URL}/templates`;
+      const res = await fetch(url);
       if (!res.ok) throw new Error("Failed to fetch templates");
       return res.json();
     },

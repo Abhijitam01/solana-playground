@@ -22,7 +22,7 @@ export function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
-  const { data: templates } = useTemplates();
+  const { data: templates } = useTemplates(false); // Show all templates in command palette for search
   const { setExecutionMode } = usePlaygroundStore(
     (state) => ({ setExecutionMode: state.setExecutionMode }),
     shallow

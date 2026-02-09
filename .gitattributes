@@ -1,0 +1,3 @@
+# Ensure templates are always tracked as text files
+packages/solana/templates/** text=auto eol=lf
+

@@ -24,7 +24,12 @@ import { LoginModal } from "@/components/auth/LoginModal";
 export function ProgramSidebar() {
   const router = useRouter();
   const { user } = useAuth();
-  const { data: templates } = useTemplates();
+  const { data: allTemplates } = useTemplates(false);
+  const { data: featuredTemplates } = useTemplates(true);
+  const [showAllTemplates, setShowAllTemplates] = useState(false);
+  
+  // Use featured templates initially, show all when expanded
+  const templates = showAllTemplates ? allTemplates : featuredTemplates;
   const {
     programs,
     activeProgramId,
@@ -79,15 +84,16 @@ export function ProgramSidebar() {
 
   const MAX_VISIBLE = {
     panels: 4,
-    templates: 3,
+    templates: 13, // Show 13 featured templates initially
     programs: 3,
   };
 
   const visiblePanels = panelItems.slice(0, MAX_VISIBLE.panels);
   const overflowPanels = panelItems.slice(MAX_VISIBLE.panels);
 
+  // Show all templates if expanded, otherwise show up to 13 featured
   const visibleTemplates = templates?.slice(0, MAX_VISIBLE.templates) ?? [];
-  const overflowTemplates = templates?.slice(MAX_VISIBLE.templates) ?? [];
+  const overflowTemplates = showAllTemplates ? [] : (allTemplates?.slice(MAX_VISIBLE.templates) ?? []);
 
   const visiblePrograms = customPrograms.slice(0, MAX_VISIBLE.programs);
   const overflowPrograms = customPrograms.slice(MAX_VISIBLE.programs);
@@ -107,10 +113,16 @@ export function ProgramSidebar() {
       ? activeProgramId.replace("template-", "")
       : null;
     if (!activeTemplateId) return visibleTemplates;
-    const active = templates?.find((template) => template.id === activeTemplateId);
+    const active = allTemplates?.find((template) => template.id === activeTemplateId);
     if (!active) return visibleTemplates;
     const alreadyVisible = visibleTemplates.some((template) => template.id === active.id);
     if (alreadyVisible) return visibleTemplates;
+    // If active template is not in visible list, add it and ensure we don't exceed limit
+    const currentList = showAllTemplates ? allTemplates ?? [] : featuredTemplates ?? [];
+    const activeIndex = currentList.findIndex((t) => t.id === activeTemplateId);
+    if (activeIndex >= 0 && activeIndex < MAX_VISIBLE.templates) {
+      return visibleTemplates;
+    }
     return [...visibleTemplates.slice(0, Math.max(0, MAX_VISIBLE.templates - 1)), active];
   };
 
@@ -212,8 +224,24 @@ export function ProgramSidebar() {
           </div>
         </div>
         <div>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
-            Open Template
+          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center justify-between">
+            <span>Open Template</span>
+            {!showAllTemplates && allTemplates && allTemplates.length > 13 && (
+              <button
+                onClick={() => setShowAllTemplates(true)}
+                className="text-xs text-primary hover:text-primary/80 transition-colors"
+              >
+                Show All ({allTemplates.length})
+              </button>
+            )}
+            {showAllTemplates && (
+              <button
+                onClick={() => setShowAllTemplates(false)}
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Show Featured
+              </button>
+            )}
           </div>
           <div className="space-y-1">
             {resolvedTemplates.map((template) => (

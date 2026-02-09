@@ -38,25 +38,29 @@ async function loadTemplateLocal(id: string) {
   
   const cwd = process.cwd();
   const possiblePaths = [
-    // Standalone build (production) - templates should be copied to .next/standalone
-    join(cwd, 'packages/solana/templates'),
-    join(cwd, '..', 'packages', 'solana', 'templates'),
+    // PRIMARY: From apps/web - go up two levels to root, then into packages (shared location)
     join(cwd, '..', '..', 'packages', 'solana', 'templates'),
-    // Local development
+    // From root directory
+    join(cwd, 'packages', 'solana', 'templates'),
+    // Standalone build (production) - templates should be copied to .next/standalone
+    join(cwd, 'packages', 'solana', 'templates'),
+    join(cwd, '..', 'packages', 'solana', 'templates'),
+    // FALLBACK: Local development (if running from root) - deprecated, use packages/solana/templates
     join(cwd, 'apps', 'web', 'packages', 'solana', 'templates'),
-    // Root context
-    join(process.cwd(), 'packages', 'solana', 'templates'),
   ];
   
   let templatesDir: string | null = null;
   
-  // Find the first path that exists
+  // Find the first path that exists as a directory
   for (const path of possiblePaths) {
     try {
-      const testPath = join(path, 'hello-solana', 'metadata.json');
-      await readFile(testPath, 'utf-8');
-      templatesDir = path;
-      break;
+      const { stat } = await import('fs/promises');
+      const stats = await stat(path);
+      if (stats.isDirectory()) {
+        // Directory exists - use it (even if empty, it's a valid templates directory)
+        templatesDir = path;
+        break;
+      }
     } catch {
       // Path doesn't exist, try next one
       continue;

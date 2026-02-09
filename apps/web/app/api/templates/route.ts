@@ -9,22 +9,26 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 async function findTemplatesDir(): Promise<string> {
   const cwd = process.cwd();
   const possiblePaths = [
-    // Standalone build (production) - templates should be copied to .next/standalone
-    join(cwd, 'packages/solana/templates'),
-    join(cwd, '..', 'packages', 'solana', 'templates'),
+    // PRIMARY: From apps/web - go up two levels to root, then into packages (shared location)
     join(cwd, '..', '..', 'packages', 'solana', 'templates'),
-    // Local development
+    // From root directory
+    join(cwd, 'packages', 'solana', 'templates'),
+    // Standalone build (production) - templates should be copied to .next/standalone
+    join(cwd, 'packages', 'solana', 'templates'),
+    join(cwd, '..', 'packages', 'solana', 'templates'),
+    // FALLBACK: Local development (if running from root) - deprecated, use packages/solana/templates
     join(cwd, 'apps', 'web', 'packages', 'solana', 'templates'),
-    // Root context
-    join(process.cwd(), 'packages', 'solana', 'templates'),
   ];
   
-  // Find the first path that exists
+  // Find the first path that exists as a directory
   for (const path of possiblePaths) {
     try {
-      const testPath = join(path, 'hello-solana', 'metadata.json');
-      await readFile(testPath, 'utf-8');
-      return path;
+      const { stat } = await import('fs/promises');
+      const stats = await stat(path);
+      if (stats.isDirectory()) {
+        // Directory exists - return it (even if empty, it's a valid templates directory)
+        return path;
+      }
     } catch {
       // Path doesn't exist, try next one
       continue;
@@ -74,11 +78,35 @@ async function listTemplatesLocal(): Promise<string[]> {
   }
 }
 
-export async function GET() {
+// Featured templates - the 13 templates to show initially in playground
+const FEATURED_TEMPLATES = [
+  'hello-solana',
+  'account-init',
+  'pda-vault',
+  'token-mint',
+  'nft-mint',
+  'pda-escrow',
+  'instruction-basics',
+  'cpi-calls',
+  'error-handling-patterns',
+  'metadata-updates',
+  'staking-pool',
+  'multisig-treasury',
+  'vesting-stream',
+];
+
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const featuredOnly = searchParams.get('featured') === 'true';
+
     // Check cache
     if (templatesCache && Date.now() - templatesCache.timestamp < CACHE_TTL) {
-      return NextResponse.json(templatesCache.data);
+      const cached = templatesCache.data;
+      if (featuredOnly) {
+        return NextResponse.json(cached.filter((t) => FEATURED_TEMPLATES.includes(t.id)));
+      }
+      return NextResponse.json(cached);
     }
 
     const templateIds = await listTemplatesLocal();
@@ -102,6 +130,7 @@ export async function GET() {
             name: metadata.name,
             description: metadata.description,
             difficulty: metadata.difficulty,
+            featured: FEATURED_TEMPLATES.includes(templateId),
           };
         } catch (error) {
           console.error(`Error loading template metadata for ${id} at ${join(templatesDir, id, 'metadata.json')}:`, error);
@@ -110,10 +139,22 @@ export async function GET() {
       })
     );
 
-    const templates = loadedTemplates.filter((t): t is NonNullable<typeof t> => t !== null);
+    let templates = loadedTemplates.filter((t): t is NonNullable<typeof t> => t !== null);
+    
+    // Sort: featured first, then by name
+    templates.sort((a, b) => {
+      if (a.featured && !b.featured) return -1;
+      if (!a.featured && b.featured) return 1;
+      return a.name.localeCompare(b.name);
+    });
     
     // Update cache
     templatesCache = { data: templates, timestamp: Date.now() };
+    
+    // Return featured only if requested
+    if (featuredOnly) {
+      return NextResponse.json(templates.filter((t) => t.featured));
+    }
     
     return NextResponse.json(templates);
   } catch (error) {
