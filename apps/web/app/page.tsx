@@ -258,7 +258,7 @@ function FloatingCodeSnippet() {
               {"    "}amount: <span className="text-[#00D18C]">u64</span>{"\n"}
               {") -> "}Result{"<"}(){">"} {"{"}{"\n"}
               {"    "}<span className="text-white/40">{"// Verify authority"}</span>{"\n"}
-              {"    "}<span className="text-[#14F195]">msg!</span>(<span className="text-[#fbbf24]">"Initializing..."</span>);{"\n"}
+              {"    "}<span className="text-[#14F195]">msg!</span>(<span className="text-[#fbbf24]">{"\"Initializing...\""}</span>);{"\n"}
               {"    "}Ok(())
             </code>
           </pre>
@@ -548,7 +548,7 @@ export default function SolanaPlaygroundLanding() {
                         <span className="text-[#9945FF]">use</span> <span className="text-[#14F195]">anchor_lang</span>::prelude::*;{"\n"}
                         {"\n"}
                         <span className="text-white/30">{"// Declare program ID"}</span>{"\n"}
-                        <span className="text-[#9945FF]">declare_id!</span>(<span className="text-[#fbbf24]">"Fg6P...n4Zq"</span>);{"\n"}
+                        <span className="text-[#9945FF]">declare_id!</span>(<span className="text-[#fbbf24]">{"\"Fg6P...n4Zq\""}</span>);{"\n"}
                         {"\n"}
                         <span className="text-[#9945FF]">#[program]</span>{"\n"}
                         <span className="text-[#9945FF]">pub mod</span> <span className="text-[#14F195]">pda_vault</span> {"{"}{"\n"}
@@ -558,7 +558,7 @@ export default function SolanaPlaygroundLanding() {
                         {"        "}ctx: Context{"<"}Initialize{">"},{"\n"}
                         {"    "}) -{">"} Result{"<"}(){">"} {"{"}{"\n"}
                         {"        "}<span className="text-white/30">{"// Init vault"}</span>{"\n"}
-                        {"        "}<span className="text-[#14F195]">msg!</span>(<span className="text-[#fbbf24]">"Vault created"</span>);{"\n"}
+                        {"        "}<span className="text-[#14F195]">msg!</span>(<span className="text-[#fbbf24]">{"\"Vault created\""}</span>);{"\n"}
                         {"        "}Ok(())
                       </code>
                     </pre>

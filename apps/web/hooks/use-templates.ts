@@ -1,13 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-const normalizeApiUrl = (raw: string) => {
-  const trimmed = raw.replace(/\/+$/, "");
-  return trimmed.endsWith("/templates") ? trimmed.slice(0, -"/templates".length) : trimmed;
-};
-
-const API_URL = normalizeApiUrl(
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"
-);
+// Use local Next.js API routes (no external API needed for Vercel deployment)
+const API_URL = "/api";
 
 export interface TemplateListItem {
   id: string;

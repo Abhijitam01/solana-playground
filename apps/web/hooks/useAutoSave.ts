@@ -17,7 +17,7 @@ export function useAutoSave({ code, title, templateId, codeId, onSaveSuccess }: 
   const saveMutation = trpc.code.save.useMutation({
     onSuccess: (data) => {
       utils.code.getMyCode.invalidate();
-      if (onSaveSuccess && data.id) {
+      if (onSaveSuccess && data?.id) {
         onSaveSuccess(data.id);
       }
     },
