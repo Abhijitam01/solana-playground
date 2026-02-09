@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 export interface TransactionInstruction {
   id: string;
@@ -44,7 +44,7 @@ const initialState = {
   feePayer: null,
 };
 
-export const useTransactionStore = create<TransactionStore>((set) => ({
+export const useTransactionStore = createWithEqualityFn<TransactionStore>((set) => ({
   ...initialState,
   addInstruction: (instruction) =>
     set((state) => ({

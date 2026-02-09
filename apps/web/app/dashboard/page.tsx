@@ -3,6 +3,7 @@
 import { TrendingUp, Clock, Target, Award, BookOpen, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { PathProgressComponent, PathProgress } from "@/components/learning/PathProgress";
+import Link from "next/link";
 
 // Mock data - in real implementation, this would come from API
 const mockProgress: PathProgress[] = [
@@ -29,144 +30,209 @@ const mockStats = {
   ],
 };
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
 export default function DashboardPage() {
   const timeSpentHours = Math.floor(mockStats.totalTimeSpent / 60);
   const timeSpentMinutes = mockStats.totalTimeSpent % 60;
 
   return (
     <main className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA]">
-      <div className="container mx-auto px-4 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
-          <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-          <p className="text-sm text-[#A3A3A3] mb-1">
-            Dashboard preview with sample data – real tracking coming soon.
-          </p>
-          <p className="text-sm text-[#737373]">
-            Track your learning progress and achievements across Solana Playground.
-          </p>
-        </motion.div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      {/* Header Section */}
+      <section className="pt-24 pb-12 px-6 border-b border-[#262626]">
+        <div className="max-w-[1200px] mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="p-4 rounded-lg bg-card border border-border"
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
           >
-            <div className="flex items-center justify-between mb-2">
-              <BookOpen className="w-5 h-5 text-primary" />
-              <TrendingUp className="w-4 h-4 text-success" />
-            </div>
-            <div className="text-2xl font-bold text-foreground mb-1">
-              {mockStats.templatesCompleted}
-            </div>
-            <div className="text-xs text-muted-foreground">Templates Completed</div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="p-4 rounded-lg bg-card border border-border"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <Clock className="w-5 h-5 text-info" />
-              <TrendingUp className="w-4 h-4 text-success" />
-            </div>
-            <div className="text-2xl font-bold text-foreground mb-1">
-              {timeSpentHours > 0
-                ? `${timeSpentHours}h ${timeSpentMinutes}m`
-                : `${timeSpentMinutes}m`}
-            </div>
-            <div className="text-xs text-muted-foreground">Time Spent</div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="p-4 rounded-lg bg-card border border-border"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <Target className="w-5 h-5 text-warning" />
-              <TrendingUp className="w-4 h-4 text-success" />
-            </div>
-            <div className="text-2xl font-bold text-foreground mb-1">
-              {mockStats.conceptsMastered}
-            </div>
-            <div className="text-xs text-muted-foreground">Concepts Mastered</div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="p-4 rounded-lg bg-card border border-border"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <Zap className="w-5 h-5 text-warning" />
-              <TrendingUp className="w-4 h-4 text-success" />
-            </div>
-            <div className="text-2xl font-bold text-foreground mb-1">
-              {mockStats.currentStreak}
-            </div>
-            <div className="text-xs text-muted-foreground">Day Streak</div>
+            <motion.div variants={fadeUp} className="mb-4">
+              <span className="px-3 py-1 text-xs font-mono text-[#14F195] border border-[#14F195]/20 bg-[#14F195]/5 rounded uppercase tracking-wider inline-block">
+                Preview
+              </span>
+            </motion.div>
+            <motion.h1
+              variants={fadeUp}
+              className="text-[48px] leading-[1.1] sm:text-[64px] font-bold tracking-tight mb-6 text-white"
+            >
+              Dashboard
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              className="text-[18px] leading-[28px] text-[#A3A3A3] mb-2 max-w-[600px]"
+            >
+              Dashboard preview with sample data – real tracking coming soon.
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              className="text-[16px] text-[#737373]"
+            >
+              Track your learning progress and achievements across Solana Playground.
+            </motion.p>
           </motion.div>
         </div>
+      </section>
 
-        {/* Learning Paths Progress */}
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold text-foreground mb-4">Learning Paths</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* Stats Section */}
+      <section className="py-24 px-6 bg-[#0A0A0A]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#262626] border border-[#262626] rounded-lg overflow-hidden mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors group relative"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center text-[#FAFAFA]">
+                  <BookOpen className="w-5 h-5" />
+                </div>
+                <TrendingUp className="w-4 h-4 text-[#14F195]" />
+              </div>
+              <div className="text-[32px] font-bold text-[#FAFAFA] mb-1">
+                {mockStats.templatesCompleted}
+              </div>
+              <div className="text-sm text-[#737373]">Templates Completed</div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors group relative"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center text-[#FAFAFA]">
+                  <Clock className="w-5 h-5" />
+                </div>
+                <TrendingUp className="w-4 h-4 text-[#14F195]" />
+              </div>
+              <div className="text-[32px] font-bold text-[#FAFAFA] mb-1">
+                {timeSpentHours > 0
+                  ? `${timeSpentHours}h ${timeSpentMinutes}m`
+                  : `${timeSpentMinutes}m`}
+              </div>
+              <div className="text-sm text-[#737373]">Time Spent</div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors group relative"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center text-[#FAFAFA]">
+                  <Target className="w-5 h-5" />
+                </div>
+                <TrendingUp className="w-4 h-4 text-[#14F195]" />
+              </div>
+              <div className="text-[32px] font-bold text-[#FAFAFA] mb-1">
+                {mockStats.conceptsMastered}
+              </div>
+              <div className="text-sm text-[#737373]">Concepts Mastered</div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors group relative"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-12 h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center text-[#FAFAFA]">
+                  <Zap className="w-5 h-5" />
+                </div>
+                <TrendingUp className="w-4 h-4 text-[#14F195]" />
+              </div>
+              <div className="text-[32px] font-bold text-[#FAFAFA] mb-1">
+                {mockStats.currentStreak}
+              </div>
+              <div className="text-sm text-[#737373]">Day Streak</div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Learning Paths Section */}
+      <section className="py-24 px-6 bg-[#0A0A0A] border-t border-[#262626]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 border-b border-[#262626] pb-8">
+            <h2 className="text-[32px] font-bold text-[#FAFAFA] leading-tight">
+              Learning Paths
+            </h2>
+            <Link 
+              href="/paths" 
+              className="text-[#A3A3A3] text-sm hover:text-[#FAFAFA] transition-colors"
+            >
+              View all paths →
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#262626] border border-[#262626] rounded-lg overflow-hidden">
             {mockProgress.map((progress, index) => (
               <motion.div
                 key={progress.pathId}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + index * 0.1 }}
+                className="bg-[#0A0A0A] hover:bg-[#111111] transition-colors"
               >
                 <PathProgressComponent progress={progress} />
               </motion.div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Achievements */}
-        <div>
-          <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Award className="w-5 h-5 text-warning" />
-            Achievements
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Achievements Section */}
+      <section className="py-24 px-6 bg-[#0A0A0A] border-t border-[#262626]">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 border-b border-[#262626] pb-8">
+            <div>
+              <h2 className="text-[32px] font-bold text-[#FAFAFA] leading-tight flex items-center gap-3">
+                <Award className="w-8 h-8 text-[#F59E0B]" />
+                Achievements
+              </h2>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#262626] border border-[#262626] rounded-lg overflow-hidden">
             {mockStats.achievements.map((achievement, index) => (
               <motion.div
                 key={achievement.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.1 }}
-                className="p-4 rounded-lg bg-card border border-border"
+                className="bg-[#0A0A0A] p-6 hover:bg-[#111111] transition-colors group relative"
               >
-                <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-full bg-warning-light">
-                    <Award className="w-5 h-5 text-warning" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-sm font-semibold text-foreground mb-1">
-                      {achievement.name}
-                    </h3>
-                    <p className="text-xs text-muted-foreground">{achievement.description}</p>
+                <div className="relative z-10">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center text-[#F59E0B]">
+                      <Award className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-[#FAFAFA] mb-2">
+                        {achievement.name}
+                      </h3>
+                      <p className="text-sm text-[#737373] leading-relaxed">
+                        {achievement.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

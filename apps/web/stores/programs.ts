@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 import { persist } from "zustand/middleware";
 import type { ProgramMap, FunctionSpec, PrecomputedState, TemplateMetadata } from "@solana-playground/types";
 import { PROGRAM_TYPE_MAP, type ProgramTypeId } from "@/lib/program-types";
@@ -58,7 +58,7 @@ const nowIso = () => new Date().toISOString();
 const createSessionId = () =>
   `program-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 
-export const useProgramStore = create<ProgramState>()(
+export const useProgramStore = createWithEqualityFn<ProgramState>()(
   persist(
     (set, get) => ({
       programs: {},

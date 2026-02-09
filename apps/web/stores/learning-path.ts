@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 import { persist } from "zustand/middleware";
 import type { LearningPath } from "@/components/learning/LearningPath";
 
@@ -93,7 +93,7 @@ export function deriveLearningPaths(
   });
 }
 
-export const useLearningPathStore = create<LearningPathState>()(
+export const useLearningPathStore = createWithEqualityFn<LearningPathState>()(
   persist(
     (set) => ({
       completedSteps: {},

@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 export type ExecutionState = "idle" | "running" | "paused" | "stepping" | "finished";
 
@@ -52,7 +52,7 @@ const initialState = {
   watchExpressions: [],
 };
 
-export const useExecutionStore = create<ExecutionStore>((set) => ({
+export const useExecutionStore = createWithEqualityFn<ExecutionStore>((set) => ({
   ...initialState,
   setExecutionState: (state) => set({ executionState: state }),
   addBreakpoint: (line) =>

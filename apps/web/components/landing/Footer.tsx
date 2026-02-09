@@ -11,12 +11,12 @@ export function Footer() {
       {/* Subtle grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none opacity-30" />
       
-      <div className="relative max-w-[1200px] mx-auto px-6 py-16">
+      <div className="relative max-w-[1200px] mx-auto px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
           {/* Brand Column */}
           <div className="md:col-span-4">
-            <Logo height={56} useFullLogo={true} className="mb-6" />
-            <p className="text-sm text-[#737373] leading-relaxed mb-6 max-w-sm">
+            <Logo height={72} useFullLogo={true} className="mb-8" />
+            <p className="text-base text-[#737373] leading-relaxed mb-8 max-w-sm">
               Interactive playground for learning Solana development. 
               Run real programs, visualize state, and understand execution—all in your browser.
             </p>
@@ -172,7 +172,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-[#262626] flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-10 border-t border-[#262626] flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
             <p className="text-sm text-[#737373]">
               © 2026 Solana Atlas. All rights reserved.

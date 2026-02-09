@@ -73,6 +73,9 @@ pnpm dev
 #### Web App (`apps/web`)
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_APP_URL=http://localhost:3000  # Optional, defaults to window.location.origin
 ```
 
 #### API Service (`apps/api`)
@@ -89,6 +92,33 @@ PORT=3002
 MAX_EXECUTION_TIME_MS=30000
 VALIDATOR_PORT=8899
 ```
+
+### OAuth Setup (Supabase)
+
+To enable OAuth authentication (GitHub, Google, Twitter/X), you need to configure redirect URLs in your Supabase dashboard:
+
+1. **Go to Supabase Dashboard** → Your Project → Authentication → Settings → Redirect URLs
+
+2. **Add the following URLs:**
+   - `http://localhost:3000/auth/callback` (for local development)
+   - `https://your-production-domain.com/auth/callback` (for production)
+   
+   **Examples based on your deployment platform:**
+   - **Vercel**: `https://your-app.vercel.app/auth/callback` (or your custom domain)
+   - **Railway**: `https://your-app.up.railway.app/auth/callback` (or your custom domain)
+   - **Render**: `https://your-app.onrender.com/auth/callback` (or your custom domain)
+   - **Custom domain**: `https://yourdomain.com/auth/callback`
+   
+   **Note:** Replace `your-production-domain.com` with your actual deployed URL. You can find this in your deployment platform's dashboard.
+
+3. **Important:** Supabase will ignore the `redirectTo` parameter if the URL isn't explicitly whitelisted. Without this configuration, OAuth providers will redirect back to `/` instead of `/auth/callback`.
+
+4. **Make sure your dev server is running** (`pnpm dev`) when testing OAuth, otherwise the callback route won't be available when the provider redirects back.
+
+The OAuth flow works as follows:
+- User clicks OAuth button → Redirected to provider (GitHub/Google/X)
+- Provider authenticates → Redirects to `/auth/callback?code=...`
+- Callback route exchanges code for session → Redirects to `/playground/hello-solana`
 
 
 

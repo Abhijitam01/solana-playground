@@ -47,10 +47,10 @@ export function TemplateHeader({ template }: TemplateHeaderProps) {
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-card/70 shadow-sm backdrop-blur">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <Logo height={40} useFullLogo={true} />
+      <div className="container mx-auto px-8 py-8 md:py-10">
+        <div className="flex items-center justify-between gap-8">
+          <div className="flex items-center gap-6">
+            <Logo height={72} useFullLogo={true} />
             <div className="h-6 w-px bg-border" />
             <div className="flex items-center gap-3">
               {hasPrev && prevTemplate && (
@@ -66,7 +66,7 @@ export function TemplateHeader({ template }: TemplateHeaderProps) {
               )}
               <div className="flex flex-col">
                 <div className="flex items-center gap-3">
-                  <h1 className="text-xl font-semibold text-foreground">
+                  <h1 className="text-3xl font-semibold leading-tight text-foreground">
                     {template.metadata.name}
                   </h1>
                   <Badge
@@ -76,7 +76,7 @@ export function TemplateHeader({ template }: TemplateHeaderProps) {
                     {template.metadata.difficulty}
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground mt-0.5">
+                <p className="text-base text-muted-foreground mt-0.5 max-w-2xl">
                   {template.metadata.description}
                 </p>
               </div>

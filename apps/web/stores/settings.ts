@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 import { persist } from "zustand/middleware";
 
 type ThemeMode = "dark" | "light";
@@ -12,7 +12,7 @@ interface SettingsState {
   setTheme: (theme: ThemeMode) => void;
 }
 
-export const useSettingsStore = create<SettingsState>()(
+export const useSettingsStore = createWithEqualityFn<SettingsState>()(
   persist(
     (set) => ({
       explanationsEnabled: true,

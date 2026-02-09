@@ -33,22 +33,47 @@ const LocalLineExplanationSchema = z.object({
 
 // Local implementation of loadTemplate to ensure correct path resolution
 async function loadTemplateLocal(id: string) {
-  // Use process.cwd() which we know works with our symlink
-  // apps/web/packages/solana/templates -> ../../../packages/solana/templates
-  // OR ../packages/solana/templates if in Vercel root
+  // Try multiple possible paths for template resolution
+  // This handles different deployment scenarios (local dev, Vercel, Railway, etc.)
   
-  let templatesDir;
   const cwd = process.cwd();
+  const possiblePaths = [
+    // Standalone build (production) - templates should be copied to .next/standalone
+    join(cwd, 'packages/solana/templates'),
+    join(cwd, '..', 'packages', 'solana', 'templates'),
+    join(cwd, '..', '..', 'packages', 'solana', 'templates'),
+    // Local development
+    join(cwd, 'apps', 'web', 'packages', 'solana', 'templates'),
+    // Root context
+    join(process.cwd(), 'packages', 'solana', 'templates'),
+  ];
   
-  if (cwd.includes('apps/web') || cwd.includes('apps\\web')) {
-    templatesDir = join(cwd, 'packages/solana/templates');
-  } else {
-    // Vercel / root context
-    templatesDir = join(cwd, 'packages/solana/templates');
+  let templatesDir: string | null = null;
+  
+  // Find the first path that exists
+  for (const path of possiblePaths) {
+    try {
+      const testPath = join(path, 'hello-solana', 'metadata.json');
+      await readFile(testPath, 'utf-8');
+      templatesDir = path;
+      break;
+    } catch {
+      // Path doesn't exist, try next one
+      continue;
+    }
   }
   
-  const basePath = join(templatesDir, id);
-  console.log(`Loading template locally from ${basePath}`);
+  if (!templatesDir) {
+    throw new Error(
+      `Templates directory not found. Tried paths: ${possiblePaths.join(', ')}. CWD: ${cwd}`
+    );
+  }
+  
+  // Handle nested template paths like "beginner/hello-anchor"
+  // Sanitize the id to prevent path traversal
+  const sanitizedId = id.replace(/\.\./g, '').replace(/^\//, '');
+  const basePath = join(templatesDir, sanitizedId);
+  console.log(`Loading template "${id}" from ${basePath} (CWD: ${cwd})`);
 
   try {
      const [code, metadata, explanations, programMap, precomputedState, functionSpecs] =

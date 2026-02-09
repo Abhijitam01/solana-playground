@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 import type { ExecutionResult, FunctionSpec } from "@solana-playground/types";
 import { markFirstTxStart, markFirstTxSuccess, trackEvent } from "@/lib/analytics";
 
@@ -55,7 +55,7 @@ const initialState = {
   currentFunctionSpec: null,
 };
 
-export const usePlaygroundStore = create<PlaygroundState>((set, get) => ({
+export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, get) => ({
   ...initialState,
   setTemplate: (templateId, code) => set({ templateId, code }),
   setSelectedLine: (line) => set({ selectedLine: line }),

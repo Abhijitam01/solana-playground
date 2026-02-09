@@ -1,34 +1,75 @@
 import { NextResponse } from 'next/server';
-import { readdir } from 'fs/promises';
+import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
 
 // Simple in-memory cache for serverless
 let templatesCache: { data: any[]; timestamp: number } | null = null;
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-async function listTemplatesLocal(): Promise<string[]> {
-  // Use process.cwd() which we know works with our symlink
-  // apps/web/packages/solana/templates -> ../../../packages/solana/templates
-  // OR ../packages/solana/templates if in Vercel root
-  
-  let templatesDir;
+async function findTemplatesDir(): Promise<string> {
   const cwd = process.cwd();
+  const possiblePaths = [
+    // Standalone build (production) - templates should be copied to .next/standalone
+    join(cwd, 'packages/solana/templates'),
+    join(cwd, '..', 'packages', 'solana', 'templates'),
+    join(cwd, '..', '..', 'packages', 'solana', 'templates'),
+    // Local development
+    join(cwd, 'apps', 'web', 'packages', 'solana', 'templates'),
+    // Root context
+    join(process.cwd(), 'packages', 'solana', 'templates'),
+  ];
   
-  if (cwd.includes('apps/web') || cwd.includes('apps\\web')) {
-    templatesDir = join(cwd, 'packages/solana/templates');
-  } else {
-    // Vercel / root context
-    templatesDir = join(cwd, 'packages/solana/templates');
+  // Find the first path that exists
+  for (const path of possiblePaths) {
+    try {
+      const testPath = join(path, 'hello-solana', 'metadata.json');
+      await readFile(testPath, 'utf-8');
+      return path;
+    } catch {
+      // Path doesn't exist, try next one
+      continue;
+    }
   }
+  
+  throw new Error(
+    `Templates directory not found. Tried paths: ${possiblePaths.join(', ')}. CWD: ${cwd}`
+  );
+}
 
+async function findTemplatesRecursive(dir: string, basePath: string = ''): Promise<string[]> {
+  const templates: string[] = [];
+  const entries = await readdir(dir, { withFileTypes: true });
+  
+  for (const entry of entries) {
+    if (entry.name.startsWith('_')) continue;
+    
+    const fullPath = join(dir, entry.name);
+    const relativePath = basePath ? `${basePath}/${entry.name}` : entry.name;
+    
+    if (entry.isDirectory()) {
+      // Check if this directory contains a template (has metadata.json)
+      try {
+        const metadataPath = join(fullPath, 'metadata.json');
+        await readFile(metadataPath, 'utf-8');
+        // This is a template directory
+        templates.push(relativePath);
+      } catch {
+        // Not a template directory, recurse into it
+        const nestedTemplates = await findTemplatesRecursive(fullPath, relativePath);
+        templates.push(...nestedTemplates);
+      }
+    }
+  }
+  
+  return templates.sort();
+}
+
+async function listTemplatesLocal(): Promise<string[]> {
   try {
-    const entries = await readdir(templatesDir, { withFileTypes: true });
-    return entries
-      .filter((entry) => entry.isDirectory() && !entry.name.startsWith('_'))
-      .map((entry) => entry.name)
-      .sort();
+    const templatesDir = await findTemplatesDir();
+    return await findTemplatesRecursive(templatesDir);
   } catch (error) {
-    console.error(`Failed to list templates from ${templatesDir}:`, error);
+    console.error(`Failed to list templates:`, error);
     return [];
   }
 }
@@ -44,21 +85,13 @@ export async function GET() {
     console.log(`Found ${templateIds.length} templates locally`);
     
     // We need to read metadata for each template
+    const templatesDir = await findTemplatesDir();
     const loadedTemplates = await Promise.all(
       templateIds.map(async (id) => {
         try {
-          // Use process.cwd() logic again to find the file
-          let templatesDir;
-          const cwd = process.cwd();
-          
-          if (cwd.includes('apps/web') || cwd.includes('apps\\web')) {
-             templatesDir = join(cwd, 'packages/solana/templates');
-          } else {
-             templatesDir = join(cwd, 'packages/solana/templates');
-          }
-          
+          // Handle nested paths like "beginner/hello-anchor"
           const metadataPath = join(templatesDir, id, 'metadata.json');
-          const content = await import('fs/promises').then(fs => fs.readFile(metadataPath, 'utf-8'));
+          const content = await readFile(metadataPath, 'utf-8');
           const metadata = JSON.parse(content);
           
           return {
@@ -79,11 +112,7 @@ export async function GET() {
     // Update cache
     templatesCache = { data: templates, timestamp: Date.now() };
     
-    return NextResponse.json({
-      cwd: process.cwd(),
-      dirname: typeof __dirname !== 'undefined' ? __dirname : 'undefined',
-      templates: templates
-    });
+    return NextResponse.json(templates);
   } catch (error) {
     console.error('Error fetching templates:', error);
     return NextResponse.json(

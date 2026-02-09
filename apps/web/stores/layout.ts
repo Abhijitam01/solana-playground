@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from "zustand/traditional";
 
 export type PanelId =
   | "map"
@@ -29,7 +29,7 @@ const initialPanels: Record<PanelId, boolean> = {
   checklist: false,
 };
 
-export const useLayoutStore = create<LayoutState>((set) => ({
+export const useLayoutStore = createWithEqualityFn<LayoutState>((set) => ({
   panels: { ...initialPanels },
   sidebarVisible: true,
   zenMode: false,
