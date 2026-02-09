@@ -263,15 +263,15 @@ export function HowItWorks() {
                       Example Preview
                     </div>
                     <div className="font-mono text-[11px] sm:text-[13px] md:text-[14px] leading-relaxed text-[#888888]">
-                      <div className="py-0.5 text-[#6272a4]">// Available Examples</div>
+                      <div className="py-0.5 text-[#6272a4]">{"// Available Examples"}</div>
                       <div className="py-0.5">
                         <span className="text-[#ff79c6]">const</span> examples = [
                       </div>
-                      <div className="py-0.5 pl-4 text-[#f1fa8c]">"Token Program",</div>
-                      <div className="py-0.5 pl-4 text-[#f1fa8c]">"NFT Minting",</div>
-                      <div className="py-0.5 pl-4 text-[#f1fa8c]">"PDA Accounts",</div>
-                      <div className="py-0.5 pl-4 text-[#f1fa8c]">"Staking Protocol",</div>
-                      <div className="py-0.5 pl-4 text-[#f1fa8c]">"AMM Swap"</div>
+                      <div className="py-0.5 pl-4 text-[#f1fa8c]">&quot;Token Program&quot;,</div>
+                      <div className="py-0.5 pl-4 text-[#f1fa8c]">&quot;NFT Minting&quot;,</div>
+                      <div className="py-0.5 pl-4 text-[#f1fa8c]">&quot;PDA Accounts&quot;,</div>
+                      <div className="py-0.5 pl-4 text-[#f1fa8c]">&quot;Staking Protocol&quot;,</div>
+                      <div className="py-0.5 pl-4 text-[#f1fa8c]">&quot;AMM Swap&quot;</div>
                       <div className="py-0.5">];</div>
                     </div>
                   </div>
@@ -346,7 +346,7 @@ export function HowItWorks() {
                         (ctx: Context&lt;Initialize&gt;) &#123;
                       </div>
                       <div className="py-0.5 pl-4 text-[#6272a4]">
-                        // Context provides account access &larr;
+                        {"// Context provides account access ←"}
                       </div>
                       <div className="py-0.5 pl-4">
                         <span className="text-[#ff79c6]">let</span> vault = &amp;
@@ -427,14 +427,14 @@ export function HowItWorks() {
                     </div>
                     <div className="font-mono text-[13px] md:text-[14px] leading-relaxed text-[#888888]">
                       <div className="py-0.5">
-                        Vault Account: <span className="text-[#f1fa8c]">"7xKXt..."</span>
+                        Vault Account: <span className="text-[#f1fa8c]">&quot;7xKXt...&quot;</span>
                       </div>
                       <div className="py-0.5">
                         ├─ Balance: <span className="text-[#50fa7b]">10.5 SOL</span>
                       </div>
                       <div className="py-0.5">
                         ├─ Authority:{" "}
-                        <span className="text-[#f1fa8c]">"ABC123..."</span>
+                        <span className="text-[#f1fa8c]">&quot;ABC123...&quot;</span>
                       </div>
                       <div className="py-0.5">
                         ├─ Status: <span className="text-[#50fa7b]">Initialized ✓</span>
@@ -511,13 +511,13 @@ export function HowItWorks() {
                     </div>
                     <div className="font-mono text-[13px] md:text-[14px] leading-relaxed text-[#888888]">
                       <div className="py-0.5 text-[#6272a4]">
-                        // Modify values and rerun
+                        {"// Modify values and rerun"}
                       </div>
                       <div className="py-0.5">
                         <span className="text-[#ff79c6]">let</span> amount ={" "}
                         <span className="text-[#f1fa8c]">100</span>;{" "}
                         <span className="text-[#6272a4]">
-                          // &larr; Try different amounts
+                          {"// ← Try different amounts"}
                         </span>
                       </div>
                       <div className="py-0.5">
@@ -525,7 +525,7 @@ export function HowItWorks() {
                       </div>
                       <div className="py-0.5" />
                       <div className="py-0.5 text-[#6272a4]">
-                        // Press Run to see changes instantly
+                        {"// Press Run to see changes instantly"}
                       </div>
                     </div>
                   </div>
