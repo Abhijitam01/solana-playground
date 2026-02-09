@@ -172,24 +172,22 @@ export default function PlaygroundPage() {
   }, [anyPanelOpen]);
 
   if (isLoading || isRouteLoading) {
+    // Simple text-based loading
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading template...</p>
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-[#1e1e1e] text-[#cccccc] font-mono">
+        <div className="text-sm">Loading...</div>
       </div>
     );
   }
 
   if (!template && !isRouteLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="min-h-screen flex items-center justify-center bg-[#1e1e1e]">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-2">
+          <h1 className="text-xl font-mono font-bold text-[#cccccc] mb-2">
             Template not found
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-[#888888] font-mono text-sm">
             The template you are looking for does not exist.
           </p>
         </div>
@@ -199,9 +197,9 @@ export default function PlaygroundPage() {
 
   return (
     <>
-      <div className="relative min-h-screen overflow-visible bg-gradient-to-b from-background via-muted/20 to-background">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(16,185,129,0.08),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(14,165,233,0.08),transparent_35%)]" />
-        <div className="pointer-events-none absolute inset-0 -z-10 opacity-60 [background:linear-gradient(180deg,rgba(255,255,255,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:40px_40px]" />
+      <div className="relative min-h-screen overflow-visible bg-[#1e1e1e] text-[#cccccc]">
+        {/* Removed "AI slop" gradients, kept clean dark background */
+        /* Optional: Very subtle grid if needed, otherwise plain */ }
         <div className="flex min-h-screen">
           {sidebarVisible && <ProgramSidebar />}
           <div className="flex flex-1 min-w-0">
