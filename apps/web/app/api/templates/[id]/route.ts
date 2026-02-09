@@ -75,7 +75,7 @@ async function loadTemplateLocal(id: string) {
   let basePath: string | null = null;
   
   // Try multiple possible locations for the template
-  const possiblePaths = [
+  const templateSearchPaths = [
     // Direct path (for top-level templates like "pda-escrow")
     join(templatesDir, sanitizedId),
     // Nested paths (for templates in beginner/, intermediate/, expert/)
@@ -83,7 +83,7 @@ async function loadTemplateLocal(id: string) {
   ];
   
   // Find the first path that contains a valid template
-  for (const path of possiblePaths) {
+  for (const path of templateSearchPaths) {
     try {
       const testMetadataPath = join(path, 'metadata.json');
       await readFile(testMetadataPath, 'utf-8');
@@ -96,7 +96,7 @@ async function loadTemplateLocal(id: string) {
   
   if (!basePath) {
     throw new Error(
-      `Template "${id}" not found. Searched paths: ${possiblePaths.join(', ')}`
+      `Template "${id}" not found. Searched paths: ${templateSearchPaths.join(', ')}`
     );
   }
   
