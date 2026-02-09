@@ -4,8 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Zap, Lock, BookOpen, Rocket } from "lucide-react";
-import { useAuth } from "@/components/providers/AuthProvider";
-import { useRouter } from "next/navigation";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -17,21 +15,11 @@ const stagger = {
 };
 
 export function Hero() {
-  const { user } = useAuth();
-  const router = useRouter();
-
-  const handlePrimaryClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Auth-aware funnel: if not logged in, send to signup with redirect back to playground.
-    if (!user) {
-      e.preventDefault();
-      const next = encodeURIComponent("/playground/hello-anchor");
-      router.push(`/signup?next=${next}`);
-    }
-    // If logged in, the href will take them directly to the playground.
-  };
+  // Allow direct access to playground - no auth check needed
+  // Auth will be required when user tries to edit code
 
   return (
-    <section className="relative pt-40 pb-32 px-6 flex items-center justify-center bg-[#0A0A0A] text-[#FAFAFA] border-b border-[#262626] min-h-[80vh] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
+    <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-32 px-4 sm:px-6 flex items-center justify-center bg-[#0A0A0A] text-[#FAFAFA] border-b border-[#262626] min-h-[70vh] sm:min-h-[80vh] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
       <div className="max-w-[1200px] w-full text-center relative z-10 px-4">
         <motion.div
           initial="hidden"
@@ -46,7 +34,7 @@ export function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="text-[48px] leading-[1.1] sm:text-[64px] md:text-[80px] lg:text-[96px] font-bold tracking-tight mb-8 text-white"
+            className="text-[36px] leading-[1.1] sm:text-[48px] md:text-[64px] lg:text-[80px] xl:text-[96px] font-bold tracking-tight mb-6 sm:mb-8 text-white px-2"
           >
             The Solana Playground
             <br />
@@ -55,7 +43,7 @@ export function Hero() {
           
           <motion.p
             variants={fadeUp}
-            className="text-[20px] leading-[32px] sm:text-[22px] text-[#A3A3A3] mb-12 max-w-[600px] mx-auto"
+            className="text-[16px] leading-[24px] sm:text-[18px] sm:leading-[28px] md:text-[20px] md:leading-[32px] lg:text-[22px] text-[#A3A3A3] mb-8 sm:mb-12 max-w-[600px] mx-auto px-4"
           >
             Run real Solana programs. Watch state transform. 
             Understand execution—not just syntax.
@@ -64,18 +52,17 @@ export function Hero() {
           
           <motion.div
             variants={fadeUp}
-            className="flex items-center justify-center gap-5 mb-12"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5 mb-8 sm:mb-12 px-4"
           >
             <Link
               href="/playground/hello-solana"
-              onClick={handlePrimaryClick}
-              className="bg-[#FAFAFA] text-[#0A0A0A] px-10 py-4 rounded text-base font-semibold hover:bg-white transition-colors"
+              className="w-full sm:w-auto bg-[#FAFAFA] text-[#0A0A0A] px-8 sm:px-10 py-3 sm:py-4 rounded text-sm sm:text-base font-semibold hover:bg-white transition-colors text-center"
             >
               Open Playground
             </Link>
             <a
               href="#examples"
-              className="bg-transparent text-[#A3A3A3] border border-[#262626] px-10 py-4 rounded text-base font-medium hover:text-[#FAFAFA] hover:border-[#525252] transition-colors"
+              className="w-full sm:w-auto bg-transparent text-[#A3A3A3] border border-[#262626] px-8 sm:px-10 py-3 sm:py-4 rounded text-sm sm:text-base font-medium hover:text-[#FAFAFA] hover:border-[#525252] transition-colors text-center"
             >
               Browse Examples
             </a>
@@ -84,7 +71,7 @@ export function Hero() {
           {/* Fast Facts - Grid Style */}
           <motion.div
             variants={fadeUp}
-            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#262626] border border-[#262626] rounded-lg overflow-hidden max-w-2xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[#262626] border border-[#262626] rounded-lg overflow-hidden max-w-3xl mx-auto w-full"
           >
             {[
               { icon: Zap, text: "Zero setup" },
@@ -92,9 +79,9 @@ export function Hero() {
               { icon: BookOpen, text: "Open source" },
               { icon: Rocket, text: "Active dev" },
             ].map((fact, i) => (
-              <div key={i} className="flex items-center justify-center gap-2 py-3 bg-[#0A0A0A] text-xs text-[#737373] hover:text-[#A3A3A3] transition-colors">
-                <fact.icon className="w-3 h-3" />
-                {fact.text}
+              <div key={i} className="flex items-center justify-center gap-2 sm:gap-3 py-4 sm:py-5 md:py-6 bg-[#0A0A0A] text-xs sm:text-sm md:text-base text-[#A3A3A3] hover:text-[#FAFAFA] hover:bg-[#111111] transition-all px-3 sm:px-4">
+                <fact.icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 flex-shrink-0" />
+                <span className="font-medium">{fact.text}</span>
               </div>
             ))}
           </motion.div>

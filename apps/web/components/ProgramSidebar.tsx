@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useTemplates } from "@/hooks/use-templates";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useProgramStore } from "@/stores/programs";
 import { PROGRAM_TYPES } from "@/lib/program-types";
 import {
@@ -18,9 +18,13 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { shallow } from "zustand/shallow";
 import { useLayoutStore } from "@/stores/layout";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { LoginModal } from "@/components/auth/LoginModal";
 
 export function ProgramSidebar() {
   const router = useRouter();
+  const pathname = usePathname();
+  const { user } = useAuth();
   const { data: templates } = useTemplates();
   const {
     programs,
@@ -49,6 +53,7 @@ export function ProgramSidebar() {
     );
 
   const [showModal, setShowModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedType, setSelectedType] = useState(PROGRAM_TYPES[0]?.id ?? "hello-solana");
   const [programName, setProgramName] = useState("");
   const [moreSection, setMoreSection] = useState<
@@ -114,6 +119,13 @@ export function ProgramSidebar() {
   const resolvedTemplates = resolveVisibleTemplates();
 
   const handleCreate = () => {
+    // Check if user is authenticated before creating a new program
+    if (!user) {
+      setShowModal(false);
+      setShowAuthModal(true);
+      return;
+    }
+
     const type = PROGRAM_TYPES.find((item) => item.id === selectedType);
     if (!type) return;
     const name = programName.trim() || `${type.label} Draft`;
@@ -122,11 +134,20 @@ export function ProgramSidebar() {
     setShowModal(false);
   };
 
+  const handleNewProgramClick = () => {
+    // Check if user is authenticated before opening create modal
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
+    setShowModal(true);
+  };
+
   return (
     <aside className="w-64 flex-shrink-0 border-r border-border/70 bg-card/60 backdrop-blur h-screen overflow-hidden flex flex-col">
       <div className="p-4 border-b border-border/70">
         <button
-          onClick={() => setShowModal(true)}
+          onClick={handleNewProgramClick}
           className="btn-primary w-full"
         >
           <Plus className="w-4 h-4" />
@@ -442,6 +463,12 @@ export function ProgramSidebar() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Auth Required Modal for Creating New Programs */}
+      <LoginModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
     </aside>
   );
 }

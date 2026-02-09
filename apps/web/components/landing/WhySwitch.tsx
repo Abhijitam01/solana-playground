@@ -32,18 +32,18 @@ const features = [
 
 export function WhySwitch() {
   return (
-    <section className="py-24 px-6 bg-[#0A0A0A] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0A0A0A] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 border-b border-[#262626] pb-8">
-          <h2 className="text-[32px] font-bold text-[#FAFAFA] leading-tight max-w-md">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-4 sm:gap-6 border-b border-[#262626] pb-6 sm:pb-8">
+          <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-bold text-[#FAFAFA] leading-tight max-w-md">
             Why developers are switching
           </h2>
-          <p className="text-[#737373] text-sm max-w-sm">
+          <p className="text-[#737373] text-xs sm:text-sm max-w-sm">
             Move beyond simple text editors. Experience a true Solana development environment.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[#262626] border border-[#262626] rounded-lg overflow-hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-px bg-[#262626] border border-[#262626] rounded-lg overflow-hidden">
           {features.map((feature) => (
             <div
               key={feature.title}
@@ -52,22 +52,22 @@ export function WhySwitch() {
               <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${feature.gradient} blur-2xl opacity-0 group-hover:opacity-100 transition-opacity`} />
               
               <div className="relative z-10">
-                <div className="w-12 h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center mb-6 text-[#FAFAFA]">
-                  <feature.icon className="w-5 h-5" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center mb-4 sm:mb-6 text-[#FAFAFA]">
+                  <feature.icon className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 
-                <h3 className="text-lg font-semibold text-[#FAFAFA] mb-4">{feature.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-[#FAFAFA] mb-3 sm:mb-4">{feature.title}</h3>
                 
-                <div className="space-y-2 mb-6 text-sm">
+                <div className="space-y-2 mb-4 sm:mb-6 text-xs sm:text-sm">
                   <div className="flex items-center gap-2 text-[#525252] line-through">
-                    <X className="w-3 h-3" /> {feature.before}
+                    <X className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" /> <span>{feature.before}</span>
                   </div>
                   <div className="flex items-center gap-2 text-[#14F195] font-medium">
-                    <Check className="w-3 h-3" /> {feature.after}
+                    <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 flex-shrink-0" /> <span>{feature.after}</span>
                   </div>
                 </div>
                 
-                <p className="text-[#737373] text-sm leading-relaxed">
+                <p className="text-[#737373] text-xs sm:text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>

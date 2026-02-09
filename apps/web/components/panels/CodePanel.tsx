@@ -210,9 +210,11 @@ export function CodePanel() {
     [theme]
   );
 
+  // Allow full interaction for viewing - no read-only restriction
+  // Auth will be checked when creating new programs or saving
   const isReadOnly = useMemo(
-    () => activeProgram?.source === "template",
-    [activeProgram?.source]
+    () => false, // Always allow viewing and interaction
+    []
   );
 
   const todoCount = useMemo(() => {
@@ -358,10 +360,11 @@ export function CodePanel() {
 
       // Handle content changes
       editor.onDidChangeModelContent(() => {
-        if (!editorRef.current || !activeProgram || activeProgram.source === "template") {
+        if (!editorRef.current || !activeProgram) {
           return;
         }
 
+        // Allow editing for viewing/exploration - auth only needed for creating new programs
         const nextCode = editorRef.current.getValue();
         const currentCode = usePlaygroundStore.getState().code;
 
@@ -656,12 +659,6 @@ export function CodePanel() {
             <span className="todo-badge" aria-label={`${todoCount} TODO items`}>
               {todoCount} TODO
             </span>
-          )}
-          {isReadOnly && (
-            <Badge variant="default" size="sm" aria-label="Read-only template">
-              <FileCode className="h-3 w-3 mr-1" />
-              Template
-            </Badge>
           )}
           {isSaving && (
              <span className="text-xs text-muted-foreground animate-pulse ml-2">Saving...</span>

@@ -27,10 +27,12 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
 
   // Redirect authenticated users away from landing/auth pages
+  // But allow unauthenticated access to playground routes
   if (user && (request.nextUrl.pathname === '/' || request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup'))) {
     return NextResponse.redirect(new URL('/playground/hello-anchor', request.url));
   }
 
+  // Allow unauthenticated access to playground routes - auth will be checked when editing code
   return response;
 }
 

@@ -1,57 +1,39 @@
 "use client";
-
-import React, { useState, useRef } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Twitter, ExternalLink } from "lucide-react";
+import { Github, Twitter } from "lucide-react";
 
-function HoverText({ text }: { text: string }) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const letters = text.split('');
-
-  return (
-    <div className="flex items-center justify-start w-full gap-1 md:gap-2">
-      {letters.map((letter, index) => (
-        <span
-          key={index}
-          className="relative inline-block cursor-default"
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
-          style={{
-            transform: 'scaleX(0.8)',
-            transformOrigin: 'center',
-            fontSize: 'clamp(7rem, 7.8vw, 18rem)',
-            lineHeight: '0.9',
-            fontWeight: '800',
-            fontStretch: 'condensed',
-            letterSpacing: '-0.03em',
-          }}
-        >
-          <span 
-            className={`transition-colors duration-200 ${hoveredIndex === index ? 'text-[#14F195]' : 'text-white/85'}`}
-            style={{
-              display: 'inline-block',
-              width: letter === ' ' ? '0.3em' : 'auto',
-            }}
-          >
-            {letter === ' ' ? '\u00A0' : letter}
-          </span>
-        </span>
-      ))}
-    </div>
-  );
-}
 
 export function Footer() {
   return (
     <footer className="bg-[#0a0a0a] border-t border-[#1a1a1a] relative z-10 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
+      {/* Moon-like Arc at Top */}
+      <div className="absolute top-0 left-0 w-full h-10 overflow-hidden pointer-events-none">
+        <svg
+          className="w-full h-full"
+          viewBox="0 0 1200 40"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M 0,40 Q 600,0 1200,40"
+            stroke="#000000"
+            strokeWidth="1.5"
+            strokeOpacity="0.4"
+            fill="none"
+          />
+        </svg>
+      </div>
+
       <div className="max-w-[1200px] mx-auto px-6 pt-12 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr_1fr] gap-8 lg:gap-10 mb-10">
           {/* Brand Section */}
           <div className="flex flex-col gap-4 md:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3">
               <Image
-                src="/logo/Gemini_Generated_Image_3z7tl23z7tl23z7t-removebg-preview.png"
+                src="/logo/og.png"
                 alt="Solana Atlas"
                 width={50}
                 height={50}
@@ -222,29 +204,53 @@ export function Footer() {
         <div className="border-t border-[#1a1a1a] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-[#666] text-sm">
             © 2026 Solana Atlas. All rights reserved.
-            <br />
-            Open Source • Created by{" "}
-            <a
-              href="https://github.com/Abhijitam01"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#888] hover:text-white transition-colors"
-            >
-              Abhijitam Dubey
-            </a>
           </div>
-          <div className="flex gap-8 text-sm text-[#666]">
-            <span>Built with Solana</span>
+          <div className="flex gap-6 text-sm text-[#666]">
+            <a
+              href="#"
+              className="hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="#"
+              className="hover:text-white transition-colors"
+            >
+              Terms of Service
+            </a>
+            <a
+              href="#"
+              className="hover:text-white transition-colors"
+            >
+              Cookies Settings
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Large SOLANA ATLAS Branding - Full Width */}
-      <div className="w-full border-t border-[#1a1a1a] relative overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-6 py-12">
-          <HoverText text="SOLANA ATLAS" />
+      {/* Large Background Text - Similar to GRAPHY style */}
+      <div className="w-full relative overflow-hidden py-16 md:py-24">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className="text-center select-none pointer-events-none"
+            style={{
+              fontSize: 'clamp(8rem, 20vw, 24rem)',
+              fontWeight: '900',
+              letterSpacing: '-0.05em',
+              lineHeight: '1',
+              color: '#1a1a1a', // Dark gray, similar to the GRAPHY image
+              whiteSpace: 'nowrap',
+              fontFamily: 'sans-serif',
+            }}
+          >
+            ATLAS
+          </div>
         </div>
       </div>
-    </footer>
+
+
+
+
+</footer>
   );
 }

@@ -5,23 +5,23 @@ import { motion } from "framer-motion";
 
 export function FinalCTA() {
   return (
-    <section className="py-32 px-6 bg-[#0A0A0A] border-t border-[#262626] text-center bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
+    <section className="py-20 sm:py-32 px-4 sm:px-6 bg-[#0A0A0A] border-t border-[#262626] text-center bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
       <div className="max-w-[600px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-[40px] font-bold text-[#FAFAFA] mb-6">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-bold text-[#FAFAFA] mb-4 sm:mb-6 px-4">
             Start understanding Solana
           </h2>
-          <p className="text-[16px] text-[#737373] mb-8">
+          <p className="text-[14px] sm:text-[16px] text-[#737373] mb-6 sm:mb-8 px-4">
             No setup. No risk. Just real programs and real execution.
           </p>
           
           <Link
-            href="/signup"
-            className="inline-block bg-[#14F195] text-[#0A0A0A] px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity"
+            href="/playground/hello-solana"
+            className="inline-block bg-[#14F195] text-[#0A0A0A] px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:opacity-90 transition-opacity"
           >
             Open Solana Playground →
           </Link>

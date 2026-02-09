@@ -118,15 +118,15 @@ export function HowItWorks() {
   }, []);
 
   return (
-    <section className="bg-[#0a0a0a] text-white py-28 px-6 md:px-10 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
+    <section className="bg-[#0a0a0a] text-white py-16 sm:py-24 md:py-28 px-4 sm:px-6 md:px-10 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
       <div className="max-w-[1600px] mx-auto pl-0 md:pl-[200px]">
-        <div className="grid gap-10 lg:grid-cols-[400px,1fr] lg:gap-24 relative">
+        <div className="grid gap-6 sm:gap-10 lg:grid-cols-[400px,1fr] lg:gap-24 relative">
           {/* Left: Steps sidebar with heading */}
           <div className="lg:sticky lg:top-28 h-fit">
             <div className="relative lg:pl-10">
               {/* How it works heading */}
-              <div className="pb-6 pt-4 mb-10">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-[-0.02em]">
+              <div className="pb-4 sm:pb-6 pt-2 sm:pt-4 mb-6 sm:mb-10">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.02em]">
                   How it works
                 </h2>
               </div>
@@ -134,7 +134,7 @@ export function HowItWorks() {
               {/* Vertical line (desktop) */}
               <div className="hidden lg:block absolute left-[18px] top-[140px] bottom-8 w-px bg-white/10" />
 
-              <div className="flex lg:block gap-4 overflow-x-auto pb-4 lg:pb-0 lg:overflow-visible">
+              <div className="flex lg:block gap-3 sm:gap-4 overflow-x-auto pb-4 lg:pb-0 lg:overflow-visible scrollbar-hide">
                 {steps.map((step, index) => {
                   const isActive = index === activeIndex;
 
@@ -172,10 +172,10 @@ export function HowItWorks() {
                         />
                       </div>
 
-                      <div className="px-4 py-3 lg:px-0 lg:py-0">
+                      <div className="px-3 py-2.5 sm:px-4 sm:py-3 lg:px-0 lg:py-0">
                         <div
                           className={[
-                            "text-xs font-semibold tracking-[0.2em] mb-1 transition-colors",
+                            "text-[10px] sm:text-xs font-semibold tracking-[0.2em] mb-1 transition-colors",
                             isActive ? "text-[#00ffa3]" : "text-[#666666]"
                           ].join(" ")}
                         >
@@ -183,13 +183,13 @@ export function HowItWorks() {
                         </div>
                         <div
                           className={[
-                            "text-base md:text-lg font-semibold transition-colors",
+                            "text-sm sm:text-base md:text-lg font-semibold transition-colors",
                             isActive ? "text-white" : "text-[#999999]"
                           ].join(" ")}
                         >
                           {step.title}
                         </div>
-                        <p className="mt-1 text-xs md:text-sm text-[#737373] hidden lg:block">
+                        <p className="mt-1 text-[10px] sm:text-xs md:text-sm text-[#737373] hidden lg:block">
                           {step.subtitle}
                         </p>
                       </div>
@@ -208,7 +208,7 @@ export function HowItWorks() {
                 sectionRefs.current[0] = el;
               }}
               data-section-index={0}
-              className="min-h-[70vh] flex items-center py-10 md:py-16"
+              className="min-h-[60vh] sm:min-h-[70vh] flex items-center py-6 sm:py-10 md:py-16"
             >
               <div
                 className={[
@@ -218,17 +218,17 @@ export function HowItWorks() {
                     : "opacity-20 translate-y-10"
                 ].join(" ")}
               >
-                <div className="mb-8">
-                  <h3 className="text-2xl md:text-3xl font-semibold mb-3 tracking-[-0.01em]">
+                <div className="mb-6 sm:mb-8">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-2 sm:mb-3 tracking-[-0.01em]">
                     Open an example
                   </h3>
-                  <p className="text-base md:text-lg text-[#999999]">
+                  <p className="text-sm sm:text-base md:text-lg text-[#999999]">
                     Start with PDAs, tokens, or account management
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-8">
-                  <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-6 sm:gap-8">
+                  <div className="flex flex-col gap-3 sm:gap-5">
                     {[
                       "Choose from 20+ curated examples covering common Solana patterns",
                       "Examples include token creation, NFTs, staking, and DeFi protocols",
@@ -236,13 +236,13 @@ export function HowItWorks() {
                     ].map((text) => (
                       <div
                         key={text}
-                        className="flex items-start gap-4 p-5 bg-white/5/10 border-l-2 border-l-transparent rounded-lg transition-all duration-300 hover:bg-white/[0.04] hover:border-l-[#00ffa3] hover:translate-x-1"
+                        className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 bg-white/5/10 border-l-2 border-l-transparent rounded-lg transition-all duration-300 hover:bg-white/[0.04] hover:border-l-[#00ffa3] hover:translate-x-1"
                       >
-                        <div className="mt-1 w-6 h-6 flex items-center justify-center">
+                        <div className="mt-0.5 sm:mt-1 w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center flex-shrink-0">
                           <svg
                             viewBox="0 0 24 24"
                             fill="none"
-                            className="w-5 h-5 stroke-[#00ffa3] stroke-2"
+                            className="w-4 h-4 sm:w-5 sm:h-5 stroke-[#00ffa3] stroke-2"
                           >
                             <path
                               d="M5 13l4 4L19 7"
@@ -251,18 +251,18 @@ export function HowItWorks() {
                             />
                           </svg>
                         </div>
-                        <p className="text-sm md:text-[15px] text-[#cccccc] leading-relaxed">
+                        <p className="text-xs sm:text-sm md:text-[15px] text-[#cccccc] leading-relaxed">
                           {text}
                         </p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-6 md:p-8 mt-1 max-w-[580px]">
-                    <div className="text-[11px] uppercase tracking-[0.2em] text-[#666666] font-semibold mb-4">
+                  <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-4 sm:p-6 md:p-8 mt-1 max-w-[580px] overflow-x-auto">
+                    <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-[#666666] font-semibold mb-3 sm:mb-4">
                       Example Preview
                     </div>
-                    <div className="font-mono text-[13px] md:text-[14px] leading-relaxed text-[#888888]">
+                    <div className="font-mono text-[11px] sm:text-[13px] md:text-[14px] leading-relaxed text-[#888888]">
                       <div className="py-0.5 text-[#6272a4]">// Available Examples</div>
                       <div className="py-0.5">
                         <span className="text-[#ff79c6]">const</span> examples = [

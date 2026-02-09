@@ -94,14 +94,14 @@ export function Trust() {
   ] as const;
 
   return (
-    <section className="py-24 px-6 bg-[#0A0A0A] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
+    <section className="py-16 sm:py-24 px-4 sm:px-6 bg-[#0A0A0A] bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-[#262626] pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 sm:mb-12 gap-4 sm:gap-6 border-b border-[#262626] pb-6 sm:pb-8">
           <div>
-            <h2 className="text-[40px] font-bold text-[#FAFAFA] leading-tight">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[40px] font-bold text-[#FAFAFA] leading-tight">
               Built for developers
             </h2>
-            <p className="mt-4 text-sm text-[#737373] max-w-[560px]">
+            <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-[#737373] max-w-[560px]">
               Everything you need to build, test, and deploy Solana programs—no
               setup required.
             </p>
@@ -113,7 +113,7 @@ export function Trust() {
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           transition={{ staggerChildren: 0.06 }}
-          className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 lg:grid-flow-dense lg:auto-rows-[88px] lg:items-stretch"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-12 gap-3 sm:gap-4 lg:grid-flow-dense lg:auto-rows-[88px] lg:items-stretch"
         >
           {items.map((item) => {
             const Icon = "icon" in item ? item.icon : null;
@@ -124,13 +124,14 @@ export function Trust() {
                 variants={fadeUp}
                 className={[
                   "group relative overflow-hidden rounded-lg border border-[#262626] bg-[#0A0A0A]",
-                  "pad" in item ? item.pad : "p-7 md:p-8",
+                  "pad" in item ? item.pad : "p-5 sm:p-6 md:p-7 lg:p-8",
                   "h-full min-h-0",
                   "transition-[transform,background-color,border-color] duration-200",
                   reduceMotion
                     ? "hover:bg-[#111111]"
                     : "hover:-translate-y-1 hover:bg-[#111111]",
                   "hover:border-[#14F195]/30",
+                  "col-span-1",
                   item.col,
                 ].join(" ")}
               >
@@ -167,14 +168,14 @@ export function Trust() {
 
                   {"stat" in item ? (
                     <div className="h-full flex flex-col justify-center">
-                      <div className="text-[52px] leading-none font-bold tracking-tight text-[#14F195]">
+                      <div className="text-[32px] sm:text-[40px] md:text-[52px] leading-none font-bold tracking-tight text-[#14F195]">
                         {item.stat}
                       </div>
-                      <div className="mt-3 text-[11px] font-mono uppercase tracking-wider text-[#737373]">
+                      <div className="mt-2 sm:mt-3 text-[9px] sm:text-[10px] md:text-[11px] font-mono uppercase tracking-wider text-[#737373]">
                         {item.statLabel}
                       </div>
                       {"statHint" in item ? (
-                        <div className="mt-3 text-sm text-[#A3A3A3]">
+                        <div className="mt-2 sm:mt-3 text-xs sm:text-sm text-[#A3A3A3]">
                           {item.statHint}
                         </div>
                       ) : null}
@@ -182,35 +183,35 @@ export function Trust() {
                   ) : (
                     <>
                       {Icon ? (
-                        <div className="w-12 h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center mb-6 text-[#FAFAFA] flex-shrink-0">
-                          <Icon className="w-5 h-5" />
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded bg-[#1A1A1A] border border-[#262626] flex items-center justify-center mb-4 sm:mb-6 text-[#FAFAFA] flex-shrink-0">
+                          <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                         </div>
                       ) : null}
 
                       <div>
-                        <h3 className="text-xl font-semibold text-[#FAFAFA] mb-3 group-hover:text-[#14F195] transition-colors">
+                        <h3 className="text-lg sm:text-xl font-semibold text-[#FAFAFA] mb-2 sm:mb-3 group-hover:text-[#14F195] transition-colors">
                           {"title" in item ? item.title : ""}
                         </h3>
 
                         {"desc" in item ? (
-                          <p className="text-sm text-[#737373] leading-relaxed">
+                          <p className="text-xs sm:text-sm text-[#737373] leading-relaxed">
                             {item.desc}
                           </p>
                         ) : null}
 
                         {"list" in item ? (
-                          <ul className="mt-4 space-y-2">
+                          <ul className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
                             {item.list.map((t) => (
                               <li
                                 key={t}
                                 className={[
                                   "flex items-start gap-2 text-[#A3A3A3]",
-                                  "text-base leading-snug"
+                                  "text-sm sm:text-base leading-snug"
                                 ].join(" ")}
                               >
                                 <Check className={[
                                   "flex-none text-[#14F195]",
-                                  "w-5 h-4 mt-0.5"
+                                  "w-4 h-4 sm:w-5 sm:h-4 mt-0.5 flex-shrink-0"
                                 ].join(" ")} />
                                 <span>{t}</span>
                               </li>

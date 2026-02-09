@@ -49,7 +49,7 @@ export function Logo({
         style={{ width: height, height: height }}
       >
         <Image
-          src="/logo/Gemini_Generated_Image_3z7tl23z7tl23z7t-removebg-preview.png"
+          src="/logo/og.png"
           alt="Solana Atlas"
           width={height}
           height={height}
