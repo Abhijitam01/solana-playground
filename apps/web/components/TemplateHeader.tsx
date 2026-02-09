@@ -50,7 +50,7 @@ export function TemplateHeader({ template }: TemplateHeaderProps) {
       <div className="container mx-auto px-8 py-8 md:py-10">
         <div className="flex items-center justify-between gap-8">
           <div className="flex items-center gap-6">
-            <Logo height={72} useFullLogo={true} />
+            <Logo height={80} />
             <div className="h-6 w-px bg-border" />
             <div className="flex items-center gap-3">
               {hasPrev && prevTemplate && (

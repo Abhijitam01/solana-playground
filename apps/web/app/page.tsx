@@ -20,7 +20,7 @@ export default function SolanaAtlasLanding() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/90 border-b border-[#262626] backdrop-blur-sm">
         <div className="max-w-[1200px] mx-auto px-6 h-24 flex items-center justify-between">
-          <Logo height={80} useFullLogo={true} className="text-[#FAFAFA]" />
+          <Logo height={72} className="text-[#FAFAFA]" />
 
           <div className="hidden md:flex items-center gap-8">
             <Link

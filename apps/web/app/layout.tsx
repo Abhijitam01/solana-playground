@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   title: "Solana Atlas",
   description: "Learn Solana programming through interactive, explorable code",
   icons: {
-    icon: "/logo/icon.png",
-    apple: "/logo/icon.png",
+    icon: "/logo/Gemini_Generated_Image_7opsf27opsf27ops.png",
+    apple: "/logo/Gemini_Generated_Image_7opsf27opsf27ops.png",
   },
 };
 

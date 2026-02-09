@@ -11,66 +11,25 @@ interface LogoProps {
   showWordmark?: boolean;
   /** Optional className for the outer wrapper */
   className?: string;
-  /** Use full logo (with text) instead of just icon */
+  /** Kept for backwards compatibility, but icon + wordmark is now always used */
   useFullLogo?: boolean;
 }
 
 /**
  * Brand logo used in the main navigation and app headers.
- * Uses the actual logo image files from /public/logo/
- * The full logo includes the compass icon with N/E/S/W and "SOLANA ATLAS" text on black background.
+ * Uses the Gemini-generated logo image as the primary mark with "SOLANA ATLAS" wordmark beside it.
  */
 export function Logo({ 
-  height = 80, 
+  height = 72, 
   showWordmark = true, 
   className = "",
   useFullLogo = true 
 }: LogoProps) {
   const [imageError, setImageError] = useState(false);
 
-  // Use full logo by default - shows the complete logo with compass + "SOLANA ATLAS" text
-  if (useFullLogo) {
-    // Fallback to text if image fails to load
-    if (imageError) {
-      return (
-        <Link href="/" className={`flex items-center ${className}`}>
-          <span className="font-bold text-xl tracking-wider text-[#14F195]">
-            SOLANA ATLAS
-          </span>
-        </Link>
-      );
-    }
-
-    return (
-      <Link href="/" className={`flex items-center ${className}`}>
-        <div 
-          className="relative flex items-center"
-          style={{ height: `${height}px` }}
-        >
-          <Image
-            src="/logo/solana-atlas-full.png"
-            alt="Solana Atlas"
-            width={400}
-            height={100}
-            className="h-full w-auto object-contain"
-            style={{ 
-              height: `${height}px`,
-              width: "auto",
-              maxWidth: "none"
-            }}
-            priority
-            unoptimized
-            onError={() => setImageError(true)}
-          />
-        </div>
-      </Link>
-    );
-  }
-
-  // Icon-only fallback
   if (imageError) {
     return (
-      <Link href="/" className={`flex items-center gap-3 ${className}`}>
+      <Link href="/" className={`flex items-center gap-2 ${className}`}>
         <div
           className="relative flex items-center justify-center bg-[#14F195] rounded"
           style={{ width: height, height: height }}
@@ -87,13 +46,13 @@ export function Logo({
   }
 
   return (
-    <Link href="/" className={`flex items-center gap-3 ${className}`}>
+    <Link href="/" className={`flex items-center gap-2 ${className}`}>
       <div
         className="relative flex items-center justify-center"
         style={{ width: height, height: height }}
       >
         <Image
-          src="/logo/icon.png"
+          src="/logo/Gemini_Generated_Image_7opsf27opsf27ops.png"
           alt="Solana Atlas"
           width={height}
           height={height}
