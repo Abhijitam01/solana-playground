@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useTemplates } from "@/hooks/use-templates";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useProgramStore } from "@/stores/programs";
 import { PROGRAM_TYPES } from "@/lib/program-types";
 import {
@@ -23,7 +23,6 @@ import { LoginModal } from "@/components/auth/LoginModal";
 
 export function ProgramSidebar() {
   const router = useRouter();
-  const pathname = usePathname();
   const { user } = useAuth();
   const { data: templates } = useTemplates();
   const {

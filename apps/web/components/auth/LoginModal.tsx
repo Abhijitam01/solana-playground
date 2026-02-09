@@ -15,7 +15,7 @@ interface LoginModalProps {
   onSwitchToSignup?: () => void; // Optional if not implemented
 }
 
-export function LoginModal({ isOpen, onClose, onSwitchToSignup }: LoginModalProps) {
+export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const router = useRouter();
   const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [email, setEmail] = useState('');
