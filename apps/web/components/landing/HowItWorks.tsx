@@ -1,78 +1,56 @@
 "use client";
 
-import React from "react";
-
 import { motion } from "framer-motion";
-import { Code2, BookOpen, Activity, Sparkles } from "lucide-react";
 
 const steps = [
   {
     number: "01",
     title: "Open an example",
-    description: "Start with PDAs, tokens, or account management",
-    Icon: Code2,
+    desc: "Start with PDAs, tokens, or account management"
   },
   {
     number: "02",
     title: "Read code with context",
-    description: "Hover over instructions for inline explanations",
-    Icon: BookOpen,
+    desc: "Hover over instructions for inline explanations"
   },
   {
     number: "03",
     title: "Run and inspect state",
-    description: "See accounts, balances, and logs in real-time",
-    Icon: Activity,
+    desc: "See accounts, balances, and logs in real-time"
   },
   {
     number: "04",
     title: "Modify and rerun",
-    description: "Experiment safely in a sandboxed environment",
-    Icon: Sparkles,
-  },
+    desc: "Experiment safely in a sandboxed environment"
+  }
 ];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-24 px-6 bg-[#FAFAFA]">
+    <section className="py-24 px-6 bg-[#0A0A0A]">
       <div className="max-w-[1200px] mx-auto">
-        {/* Section Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-[40px] leading-[1.2] font-bold text-[#0A0A0A] mb-3">
-            How it works
-          </h2>
-        </motion.div>
-
-        {/* Steps */}
-        <div className="max-w-[600px] mx-auto space-y-8">
-          {steps.map((step, index) => (
+        <h2 className="text-[40px] font-bold text-[#FAFAFA] mb-16">How it works</h2>
+        
+        <div className="max-w-[600px] space-y-12">
+          {steps.map((step, idx) => (
             <motion.div
-              key={index}
+              key={step.number}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-start gap-6"
+              transition={{ delay: idx * 0.1 }}
+              className="flex gap-6 group"
             >
-              {/* Number */}
-              <div className="flex-shrink-0">
-                <span className="inline-block font-mono text-sm font-semibold text-[#14F195]">
-                  {step.number}
-                </span>
-              </div>
-
-              {/* Content */}
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-[#0A0A0A] mb-2">
+              <span className="text-sm font-mono font-bold text-[#14F195] pt-1">
+                {step.number}
+              </span>
+              <div>
+                <h3 className="text-xl font-semibold text-[#FAFAFA] mb-2 group-hover:text-[#14F195] transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-base text-[#525252]">{step.description}</p>
+                <p className="text-[#737373]">
+                  {step.desc}
+                </p>
               </div>
             </motion.div>
           ))}

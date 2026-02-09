@@ -1,188 +1,120 @@
 "use client";
 
-import React from "react";
-
 import { motion } from "framer-motion";
-import { Activity, Terminal } from "lucide-react";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-  },
-};
 
 export function ProductDemo() {
   return (
-    <section className="relative py-20 px-6 bg-[#0A0A0A]">
+    <section className="py-24 px-6 bg-[#0A0A0A]">
       <div className="max-w-[1200px] mx-auto">
-        {/* Label */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <p className="text-xs font-semibold tracking-wider text-[#888888] uppercase mb-6">
-            SEE IT IN ACTION
-          </p>
-        </motion.div>
+        <div className="flex items-center justify-center mb-12">
+           <span className="px-3 py-1 rounded-full border border-[#262626] bg-[#111111] text-xs font-mono text-[#737373] uppercase tracking-wider">
+            Interactive Environment
+           </span>
+        </div>
 
-        {/* Screenshot Mockup */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeUp}
-          className="relative"
+          transition={{ duration: 0.6 }}
+          className="rounded-lg border border-[#262626] bg-[#0A0A0A] shadow-2xl overflow-hidden"
         >
-          <div className="border border-[#333333] rounded-xl overflow-hidden bg-[#000000] shadow-2xl shadow-black/50">
-            {/* Editor Header */}
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-[#333333] bg-[#111111]">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-                <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-                <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+          {/* Editor Header */}
+          <div className="flex items-center justify-between px-4 py-2 border-b border-[#262626] bg-[#111111]">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#262626]" />
+              <div className="w-3 h-3 rounded-full bg-[#262626]" />
+              <div className="w-3 h-3 rounded-full bg-[#262626]" />
+            </div>
+            <div className="flex items-center gap-1 text-[10px] font-mono text-[#525252] uppercase tracking-wide">
+              <span>lib.rs</span>
+              <span className="text-[#262626]">/</span>
+              <span>state.rs</span>
+              <span className="text-[#262626]">/</span>
+              <span className="text-[#FAFAFA]">main</span>
+            </div>
+            <div className="w-16" /> 
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[500px] divide-x divide-[#262626]">
+            {/* Left: Code Editor */}
+            <div className="p-6 font-mono text-xs sm:text-sm leading-relaxed bg-[#0A0A0A]">
+              <div className="text-[#525252] mb-4">Solana Program Logic</div>
+              <div className="space-y-1 text-[#D4D4D4]">
+                <div><span className="text-[#C586C0]">use</span> anchor_lang::prelude::*;</div>
+                <br />
+                <div>#[program]</div>
+                <div><span className="text-[#C586C0]">pub mod</span> vault &#123;</div>
+                <div className="pl-4"><span className="text-[#C586C0]">pub fn</span> <span className="text-[#DCDCAA]">initialize</span>(ctx: Context&lt;Initialize&gt;) -&gt; Result&lt;()&gt; &#123;</div>
+                <div className="pl-8"><span className="text-[#569CD6]">let</span> vault = &amp;<span className="text-[#C586C0]">mut</span> ctx.accounts.vault;</div>
+                <div className="pl-8">vault.authority = ctx.accounts.authority.key();</div>
+                <div className="pl-8">vault.balance = <span className="text-[#B5CEA8]">0</span>;</div>
+                <br />
+                <div className="pl-8"><span className="text-[#4EC9B0]">msg!</span>(&quot;Vault initialized&quot;);</div>
+                <div className="pl-8"><span className="text-[#C586C0]">Ok</span>(())</div>
+                <div className="pl-4">&#125;</div>
+                <div>&#125;</div>
+                <br />
+                <div>#[derive(Accounts)]</div>
+                <div><span className="text-[#C586C0]">pub struct</span> Initialize&lt;&apos;info&gt; &#123;</div>
+                <div className="pl-4">#[account(init, payer = authority, space = 8 + 32 + 8)]</div>
+                <div className="pl-4"><span className="text-[#C586C0]">pub</span> vault: Account&lt;&apos;info, Vault&gt;,</div>
+                <div className="pl-4">...</div>
+                <div>&#125;</div>
               </div>
-              <span className="text-sm font-mono text-[#888888]">vault.rs</span>
             </div>
 
-            {/* Editor Content - Split Layout */}
-            <div className="grid grid-cols-1 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-[#333333]">
-              {/* Code Editor Panel */}
-              <div className="lg:col-span-3 p-6 font-mono text-sm bg-[#000000]">
-                <pre className="text-[#E5E5E5] leading-relaxed">
-                  <code>
-                    <span className="text-[#0066CC]">use</span>{" "}
-                    <span className="text-[#14F195]">anchor_lang</span>::prelude::*;
-                    {"\n\n"}
-                    <span className="text-[#737373]">
-                      {"// Initialize vault account"}
-                    </span>
-                    {"\n"}
-                    <span className="text-[#0066CC]">pub fn</span>{" "}
-                    <span className="text-[#0A0A0A]">initialize</span>(
-                    {"\n"}
-                    {"    "}ctx: Context&lt;Initialize&gt;,
-                    {"\n"}
-                    {"    "}amount: <span className="text-[#DC2626]">u64</span>
-                    {"\n"}
-                    ) -&gt; Result&lt;()&gt; {"{"}
-                    {"\n"}
-                    {"    "}
-                    <span className="text-[#0066CC]">let</span> vault = &amp;
-                    <span className="text-[#0066CC]">mut</span> ctx.accounts.vault;
-                    {"\n"}
-                    {"    "}vault.authority = ctx.accounts.authority.key();
-                    {"\n"}
-                    {"    "}vault.balance = <span className="text-[#DC2626]">0</span>;
-                    {"\n"}
-                    {"    \n"}
-                    {"    "}
-                    <span className="text-[#14F195]">msg!</span>(
-                    <span className="text-[#CA8A04]">&quot;Vault initialized&quot;</span>);
-                    {"\n"}
-                    {"    "}Ok(())
-                    {"\n"}
-                    {"}"}
-                    {"\n\n"}
-                    <span className="text-[#0066CC]">#[account]</span>
-                    {"\n"}
-                    <span className="text-[#0066CC]">pub struct</span> Vault {"{"}
-                    {"\n"}
-                    {"    "}
-                    <span className="text-[#0066CC]">pub</span> authority: Pubkey,
-                    {"\n"}
-                    {"    "}
-                    <span className="text-[#0066CC]">pub</span> balance:{" "}
-                    <span className="text-[#DC2626]">u64</span>,
-                    {"\n"}
-                    {"}"}
-                  </code>
-                </pre>
-              </div>
-
-              {/* State & Execution Panel */}
-              <div className="lg:col-span-2 p-6 bg-[#FAFAFA]">
-                {/* Live State */}
-                <div className="mb-6">
-                  <h4 className="text-xs font-bold text-[#737373] uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <Activity className="w-3 h-3" />
-                    Account State
-                  </h4>
-                  <div className="space-y-2">
-                    <div className="p-3 rounded-lg bg-white border border-[#E5E5E5]">
-                      <div className="text-xs text-[#737373] mb-1">
-                        Account: <span className="text-[#0A0A0A] font-mono">vault</span>
-                      </div>
-                      <div className="text-xs font-mono space-y-1">
-                        <div>
-                          <span className="text-[#737373]">├─ authority:</span>{" "}
-                          <span className="text-[#14F195]">Fg6P...n4Zq</span>
-                        </div>
-                        <div>
-                          <span className="text-[#737373]">├─ balance:</span>{" "}
-                          <span className="text-[#0A0A0A]">0 SOL</span>
-                        </div>
-                        <div>
-                          <span className="text-[#737373]">└─ discriminator:</span>{" "}
-                          <span className="text-[#737373]">[140, 151, 37...]</span>
-                        </div>
-                      </div>
-                      <div className="mt-2 text-xs">
-                        <span className="text-[#14F195]">✓</span> Initialized
-                      </div>
-                    </div>
+            {/* Right: State & Logs */}
+            <div className="flex flex-col h-full bg-[#0A0A0A] divide-y divide-[#262626]">
+              {/* State Panel */}
+              <div className="flex-1 p-6 bg-[#0B0B0B]">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-bold text-[#525252] uppercase tracking-wider">Account State</span>
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-[#14F195]/10 text-[#14F195] border border-[#14F195]/20 font-mono">Running</span>
+                </div>
+                <div className="font-mono text-xs sm:text-sm space-y-3">
+                  <div className="p-3 bg-[#111111] border border-[#262626] rounded">
+                    <div className="text-[#A3A3A3] text-xs mb-1">Address</div>
+                    <div className="text-[#FAFAFA]">vault_account</div>
+                  </div>
+                  <div className="p-3 bg-[#111111] border border-[#262626] rounded">
+                     <div className="flex justify-between">
+                        <span className="text-[#A3A3A3]">authority</span>
+                        <span className="text-[#14F195]">Fg6P...n4Zq</span>
+                     </div>
+                     <div className="flex justify-between mt-2">
+                        <span className="text-[#A3A3A3]">balance</span>
+                        <span className="text-[#FAFAFA]">0 SOL</span>
+                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Execution Log */}
-                <div>
-                  <h4 className="text-xs font-bold text-[#737373] uppercase tracking-wider mb-3 flex items-center gap-2">
-                    <Terminal className="w-3 h-3" />
-                    Execution Log
-                  </h4>
-                  <div className="space-y-1.5 font-mono text-xs">
-                    <div className="flex items-start gap-2 text-[#14F195]">
-                      <span>→</span>
-                      <span>Program invoked</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-[#14F195]">
-                      <span>→</span>
-                      <span>Account created (vault)</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-[#14F195]">
-                      <span>→</span>
-                      <span>PDA derived: Fg6P...n4Zq</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-[#14F195]">
-                      <span>✓</span>
-                      <span>Vault initialized</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-[#14F195]">
-                      <span>✓</span>
-                      <span>Transaction successful</span>
-                    </div>
+              {/* Execution Log */}
+              <div className="flex-1 p-6 bg-[#0A0A0A]">
+                <div className="text-[10px] font-bold text-[#525252] uppercase tracking-wider mb-4">Terminal Output</div>
+                <div className="font-mono text-xs space-y-2">
+                  <div className="flex gap-3 text-[#525252]">
+                    <span className="select-none text-[#333]">$</span>
+                    <span>solana program deploy target/deploy/vault.so</span>
+                  </div>
+                  <div className="flex gap-3 text-[#A3A3A3]">
+                    <span className="opacity-50">14:20:01</span>
+                    <span>→ Program invoked</span>
+                  </div>
+                  <div className="flex gap-3 text-[#A3A3A3]">
+                    <span className="opacity-50">14:20:01</span>
+                    <span>→ Account created (vault)</span>
+                  </div>
+                  <div className="flex gap-3 text-[#14F195]">
+                    <span className="opacity-50">14:20:02</span>
+                    <span>✓ Vault initialized</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
-
-        {/* Caption */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="text-center text-base text-[#525252] mt-8 max-w-[600px] mx-auto"
-        >
-          Unlike the original Solana Playground, every execution shows you
-          exactly what changed—accounts, balances, and state.
-        </motion.p>
       </div>
     </section>
   );

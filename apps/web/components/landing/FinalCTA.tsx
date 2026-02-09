@@ -1,34 +1,29 @@
 "use client";
 
-import React from "react";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function FinalCTA() {
   return (
-    <section className="relative py-24 px-6 bg-[#FAFAFA]">
-      <div className="max-w-[600px] mx-auto text-center">
+    <section className="py-32 px-6 bg-[#0A0A0A] border-t border-[#262626] text-center">
+      <div className="max-w-[600px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-6"
         >
-          <h2 className="text-[40px] leading-[1.2] font-bold text-[#0A0A0A]">
+          <h2 className="text-[40px] font-bold text-[#FAFAFA] mb-6">
             Start understanding Solana
           </h2>
-          <p className="text-base text-[#525252]">
+          <p className="text-[16px] text-[#737373] mb-8">
             No setup. No risk. Just real programs and real execution.
           </p>
+          
           <Link
-            href="/playground/hello-anchor"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#14F195] text-[#0A0A0A] rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity duration-200"
+            href="/signup"
+            className="inline-block bg-[#14F195] text-[#0A0A0A] px-8 py-4 rounded-lg text-lg font-semibold hover:opacity-90 transition-opacity"
           >
-            Open Solana Playground
-            <ArrowRight className="w-5 h-5" />
+            Open Solana Playground →
           </Link>
         </motion.div>
       </div>

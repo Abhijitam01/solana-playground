@@ -24,7 +24,12 @@ export async function middleware(request: NextRequest) {
   );
 
   // IMPORTANT: Refresh session (updates cookies if needed)
-  await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  // Redirect authenticated users away from landing/auth pages
+  if (user && (request.nextUrl.pathname === '/' || request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup'))) {
+    return NextResponse.redirect(new URL('/playground/hello-solana', request.url));
+  }
 
   return response;
 }
