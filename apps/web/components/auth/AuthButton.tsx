@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useAuth } from '@/components/providers/AuthProvider';
-import { LoginModal } from './LoginModal';
 import { Loader2, User as UserIcon, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -10,7 +9,6 @@ import Image from 'next/image';
 
 export function AuthButton() {
   const { user, loading, signOut } = useAuth();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
   if (loading) {
@@ -92,14 +90,19 @@ export function AuthButton() {
   }
 
   return (
-    <>
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="px-5 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-sm font-medium"
+    <div className="flex items-center gap-3">
+      <Link
+        href="/login"
+        className="text-sm font-medium text-white/60 hover:text-white transition-colors"
       >
         Sign In
-      </button>
-      <LoginModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
+      </Link>
+      <Link
+        href="/signup"
+        className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-sm font-medium"
+      >
+        Sign Up
+      </Link>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  title: "Solana Developer Playground",
+  title: "Solana Atlas",
   description: "Learn Solana programming through interactive, explorable code",
 };
 

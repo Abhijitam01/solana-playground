@@ -12,7 +12,7 @@ export function Footer() {
           {/* Left Side */}
           <div className="text-center md:text-left">
             <p className="text-sm text-[#737373]">
-              © 2024 Solana Playground
+              © 2024 Solana Atlas
             </p>
             <p className="text-sm text-[#737373] mt-1">
               Open Source • MIT License

@@ -90,41 +90,9 @@ MAX_EXECUTION_TIME_MS=30000
 VALIDATOR_PORT=8899
 ```
 
-## Deployment
 
-### DigitalOcean Setup
 
-#### Option 1: App Platform (Recommended for Web + API)
 
-1. **Web App**:
-   - Connect GitHub repository
-   - Build command: `pnpm build --filter=@solana-playground/web`
-   - Start command: `pnpm start --filter=@solana-playground/web`
-   - Environment variables: `NEXT_PUBLIC_API_URL`
-
-2. **API Service**:
-   - Connect GitHub repository
-   - Build command: `pnpm build --filter=@solana-playground/api`
-   - Start command: `pnpm start --filter=@solana-playground/api`
-   - Environment variables: `GEMINI_API_KEY`, `RUNNER_URL`, `CORS_ORIGIN`
-
-#### Option 2: Droplet (For Runner Service)
-
-The runner service needs a persistent process for `solana-test-validator`, so it's best deployed on a Droplet:
-
-1. Create a Droplet (Ubuntu 22.04, 4GB RAM minimum)
-2. Install Docker
-3. Build and run the runner service:
-
-```bash
-docker build -f apps/runner/Dockerfile -t solana-runner .
-docker run -d \
-  -p 3002:3002 \
-  -p 8899:8899 \
-  -e MAX_EXECUTION_TIME_MS=30000 \
-  -e VALIDATOR_PORT=8899 \
-  --name solana-runner \
-  solana-runner
 ```
 
 ### Docker Compose (Local Development)
@@ -142,16 +110,6 @@ docker-compose up
 - **No collaboration**: Single-user experience
 - **Live execution**: Placeholder implementation (use pre-computed mode)
 
-## V2 Roadmap
-
-- User accounts + progress tracking
-- More templates (NFT basics, staking, DeFi)
-- Interactive exercises (fill-in-the-blank)
-- Transaction builder visualization
-- Devnet deployment preview
-- Community template submissions
-- Full live execution implementation
-
 ## Contributing
 
 This is V1 - focused on core learning experience. Contributions welcome for:
@@ -159,8 +117,4 @@ This is V1 - focused on core learning experience. Contributions welcome for:
 - Improved explanations
 - UI/UX enhancements
 - Documentation improvements
-
-## License
-
-MIT
 

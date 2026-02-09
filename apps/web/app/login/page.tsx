@@ -60,7 +60,7 @@ export default function LoginPage() {
         <div className="bg-[#111] border border-white/10 rounded-2xl p-8">
           <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold mb-2">Welcome back</h1>
-            <p className="text-white/60">Sign in to continue to Solana Playground</p>
+            <p className="text-white/60">Sign in to continue to Solana Atlas</p>
           </div>
 
           {error && (
