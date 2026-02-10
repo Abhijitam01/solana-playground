@@ -53,7 +53,7 @@ export function OnboardingGuide() {
   );
 
   useEffect(() => {
-    // Check if user has completed onboarding
+    // Check if user has completed onboarding (auto-open only once)
     const completed = localStorage.getItem(ONBOARDING_KEY);
     if (!completed) {
       // Show onboarding after a short delay
@@ -62,6 +62,21 @@ export function OnboardingGuide() {
       }, 1000);
       return () => clearTimeout(timer);
     }
+  }, []);
+
+  // Allow reopening onboarding via a global event
+  useEffect(() => {
+    const handler = () => {
+      setIsOpen(true);
+    };
+    if (typeof window !== "undefined") {
+      window.addEventListener("solana-playground-open-onboarding", handler);
+    }
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("solana-playground-open-onboarding", handler);
+      }
+    };
   }, []);
 
   // Highlight target element for each step

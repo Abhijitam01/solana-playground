@@ -30,7 +30,8 @@ import {
   PanelResizeHandle,
   type ImperativePanelHandle,
 } from "react-resizable-panels";
-import { Menu } from "lucide-react";
+import { Menu, HelpCircle } from "lucide-react";
+import { Tooltip } from "@/components/ui/Tooltip";
 
 export default function PlaygroundPage() {
   const params = useParams();
@@ -254,6 +255,23 @@ export default function PlaygroundPage() {
           >
             <Menu className="w-5 h-5" />
           </button>
+          {/* Global help button to reopen onboarding */}
+          <div className="fixed top-4 right-4 z-50">
+            <Tooltip content="Open the onboarding guide" side="left">
+              <button
+                type="button"
+                className="p-2 rounded-lg bg-card/90 backdrop-blur border border-border/70 text-muted-foreground hover:text-foreground hover:bg-card transition-colors"
+                aria-label="Open onboarding guide"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new Event("solana-playground-open-onboarding"));
+                  }
+                }}
+              >
+                <HelpCircle className="w-5 h-5" />
+              </button>
+            </Tooltip>
+          </div>
           {sidebarVisible && <ProgramSidebar />}
           <div className="flex flex-1 min-w-0">
             <PanelGroup direction="horizontal" className="w-full h-screen">
