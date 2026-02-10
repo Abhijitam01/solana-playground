@@ -1,7 +1,0 @@
-import { describe, expect, it } from "vitest";
-
-describe("Test harness", () => {
-  it("is configured", () => {
-    expect(true).toBe(true);
-  });
-});

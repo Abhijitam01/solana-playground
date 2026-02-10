@@ -121,8 +121,24 @@ export const useProgramStore = createWithEqualityFn<ProgramState>()(
           (program) => program.source === "template" && program.templateId === template.id
         );
         if (existing) {
-          set({ activeProgramId: existing.id });
-          return existing;
+          // Update session with fresh template data while preserving user state
+          const updatedSession = {
+            ...existing,
+            metadata: template.metadata,
+            functionSpecs: template.functionSpecs,
+            programMap: template.programMap,
+            precomputedState: template.precomputedState,
+            checklist: template.checklist || [],
+          };
+
+          set((state) => ({
+            programs: {
+              ...state.programs,
+              [existing.id]: updatedSession,
+            },
+            activeProgramId: existing.id,
+          }));
+          return updatedSession;
         }
 
         const id = `template-${template.id}`;

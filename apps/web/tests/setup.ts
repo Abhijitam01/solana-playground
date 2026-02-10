@@ -16,3 +16,4 @@ if (typeof window !== "undefined" && !window.matchMedia) {
 }
 
 
+import React from 'react'; global.React = React;
