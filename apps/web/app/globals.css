@@ -301,7 +301,7 @@
   }
 
   .btn-primary:hover {
-    @apply bg-primary-hover;
+    @apply bg-[#14F195];
     transform: translateY(-1px);
   }
 
@@ -310,7 +310,7 @@
   }
 
   .btn-ghost:hover {
-    @apply bg-muted/60;
+    @apply bg-[#14F195]/20 text-[#14F195];
   }
   
   /* Focus visible */

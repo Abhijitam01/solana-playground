@@ -2,7 +2,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 import { persist } from "zustand/middleware";
 
 type ThemeMode = "dark" | "light";
-type PlaygroundTheme = "default" | "grid";
+type PlaygroundTheme = "default" | "grid" | "matrix";
 
 interface SettingsState {
   explanationsEnabled: boolean;

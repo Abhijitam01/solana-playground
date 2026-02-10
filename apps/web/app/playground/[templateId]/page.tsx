@@ -204,31 +204,43 @@ export default function PlaygroundPage() {
   }
 
   const isGridTheme = playgroundTheme === "grid";
+  const isMatrixTheme = playgroundTheme === "matrix";
 
   return (
     <>
       <div
-        className={`relative min-h-screen overflow-visible text-[#cccccc] ${
+        className={`relative min-h-screen overflow-visible ${
           isGridTheme
-            ? "bg-[#0A0A0A]"
-            : "bg-[#1e1e1e] grid-pattern-dark"
+            ? "bg-[#0A0A0A] text-[#cccccc]"
+            : isMatrixTheme
+            ? "bg-[#000000] text-[#00ff00]"
+            : "bg-[#1e1e1e] text-[#cccccc] grid-pattern-dark"
         }`}
       >
         {/* Theme selector - floating in top right */}
         <div className="fixed top-4 right-4 z-50">
           <select
             value={playgroundTheme}
-            onChange={(e) => setPlaygroundTheme(e.target.value as "default" | "grid")}
+            onChange={(e) => setPlaygroundTheme(e.target.value as "default" | "grid" | "matrix")}
             className="rounded-lg border border-border/70 bg-card/90 backdrop-blur px-3 py-2 text-sm text-foreground cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary transition-all"
           >
             <option value="default">Default Theme</option>
             <option value="grid">Grid Theme</option>
+            <option value="matrix">Matrix Theme</option>
           </select>
         </div>
 
         {/* Grid background overlay for grid theme */}
         {isGridTheme && (
           <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none z-0" />
+        )}
+
+        {/* Matrix background overlay for matrix theme */}
+        {isMatrixTheme && (
+          <>
+            <div className="fixed inset-0 bg-[linear-gradient(rgba(0,255,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none z-0" />
+            <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,255,0,0.05)_0%,transparent_50%)] pointer-events-none z-0" />
+          </>
         )}
 
         <div className="flex min-h-screen relative z-10">
@@ -238,19 +250,23 @@ export default function PlaygroundPage() {
               <Panel minSizePercentage={60} defaultSizePercentage={70}>
                 <div
                   className={`min-w-0 h-full min-h-0 ${
-                    isGridTheme ? "bg-[#000000]" : ""
+                    isGridTheme 
+                      ? "bg-[#000000]" 
+                      : isMatrixTheme
+                      ? "bg-[#000000]"
+                      : ""
                   }`}
                 >
                   <CodePanel />
                 </div>
               </Panel>
               <PanelResizeHandle
-                className={`w-1 bg-border hover:bg-primary/50 transition-colors duration-fast relative group ${
+                className={`w-1 bg-border hover:bg-[#14F195]/50 transition-colors duration-fast relative group ${
                   anyPanelOpen ? "" : "opacity-0 pointer-events-none"
                 }`}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-0.5 h-8 bg-muted-foreground/30 group-hover:bg-primary rounded-full transition-colors duration-fast" />
+                  <div className="w-0.5 h-8 bg-muted-foreground/30 group-hover:bg-[#14F195] rounded-full transition-colors duration-fast" />
                 </div>
               </PanelResizeHandle>
               <Panel
@@ -269,7 +285,9 @@ export default function PlaygroundPage() {
                       transition={{ duration: 0.2 }}
                       className={`h-full border-l border-border/70 backdrop-blur ${
                         isGridTheme
-                          ? "bg-[#0A0A0A]/80 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]"
+                          ? "bg-[#000000]"
+                          : isMatrixTheme
+                          ? "bg-card/70"
                           : "bg-card/70"
                       }`}
                     >

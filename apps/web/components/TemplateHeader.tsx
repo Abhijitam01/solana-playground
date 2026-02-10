@@ -108,7 +108,7 @@ export function TemplateHeader({ template }: TemplateHeaderProps) {
               <Tooltip content="Select playground theme">
                 <select
                   value={playgroundTheme}
-                  onChange={(e) => setPlaygroundTheme(e.target.value as "default" | "grid")}
+                  onChange={(e) => setPlaygroundTheme(e.target.value as "default" | "grid" | "matrix")}
                   className="rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-semibold text-foreground bg-background transition-all duration-fast border-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary appearance-none pr-6 sm:pr-8"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
@@ -118,6 +118,7 @@ export function TemplateHeader({ template }: TemplateHeaderProps) {
                 >
                   <option value="default">Theme: Default</option>
                   <option value="grid">Theme: Grid</option>
+                  <option value="matrix">Theme: Matrix</option>
                 </select>
               </Tooltip>
             </div>

@@ -134,6 +134,96 @@ const defineSolanaThemes = (monaco: typeof Monaco): void => {
     },
   });
 
+  // Grid theme - black/grayish-black background
+  monaco.editor.defineTheme("solana-grid", {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "comment", foreground: "6b7280", fontStyle: "italic" },
+      { token: "keyword", foreground: "34d399", fontStyle: "bold" },
+      { token: "type.identifier", foreground: "7dd3fc" },
+      { token: "identifier", foreground: "e5e7eb" },
+      { token: "number", foreground: "fbbf24" },
+      { token: "string", foreground: "4ade80" },
+      { token: "delimiter", foreground: "9ca3af" },
+      { token: "operator", foreground: "60a5fa" },
+      { token: "function", foreground: "c084fc" },
+    ],
+    colors: {
+      "editor.background": "#000000",
+      "editor.foreground": "#e5e7eb",
+      "editorLineNumber.foreground": "#4b5563",
+      "editorLineNumber.activeForeground": "#9ca3af",
+      "editor.lineHighlightBackground": "#252525",
+      "editor.selectionBackground": "#1e3a5f",
+      "editor.inactiveSelectionBackground": "#1a1a2e",
+      "editorCursor.foreground": "#34d399",
+      "editorIndentGuide.background1": "#2a2a2a",
+      "editorIndentGuide.activeBackground1": "#3a3a3a",
+      "editorWhitespace.foreground": "#2a2a2a",
+      "editorGutter.background": "#000000",
+      "editorOverviewRuler.border": "#000000",
+      "editorWidget.background": "#252525",
+      "editorWidget.border": "#3a3a3a",
+      "editorSuggestWidget.background": "#252525",
+      "editorSuggestWidget.border": "#3a3a3a",
+      "editorSuggestWidget.selectedBackground": "#2a2a2a",
+      "editorSuggestWidget.foreground": "#e5e7eb",
+      "editorSuggestWidget.highlightForeground": "#34d399",
+      "editor.hoverHighlightBackground": "#252525",
+      "editorHoverWidget.background": "#252525",
+      "editorHoverWidget.border": "#3a3a3a",
+      "scrollbarSlider.background": "#3a3a3a80",
+      "scrollbarSlider.hoverBackground": "#4a4a4a80",
+      "scrollbarSlider.activeBackground": "#5a5a5a80",
+    },
+  });
+
+  // Matrix theme - green matrix-style
+  monaco.editor.defineTheme("solana-matrix", {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "comment", foreground: "00aa00", fontStyle: "italic" },
+      { token: "keyword", foreground: "00ff00", fontStyle: "bold" },
+      { token: "type.identifier", foreground: "00ff88" },
+      { token: "identifier", foreground: "00ff00" },
+      { token: "number", foreground: "88ff00" },
+      { token: "string", foreground: "00ff00" },
+      { token: "delimiter", foreground: "00aa00" },
+      { token: "operator", foreground: "00ff00" },
+      { token: "function", foreground: "00ff88" },
+    ],
+    colors: {
+      "editor.background": "#000000",
+      "editor.foreground": "#00ff00",
+      "editorLineNumber.foreground": "#003300",
+      "editorLineNumber.activeForeground": "#00ff00",
+      "editor.lineHighlightBackground": "#001100",
+      "editor.selectionBackground": "#003300",
+      "editor.inactiveSelectionBackground": "#001100",
+      "editorCursor.foreground": "#00ff00",
+      "editorIndentGuide.background1": "#001100",
+      "editorIndentGuide.activeBackground1": "#002200",
+      "editorWhitespace.foreground": "#001100",
+      "editorGutter.background": "#000000",
+      "editorOverviewRuler.border": "#000000",
+      "editorWidget.background": "#001100",
+      "editorWidget.border": "#003300",
+      "editorSuggestWidget.background": "#001100",
+      "editorSuggestWidget.border": "#003300",
+      "editorSuggestWidget.selectedBackground": "#002200",
+      "editorSuggestWidget.foreground": "#00ff00",
+      "editorSuggestWidget.highlightForeground": "#88ff00",
+      "editor.hoverHighlightBackground": "#001100",
+      "editorHoverWidget.background": "#001100",
+      "editorHoverWidget.border": "#003300",
+      "scrollbarSlider.background": "#00330080",
+      "scrollbarSlider.hoverBackground": "#00440080",
+      "scrollbarSlider.activeBackground": "#00550080",
+    },
+  });
+
   themesInitialized = true;
 };
 
@@ -168,10 +258,11 @@ export function CodePanel() {
     shallow
   );
 
-  const { explanationsEnabled, theme } = useSettingsStore(
+  const { explanationsEnabled, theme, playgroundTheme } = useSettingsStore(
     (state) => ({
       explanationsEnabled: state.explanationsEnabled,
       theme: state.theme,
+      playgroundTheme: state.playgroundTheme,
     }),
     shallow
   );
@@ -204,10 +295,15 @@ export function CodePanel() {
   const completionProviderRef = useRef<Monaco.IDisposable | null>(null);
 
   // Computed values
-  const monacoTheme = useMemo(
-    () => (theme === "dark" ? "solana-dark" : "solana-light"),
-    [theme]
-  );
+  const monacoTheme = useMemo(() => {
+    if (playgroundTheme === "grid") {
+      return "solana-grid";
+    }
+    if (playgroundTheme === "matrix") {
+      return "solana-matrix";
+    }
+    return theme === "dark" ? "solana-dark" : "solana-light";
+  }, [theme, playgroundTheme]);
 
   // Allow full interaction for viewing - no read-only restriction
   // Auth will be checked when creating new programs or saving

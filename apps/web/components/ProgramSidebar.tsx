@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { shallow } from "zustand/shallow";
 import { useLayoutStore } from "@/stores/layout";
+import { useSettingsStore } from "@/stores/settings";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { LoginModal } from "@/components/auth/LoginModal";
 
@@ -84,7 +85,7 @@ export function ProgramSidebar() {
 
   const MAX_VISIBLE = {
     panels: 4,
-    templates: 13, // Show 13 featured templates initially
+    templates: 3, // Show only 3 templates initially
     programs: 3,
   };
 
@@ -154,8 +155,25 @@ export function ProgramSidebar() {
     setShowModal(true);
   };
 
+  // Get playground theme from settings store
+  const { playgroundTheme } = useSettingsStore(
+    (state) => ({
+      playgroundTheme: state.playgroundTheme,
+    }),
+    shallow
+  );
+  
+  const isGridTheme = playgroundTheme === "grid";
+  const isMatrixTheme = playgroundTheme === "matrix";
+
   return (
-    <aside className="w-64 flex-shrink-0 border-r border-border/70 bg-card/60 backdrop-blur h-screen overflow-hidden flex flex-col">
+    <aside className={`w-64 flex-shrink-0 border-r border-border/70 backdrop-blur h-screen overflow-hidden flex flex-col ${
+      isGridTheme 
+        ? "bg-[#0A0A0A]/80 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:64px_64px]"
+        : isMatrixTheme
+        ? "bg-[#000000] bg-[linear-gradient(rgba(0,255,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"
+        : "bg-card/60"
+    }`}>
       <div className="p-4 border-b border-border/70">
         <button
           onClick={handleNewProgramClick}
@@ -166,9 +184,13 @@ export function ProgramSidebar() {
         </button>
       </div>
 
-      <div className="p-4 space-y-6 text-sm flex-1 overflow-hidden">
+      <div className={`p-4 space-y-6 text-sm flex-1 overflow-y-auto ${
+        isMatrixTheme ? "text-[#00ff00]" : ""
+      }`}>
         <div>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2 ${
+            isMatrixTheme ? "text-[#00ff00]" : "text-muted-foreground"
+          }`}>
             Panels
           </div>
           <div className="space-y-1">
@@ -181,8 +203,12 @@ export function ProgramSidebar() {
                   onClick={() => togglePanel(panel.id)}
                   className={`w-full text-left rounded-lg px-3 py-2 transition-colors flex items-center justify-between ${
                     isOpen
-                      ? "bg-primary-light/60 text-foreground"
-                      : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                      ? isMatrixTheme
+                        ? "bg-[#00ff00]/20 text-[#00ff00]"
+                        : "bg-primary-light/60 text-foreground"
+                      : isMatrixTheme
+                      ? "text-[#00ff00] hover:bg-[#00ff00]/20"
+                      : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -196,7 +222,7 @@ export function ProgramSidebar() {
             {overflowPanels.length > 0 && (
               <button
                 onClick={() => setMoreSection("panels")}
-                className="w-full text-left rounded-lg px-3 py-2 transition-colors text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                className="w-full text-left rounded-lg px-3 py-2 transition-colors text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
               >
                 +{overflowPanels.length} more
               </button>
@@ -204,7 +230,9 @@ export function ProgramSidebar() {
           </div>
         </div>
         <div>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2 ${
+            isMatrixTheme ? "text-[#00ff00]" : "text-muted-foreground"
+          }`}>
             Layouts
           </div>
           <div className="space-y-1">
@@ -214,8 +242,12 @@ export function ProgramSidebar() {
                 onClick={() => setLayoutMode(item.id)}
                 className={`w-full text-left rounded-lg px-3 py-2 transition-colors ${
                   layoutMode === item.id
-                    ? "bg-primary-light/60 text-foreground"
-                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                    ? isMatrixTheme 
+                      ? "bg-[#00ff00]/20 text-[#00ff00]"
+                      : "bg-primary-light/60 text-foreground"
+                    : isMatrixTheme
+                    ? "text-[#00ff00] hover:bg-[#00ff00]/20"
+                    : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
                 }`}
               >
                 {item.label}
@@ -224,20 +256,30 @@ export function ProgramSidebar() {
           </div>
         </div>
         <div>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center justify-between">
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-2 flex items-center justify-between ${
+            isMatrixTheme ? "text-[#00ff00]" : "text-muted-foreground"
+          }`}>
             <span>Open Template</span>
-            {!showAllTemplates && allTemplates && allTemplates.length > 13 && (
+            {!showAllTemplates && allTemplates && allTemplates.length > 3 && (
               <button
                 onClick={() => setShowAllTemplates(true)}
-                className="text-xs text-primary hover:text-primary/80 transition-colors"
+                className={`text-xs transition-colors ${
+                  isMatrixTheme 
+                    ? "text-[#00ff00] hover:text-[#00ff88]"
+                    : "text-primary hover:text-[#14F195]"
+                }`}
               >
-                Show All ({allTemplates.length})
+                More ({allTemplates.length - 3})
               </button>
             )}
             {showAllTemplates && (
               <button
                 onClick={() => setShowAllTemplates(false)}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                className={`text-xs transition-colors ${
+                  isMatrixTheme 
+                    ? "text-[#00ff00] hover:text-[#00ff88]"
+                    : "text-muted-foreground hover:text-[#14F195]"
+                }`}
               >
                 Show Featured
               </button>
@@ -256,20 +298,24 @@ export function ProgramSidebar() {
                 }}
                 className={`w-full text-left rounded-lg px-3 py-2 transition-colors ${
                   activeProgramId === `template-${template.id}`
-                    ? "bg-primary-light/60 text-foreground"
-                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                    ? isMatrixTheme
+                      ? "bg-[#00ff00]/20 text-[#00ff00]"
+                      : "bg-primary-light/60 text-foreground"
+                    : isMatrixTheme
+                    ? "text-[#00ff00] hover:bg-[#00ff00]/20"
+                    : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
                 }`}
               >
                 {template.name}
               </button>
             ))}
             {!templates?.length && (
-              <div className="text-xs text-muted-foreground">No templates loaded.</div>
+              <div className={`text-xs ${isMatrixTheme ? "text-[#00ff00]" : "text-muted-foreground"}`}>No templates loaded.</div>
             )}
             {overflowTemplates.length > 0 && (
               <button
                 onClick={() => setMoreSection("templates")}
-                className="w-full text-left rounded-lg px-3 py-2 transition-colors text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                className="w-full text-left rounded-lg px-3 py-2 transition-colors text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
               >
                 +{overflowTemplates.length} more
               </button>
@@ -278,7 +324,9 @@ export function ProgramSidebar() {
         </div>
 
         <div>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2 ${
+            isMatrixTheme ? "text-[#00ff00]" : "text-muted-foreground"
+          }`}>
             My Programs
           </div>
           <div className="space-y-1">
@@ -288,20 +336,24 @@ export function ProgramSidebar() {
                 onClick={() => setActiveProgram(program.id)}
                 className={`w-full text-left rounded-lg px-3 py-2 transition-colors ${
                   activeProgramId === program.id
-                    ? "bg-primary-light/60 text-foreground"
-                    : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                    ? isMatrixTheme
+                      ? "bg-[#00ff00]/20 text-[#00ff00]"
+                      : "bg-primary-light/60 text-foreground"
+                    : isMatrixTheme
+                    ? "text-[#00ff00] hover:bg-[#00ff00]/20"
+                    : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
                 }`}
               >
                 {program.name}
               </button>
             ))}
             {customPrograms.length === 0 && (
-              <div className="text-xs text-muted-foreground">No drafts yet.</div>
+              <div className={`text-xs ${isMatrixTheme ? "text-[#00ff00]" : "text-muted-foreground"}`}>No drafts yet.</div>
             )}
             {overflowPrograms.length > 0 && (
               <button
                 onClick={() => setMoreSection("programs")}
-                className="w-full text-left rounded-lg px-3 py-2 transition-colors text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                className="w-full text-left rounded-lg px-3 py-2 transition-colors text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
               >
                 +{overflowPrograms.length} more
               </button>
@@ -309,15 +361,21 @@ export function ProgramSidebar() {
           </div>
         </div>
         <div>
-          <div className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 flex items-center gap-2">
+          <div className={`text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2 ${
+            isMatrixTheme ? "text-[#00ff00]" : "text-muted-foreground"
+          }`}>
             Focus
           </div>
           <button
             onClick={toggleZenMode}
             className={`w-full text-left rounded-lg px-3 py-2 transition-colors flex items-center gap-2 ${
               zenMode
-                ? "bg-primary-light/60 text-foreground"
-                : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                ? isMatrixTheme
+                  ? "bg-[#00ff00]/20 text-[#00ff00]"
+                  : "bg-primary-light/60 text-foreground"
+                : isMatrixTheme
+                ? "text-[#00ff00] hover:bg-[#00ff00]/20"
+                : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
             }`}
           >
             <PanelLeftClose className="w-4 h-4" />
@@ -353,7 +411,7 @@ export function ProgramSidebar() {
                     className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-all ${
                       selectedType === type.id
                         ? "border-primary bg-primary-light/60"
-                        : "border-border bg-muted/20 hover:border-primary/60"
+                        : "border-border bg-muted/20 hover:border-[#14F195]"
                     }`}
                   >
                     <div>
@@ -416,7 +474,7 @@ export function ProgramSidebar() {
                 </div>
                 <button
                   onClick={() => setMoreSection(null)}
-                  className="rounded-lg px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  className="rounded-lg px-2 py-1 text-xs text-muted-foreground hover:text-[#14F195] hover:bg-[#14F195]/20"
                 >
                   Close
                 </button>
@@ -436,7 +494,7 @@ export function ProgramSidebar() {
                         className={`w-full text-left rounded-lg px-3 py-2 transition-colors flex items-center justify-between ${
                           isOpen
                             ? "bg-primary-light/60 text-foreground"
-                            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                            : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
                         }`}
                       >
                         <span className="flex items-center gap-2">
@@ -462,7 +520,7 @@ export function ProgramSidebar() {
                       className={`w-full text-left rounded-lg px-3 py-2 transition-colors ${
                         activeProgramId === `template-${template.id}`
                           ? "bg-primary-light/60 text-foreground"
-                          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                          : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
                       }`}
                     >
                       {template.name}
@@ -479,7 +537,7 @@ export function ProgramSidebar() {
                       className={`w-full text-left rounded-lg px-3 py-2 transition-colors ${
                         activeProgramId === program.id
                           ? "bg-primary-light/60 text-foreground"
-                          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                          : "text-muted-foreground hover:bg-[#14F195]/20 hover:text-[#14F195]"
                       }`}
                     >
                       {program.name}
