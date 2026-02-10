@@ -78,7 +78,7 @@ export default function PlaygroundPage() {
   );
 
   // Fetch user code if codeId is present
-  const { data: userCode, isLoading: isUserCodeLoading } = trpc.code.getById.useQuery(
+  const { data: userCode, isLoading: isUserCodeLoading, error: userCodeError } = trpc.code.getById.useQuery(
     { id: codeId! },
     { enabled: !!codeId }
   );
@@ -86,6 +86,11 @@ export default function PlaygroundPage() {
   useEffect(() => {
     if (userCode) {
       if (routeTemplate) {
+        // userCode.code will be populated from Gist if needed (handled by getById endpoint)
+        if (!userCode.code) {
+          toast.error('Failed to load code. Please try again.');
+          return;
+        }
         openUserProgram({
           id: userCode.id,
           templateId: userCode.templateId,
@@ -97,7 +102,14 @@ export default function PlaygroundPage() {
     } else if (routeTemplate && !codeId && !isUserCodeLoading) {
       openTemplateProgram(routeTemplate);
     }
-  }, [routeTemplate, userCode, codeId, openTemplateProgram, openUserProgram, isUserCodeLoading]);
+  }, [routeTemplate, userCode, codeId, openTemplateProgram, openUserProgram, isUserCodeLoading, toast]);
+
+  // Handle error loading user code
+  useEffect(() => {
+    if (userCodeError && codeId) {
+      toast.error('Failed to load your saved code. Please try again.');
+    }
+  }, [userCodeError, codeId, toast]);
 
   useEffect(() => {
     if (template) {
@@ -181,7 +193,7 @@ export default function PlaygroundPage() {
     }
   }, [anyPanelOpen]);
 
-  if (isLoading || isRouteLoading) {
+  if (isLoading || isRouteLoading || (codeId && isUserCodeLoading)) {
     // Simple text-based loading
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#1e1e1e] text-[#cccccc] font-mono">

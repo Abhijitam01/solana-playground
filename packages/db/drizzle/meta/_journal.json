@@ -8,6 +8,13 @@
       "when": 1770582700143,
       "tag": "0000_wide_hex",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1770690263368,
+      "tag": "0001_noisy_roland_deschain",
+      "breakpoints": true
     }
   ]
 }

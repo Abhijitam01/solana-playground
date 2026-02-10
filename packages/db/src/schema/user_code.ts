@@ -6,8 +6,12 @@ export const userCode = pgTable('user_code', {
   userId: uuid('user_id').references(() => profiles.id).notNull(),
   templateId: text('template_id').notNull(), // e.g., "hello-solana"
   title: text('title').notNull(),
-  code: text('code').notNull(), // The actual Rust code
+  code: text('code'), // The actual Rust code (nullable if stored in Gist)
   language: text('language').default('rust').notNull(),
+  
+  // GitHub Gist storage (for code >= 5KB)
+  gistId: text('gist_id'), // GitHub Gist ID
+  gistUrl: text('gist_url'), // GitHub Gist URL
   
   // Metadata
   isFavorite: boolean('is_favorite').default(false),

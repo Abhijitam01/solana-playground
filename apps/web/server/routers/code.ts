@@ -4,6 +4,13 @@ import { db } from '@solana-playground/db';
 import { userCode, profiles } from '@solana-playground/db';
 import { eq, and, desc } from 'drizzle-orm';
 import { TRPCError } from '@trpc/server';
+import {
+  createGist,
+  getGistContent,
+  updateGist,
+  deleteGist,
+  shouldUseGist,
+} from '../services/github-gist';
 
 export const codeRouter = router({
   getMyCode: protectedProcedure
@@ -31,7 +38,31 @@ export const codeRouter = router({
         )
         .limit(1);
       
-      return code[0] || null;
+      if (!code[0]) {
+        return null;
+      }
+
+      const record = code[0];
+      
+      // If code is stored in Gist, fetch it
+      if (record.gistId && !record.code) {
+        try {
+          const gistContent = await getGistContent(record.gistId);
+          return {
+            ...record,
+            code: gistContent,
+          };
+        } catch (error) {
+          // If Gist fetch fails, log error but return record without code
+          console.error(`Failed to fetch Gist ${record.gistId}:`, error);
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Failed to fetch code from GitHub Gist',
+          });
+        }
+      }
+      
+      return record;
     }),
 
   save: protectedProcedure
@@ -79,14 +110,92 @@ export const codeRouter = router({
       }
       
       const now = new Date();
+      const useGist = shouldUseGist(input.code);
 
       if (input.id) {
-        // Update existing
+        // Update existing - first get the current record
+        const [existing] = await db
+          .select()
+          .from(userCode)
+          .where(
+            and(
+              eq(userCode.id, input.id),
+              eq(userCode.userId, ctx.user.id)
+            )
+          )
+          .limit(1);
+
+        if (!existing) {
+          throw new TRPCError({ code: 'NOT_FOUND', message: 'Code not found' });
+        }
+
+        const hadGist = !!existing.gistId;
+        const needsGist = useGist;
+        const switchingStorage = hadGist !== needsGist;
+
+        // Handle storage switching
+        if (switchingStorage) {
+          if (hadGist && !needsGist) {
+            // Switching from Gist to DB - delete old Gist
+            try {
+              await deleteGist(existing.gistId!);
+            } catch (error) {
+              console.error(`Failed to delete old Gist ${existing.gistId}:`, error);
+              // Continue anyway
+            }
+          } else if (!hadGist && needsGist) {
+            // Switching from DB to Gist - delete old code from DB
+            // (will be handled in update)
+          }
+        }
+
+        // Create or update Gist if needed
+        let gistId = existing.gistId;
+        let gistUrl = existing.gistUrl;
+
+        if (needsGist) {
+          try {
+            if (hadGist && !switchingStorage) {
+              // Update existing Gist
+              await updateGist(existing.gistId!, input.code, input.title, input.language);
+            } else {
+              // Create new Gist
+              const gist = await createGist(input.code, input.title, input.language);
+              gistId = gist.id;
+              gistUrl = gist.url;
+            }
+          } catch (error) {
+            console.error('Failed to create/update Gist, falling back to database:', error);
+            // Fallback to database storage
+            const [updated] = await db
+              .update(userCode)
+              .set({
+                title: input.title,
+                code: input.code,
+                gistId: null,
+                gistUrl: null,
+                updatedAt: now,
+                lastOpenedAt: now,
+              })
+              .where(
+                and(
+                  eq(userCode.id, input.id),
+                  eq(userCode.userId, ctx.user.id)
+                )
+              )
+              .returning();
+            return updated;
+          }
+        }
+
+        // Update database record
         const [updated] = await db
           .update(userCode)
           .set({
             title: input.title,
-            code: input.code,
+            code: needsGist ? null : input.code, // Store code only if not using Gist
+            gistId: needsGist ? gistId : null,
+            gistUrl: needsGist ? gistUrl : null,
             updatedAt: now,
             lastOpenedAt: now,
           })
@@ -101,14 +210,35 @@ export const codeRouter = router({
         return updated;
       } else {
         // Create new
+        let gistId: string | null = null;
+        let gistUrl: string | null = null;
+        let codeToStore: string | null = input.code;
+
+        if (useGist) {
+          try {
+            const gist = await createGist(input.code, input.title, input.language);
+            gistId = gist.id;
+            gistUrl = gist.url;
+            codeToStore = null; // Don't store code in DB if using Gist
+          } catch (error) {
+            console.error('Failed to create Gist, falling back to database:', error);
+            // Fallback to database storage
+            gistId = null;
+            gistUrl = null;
+            codeToStore = input.code;
+          }
+        }
+
         const [created] = await db
           .insert(userCode)
           .values({
             userId: ctx.user.id,
             templateId: input.templateId,
             title: input.title,
-            code: input.code,
+            code: codeToStore,
             language: input.language,
+            gistId,
+            gistUrl,
             lastOpenedAt: now,
           })
           .returning();
@@ -121,6 +251,30 @@ export const codeRouter = router({
     .input(z.object({ id: z.string().uuid() }))
     .mutation(async ({ ctx, input }) => {
       if (!db) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'Database not connected' });
+      
+      // Get the record first to check for Gist
+      const [record] = await db
+        .select()
+        .from(userCode)
+        .where(
+          and(
+            eq(userCode.id, input.id),
+            eq(userCode.userId, ctx.user.id)
+          )
+        )
+        .limit(1);
+
+      if (record?.gistId) {
+        // Delete the Gist first
+        try {
+          await deleteGist(record.gistId);
+        } catch (error) {
+          console.error(`Failed to delete Gist ${record.gistId}:`, error);
+          // Continue with database deletion even if Gist deletion fails
+        }
+      }
+
+      // Delete from database
       await db
         .delete(userCode)
         .where(

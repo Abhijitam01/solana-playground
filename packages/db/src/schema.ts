@@ -40,8 +40,10 @@ export const userCode = pgTable("user_code", {
     .notNull(),
   templateId: varchar("template_id", { length: 100 }).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
-  code: text("code").notNull(),
+  code: text("code"), // Nullable if stored in Gist
   language: varchar("language", { length: 32 }).notNull().default("rust"),
+  gistId: text("gist_id"), // GitHub Gist ID
+  gistUrl: text("gist_url"), // GitHub Gist URL
   isFavorite: boolean("is_favorite").default(false).notNull(),
   lastOpenedAt: timestamp("last_opened_at").defaultNow().notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

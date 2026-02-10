@@ -144,7 +144,11 @@ export default function MyCodePage() {
                   </h3>
 
                   <p className="text-sm text-white/60 mb-4 line-clamp-2 font-mono">
-                    {code.code.split('\n')[0]}...
+                    {code.gistId 
+                      ? 'Code stored in GitHub Gist (click to view)...'
+                      : code.code 
+                        ? `${code.code.split('\n')[0]}...`
+                        : 'No preview available'}
                   </p>
 
                   <div className="flex items-center gap-4 text-xs text-white/40">

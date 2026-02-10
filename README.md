@@ -76,6 +76,7 @@ NEXT_PUBLIC_API_URL=http://localhost:3001
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 NEXT_PUBLIC_APP_URL=http://localhost:3000  # Optional, defaults to window.location.origin
+GITHUB_TOKEN=your_github_personal_access_token  # Required for storing large code snippets in GitHub Gists
 ```
 
 #### API Service (`apps/api`)
@@ -119,6 +120,30 @@ The OAuth flow works as follows:
 - User clicks OAuth button → Redirected to provider (GitHub/Google/X)
 - Provider authenticates → Redirects to `/auth/callback?code=...`
 - Callback route exchanges code for session → Redirects to `/playground/hello-solana`
+
+### GitHub Gist Setup (Optional but Recommended)
+
+For storing large code snippets (>= 5KB), the application uses GitHub Gists. This reduces database storage requirements.
+
+1. **Create a GitHub Personal Access Token:**
+   - Go to GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
+   - Click "Generate new token (classic)"
+   - Give it a descriptive name (e.g., "Solana Playground Gist Storage")
+   - Select the `gist` scope (this allows creating and managing gists)
+   - Click "Generate token"
+   - **Copy the token immediately** (you won't be able to see it again)
+
+2. **Add the token to your environment:**
+   - Add `GITHUB_TOKEN=your_token_here` to your `.env` file in `apps/web/`
+   - Or set it in your deployment platform's environment variables
+
+3. **How it works:**
+   - Code snippets smaller than 5KB are stored in the database (fast access)
+   - Code snippets 5KB or larger are automatically stored in GitHub Gists (unlisted, not searchable)
+   - The application handles fetching from Gists transparently
+   - If Gist creation fails, the code falls back to database storage
+
+**Note:** If `GITHUB_TOKEN` is not set, the application will store all code in the database regardless of size.
 
 
 
