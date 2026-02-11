@@ -16,7 +16,7 @@ Solana Atlas helps developers understand Solana on-chain programs end-to-end usi
 
 Modern, dark, and developer-centric. Get a bird's eye view of what's possible before diving into the code.
 
-![Landing Page](assets/readme/landing.png)
+![Landing Page](assets/readme/checklist.png)
 
 ---
 
@@ -26,19 +26,19 @@ Modern, dark, and developer-centric. Get a bird's eye view of what's possible be
 
 A seamless coding environment designed specifically for Solana programs. Write, compile, and explore in one place.
 
-![Playground](assets/readme/playground.png)
+![Playground](assets/readme/explanation.png)
 
 ### 📖 Deep Explanations
 
 Every important line of code is explained. Understand the **what**, the **why**, and the **risk** associated with every instruction.
 
-![Explanation](assets/readme/explanation.png)
+![Explanation](assets/readme/playground.png)
 
 ### ✅ Interactive Checklists
 
 Stay on track with program-specific checklists that guide you through building and understanding complex logic.
 
-![Checklist](assets/readme/checklist.png)
+![Checklist](assets/readme/landing.png)
 
 ---
 
