@@ -1,0 +1,14 @@
+flowchart TD
+    start["Start"] --> initialize["Initialize Update Uri"]
+    initialize --> checkMetadata["Check Metadata Account"]
+    checkMetadata --> checkUpdateAuthority["Check Update Authority"]
+    checkUpdateAuthority --> checkTokenMetadataProgram["Check Token Metadata Program"]
+    checkTokenMetadataProgram --> updateMetadata["Update Metadata via CPI"]
+    updateMetadata --> invokeUpdate["Invoke Update Metadata Instruction"]
+    invokeUpdate --> logUpdate["Log Metadata URI Update"]
+    logUpdate --> end["End"]
+    subgraph UpdateUriContext
+        metadata["Metadata Account"] -.-> updateMetadata
+        update_authority["Update Authority"] -.-> updateMetadata
+        token_metadata_program["Token Metadata Program"] -.-> updateMetadata
+    end

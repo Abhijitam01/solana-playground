@@ -1,0 +1,21 @@
+flowchart TD
+    initialize["Initialize Escrow"] --> createEscrow["Create Escrow"]
+    createEscrow --> fundEscrow["Fund Escrow"]
+    fundEscrow --> updateEscrow["Update Escrow"]
+    updateEscrow --> escrowCreated["Escrow Created"]
+    escrowCreated --> releaseEscrow["Release Escrow"]
+    releaseEscrow --> checkAuthorization["Check Authorization"]
+    checkAuthorization --> authorized["Authorized"] -.-> releaseFunds["Release Funds"]
+    checkAuthorization --> notAuthorized["Not Authorized"] -.-> error["Error: Unauthorized"]
+    releaseFunds --> updateSeller["Update Seller Account"]
+    updateSeller --> escrowReleased["Escrow Released"]
+    subgraph Create Escrow
+        createEscrow --> initializeBuyer["Initialize Buyer"]
+        initializeBuyer --> initializeSeller["Initialize Seller"]
+        initializeSeller --> initializeArbiter["Initialize Arbiter"]
+    end
+    subgraph Release Escrow
+        releaseEscrow --> getEscrow["Get Escrow Account"]
+        getEscrow --> getArbiter["Get Arbiter Account"]
+        getArbiter --> checkAuthorization
+    end

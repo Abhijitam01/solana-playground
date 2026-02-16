@@ -18,6 +18,7 @@ export interface ProgramSession {
   programMap: ProgramMap;
   precomputedState: PrecomputedState;
   checklist: string[];
+  mermaidDiagram?: string;
   createdAt: string;
   updatedAt: string;
   isDirty: boolean;
@@ -34,7 +35,8 @@ interface ProgramState {
     metadata?: TemplateMetadata,
     programMap?: ProgramMap,
     functionSpecs?: FunctionSpec[],
-    precomputedState?: PrecomputedState
+    precomputedState?: PrecomputedState,
+    mermaidDiagram?: string
   ) => ProgramSession;
   openTemplateProgram: (template: {
     id: string;
@@ -44,6 +46,7 @@ interface ProgramState {
     programMap: ProgramMap;
     precomputedState: PrecomputedState;
     checklist?: string[];
+    mermaidDiagram?: string;
   }) => ProgramSession;
   setActiveProgram: (id: string) => void;
   updateProgramCode: (id: string, code: string) => void;
@@ -82,7 +85,8 @@ export const useProgramStore = createWithEqualityFn<ProgramState>()(
         metadata,
         programMap,
         functionSpecs,
-        precomputedState
+        precomputedState,
+        mermaidDiagram
       ) => {
         const definition = PROGRAM_TYPE_MAP.get(typeId);
         if (!definition) {
@@ -104,6 +108,7 @@ export const useProgramStore = createWithEqualityFn<ProgramState>()(
           programMap: programMap || definition.programMap,
           precomputedState: precomputedState || definition.precomputedState,
           checklist: checklist || definition.checklist,
+          mermaidDiagram: mermaidDiagram,
           createdAt: nowIso(),
           updatedAt: nowIso(),
           isDirty: false,
@@ -129,6 +134,7 @@ export const useProgramStore = createWithEqualityFn<ProgramState>()(
             programMap: template.programMap,
             precomputedState: template.precomputedState,
             checklist: template.checklist || [],
+            mermaidDiagram: template.mermaidDiagram,
           };
 
           set((state) => ({
@@ -154,6 +160,7 @@ export const useProgramStore = createWithEqualityFn<ProgramState>()(
           programMap: template.programMap,
           precomputedState: template.precomputedState,
           checklist: template.checklist || [],
+          mermaidDiagram: template.mermaidDiagram,
           createdAt: nowIso(),
           updatedAt: nowIso(),
           isDirty: false,

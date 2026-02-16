@@ -105,7 +105,7 @@ async function loadTemplateLocal(id: string) {
   console.log(`Loading template "${id}" from ${basePath} (CWD: ${cwd})`);
 
   try {
-     const [code, metadata, explanations, programMap, precomputedState, functionSpecs, checklist] =
+     const [code, metadata, explanations, programMap, precomputedState, functionSpecs, checklist, mermaidDiagram] =
       await Promise.all([
         readFile(join(basePath, "program/lib.rs"), "utf-8").catch((err) => {
           throw new Error(`Failed to read program code from ${join(basePath, "program/lib.rs")}: ${err instanceof Error ? err.message : String(err)}`);
@@ -128,6 +128,7 @@ async function loadTemplateLocal(id: string) {
         readJSON(join(basePath, "checklist.json"))
           .then((data) => z.array(z.string()).parse(data))
           .catch(() => ["Build the program", "Deploy to Devnet"]), /* Default checklist */
+        readFile(join(basePath, "mermaid-diagram.txt"), "utf-8").catch(() => undefined),
       ]);
 
     return {
@@ -139,6 +140,7 @@ async function loadTemplateLocal(id: string) {
       functionSpecs,
       precomputedState,
       checklist,
+      mermaidDiagram,
     };
   } catch (error) {
      console.error(`Local load failed for template "${id}" at ${basePath}:`, error);

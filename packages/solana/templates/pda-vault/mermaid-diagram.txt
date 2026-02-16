@@ -1,0 +1,10 @@
+flowchart TD
+    initialize["Initialize Vault"] --> vaultCreated["Vault Created"]
+    vaultCreated --> deposit["Deposit Lamports"] -.-> withdraw["Withdraw Lamports"]
+    deposit --> updateVault["Update Vault Balance"]
+    updateVault --> updateAuthority["Update Authority Balance"]
+    withdraw --> checkAuthority["Check Authority"] ==> authorized["Authorized"]
+    checkAuthority --> unauthorized["Unauthorized"]
+    authorized --> updateVault
+    updateAuthority --> success["Transaction Successful"]
+    unauthorized --> error["Error: Unauthorized"]

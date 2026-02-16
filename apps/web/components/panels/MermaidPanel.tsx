@@ -58,6 +58,13 @@ export function MermaidPanel() {
   const [mermaidDef, setMermaidDef] = useState<string>("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Load precomputed diagram from template if available and no custom diagram exists
+  useEffect(() => {
+    if (activeProgram?.mermaidDiagram && !mermaidDef) {
+      setMermaidDef(activeProgram.mermaidDiagram);
+    }
+  }, [activeProgram?.mermaidDiagram, mermaidDef]);
   const [copied, setCopied] = useState(false);
   const diagramRef = useRef<HTMLDivElement>(null);
 

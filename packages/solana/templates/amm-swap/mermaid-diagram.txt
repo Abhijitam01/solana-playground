@@ -1,0 +1,16 @@
+flowchart TD
+    initialize["Initialize Pool"]
+    swap["Swap"]
+    initialize --> swap
+    initialize["Initialize Pool"] --> initializePool["Initialize Pool Accounts"]
+    initializePool --> initializePoolAuthority["Set Pool Authority"]
+    initializePoolAuthority --> initializeMintA["Set Mint A"]
+    initializeMintA --> initializeMintB["Set Mint B"]
+    initializeMintB --> initializeVaultA["Set Vault A"]
+    initializeVaultA --> initializeVaultB["Set Vault B"]
+    swap --> swapCheckVaults["Check Vault Accounts"]
+    swapCheckVaults --> swapCheckLiquidity["Check Pool Liquidity"]
+    swapCheckLiquidity --> swapTransferIn["Transfer In"]
+    swapTransferIn --> swapCalculateOut["Calculate Out Amount"]
+    swapCalculateOut --> swapTransferOut["Transfer Out"]
+    swapTransferOut --> swapComplete["Swap Complete"]

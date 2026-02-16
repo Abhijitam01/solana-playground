@@ -1,0 +1,14 @@
+flowchart TD
+    start["Start"] --> initialize["Initialize Accounts"]
+    initialize --> freeze["Freeze Token Account"]
+    freeze --> checkFreeze["Check Freeze Status"]
+    checkFreeze -.-> thaw["Thaw Token Account"]
+    thaw --> endProgram["End Program"]
+    freeze --> endProgram
+    initialize["Initialize Accounts"] --> getMint["Get Mint Account"]
+    getMint --> getFreezeAuthority["Get Freeze Authority"]
+    getFreezeAuthority --> getTokenProgram["Get Token Program"]
+    getTokenProgram --> freeze
+    thaw --> checkThaw["Check Thaw Status"]
+    checkThaw -.-> freeze
+    start --> thaw

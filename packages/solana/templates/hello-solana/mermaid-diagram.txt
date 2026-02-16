@@ -1,0 +1,12 @@
+flowchart TD
+    start["Start"] --> initialize["Initialize Program"]
+    initialize --> sayHello["Say Hello"]
+    sayHello --> logMessage["Log Hello Message"]
+    logMessage --> logProgramId["Log Program ID"]
+    logProgramId --> logUser["Log User"]
+    logUser --> endProgram["End Program"]
+    subgraph Accounts
+        user["User Account"] -.-> systemProgram["System Program"]
+    end
+    start --> Accounts
+    endProgram --> end

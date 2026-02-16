@@ -1,0 +1,15 @@
+flowchart TD
+    initialize["Initialize Pool"] --> pool["Pool Created"]
+    pool --> deposit["Deposit"]
+    deposit --> calculate_shares["Calculate Shares"]
+    calculate_shares --> update_pool["Update Pool"]
+    update_pool --> update_stake["Update Stake Account"]
+    deposit --> transfer_lamports["Transfer Lamports"]
+    transfer_lamports --> update_stake
+    withdraw["Withdraw"] --> check_shares["Check Shares"]
+    check_shares --> calculate_amount["Calculate Amount"]
+    calculate_amount --> update_pool_withdraw["Update Pool"]
+    update_pool_withdraw --> update_stake_withdraw["Update Stake Account"]
+    update_stake_withdraw --> transfer_lamports_withdraw["Transfer Lamports"]
+    initialize["Initialize Pool"] -.-> withdraw["Withdraw"]
+    deposit -.-> withdraw["Withdraw"]

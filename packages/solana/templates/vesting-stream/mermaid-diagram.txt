@@ -1,0 +1,19 @@
+flowchart TD
+    initialize["Initialize Vesting"]
+    fund["Fund"]
+    claim["Claim"]
+    initialize --> fund
+    fund --> claim
+    initialize["Initialize Vesting"] -->|total_amount|> initializeVesting[Initialize Vesting Account]
+    initializeVesting -->|vesting|> vault[Create Vault]
+    fund -->|amount|> fundVault[Fund Vault]
+    claim -->|vesting|> checkCliff[Check Cliff]
+    checkCliff -->|passed|> calculateVested[Calculate Vested Amount]
+    calculateVested -->|available|> claimVault[Claim from Vault]
+    claimVault -->|available|> beneficiary[Send to Beneficiary]
+    initializeVesting["Initialize Vesting Account"] --> initialize
+    fundVault["Fund Vault"] --> fund
+    checkCliff["Check Cliff"] --> claim
+    calculateVested["Calculate Vested Amount"] --> claim
+    claimVault["Claim from Vault"] --> claim
+    beneficiary["Send to Beneficiary"] --> claim

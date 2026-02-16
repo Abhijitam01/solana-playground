@@ -1,0 +1,31 @@
+flowchart TD
+    createMint["Create Mint"] --> initializeMint["Initialize Mint Account"]
+    initializeMint --> createMintAccount["Create Mint Account"]
+    createMintAccount --> mintCreated["Mint Created"]
+    mintCreated --> mintTokens["Mint Tokens"]
+    mintTokens --> mintToAccount["Mint to Token Account"]
+    mintToAccount --> tokensMinted["Tokens Minted"]
+    tokensMinted --> transferTokens["Transfer Tokens"]
+    transferTokens --> transferFromAccount["Transfer from Token Account"]
+    transferFromAccount --> transferToAccount["Transfer to Token Account"]
+    transferToAccount --> tokensTransferred["Tokens Transferred"]
+    createMint --> error[Error]
+    mintTokens --> error
+    transferTokens --> error
+    subgraph Create Mint
+        createMint
+        initializeMint
+        createMintAccount
+        mintCreated
+    end
+    subgraph Mint Tokens
+        mintTokens
+        mintToAccount
+        tokensMinted
+    end
+    subgraph Transfer Tokens
+        transferTokens
+        transferFromAccount
+        transferToAccount
+        tokensTransferred
+    end

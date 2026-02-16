@@ -1,0 +1,20 @@
+flowchart TD
+    initialize["Initialize Multisig"] --> vault["Create Vault"]
+    vault --> multisig["Set Multisig Owners and Threshold"]
+    multisig --> deposit["Deposit Lamports"]
+    deposit --> createProposal["Create Proposal"]
+    createProposal --> approve["Approve Proposal"]
+    approve --> execute["Execute Proposal"]
+    execute --> transfer["Transfer Lamports to Recipient"]
+    transfer --> endProgram["End Program"]
+    subgraph Proposal Flow
+        createProposal --> approve
+        approve --> execute
+    end
+    subgraph Error Handling
+        invalidThreshold["Invalid Threshold"] -.-> initialize
+        invalidAmount["Invalid Amount"] -.-> createProposal
+        unauthorized["Unauthorized Owner"] -.-> approve
+        alreadyExecuted["Already Executed"] -.-> execute
+        notEnoughApprovals["Not Enough Approvals"] -.-> execute
+    end

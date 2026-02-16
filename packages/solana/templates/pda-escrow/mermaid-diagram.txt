@@ -1,0 +1,23 @@
+flowchart TD
+    initialize["Initialize Escrow"] --> createEscrow["Create Escrow Account"]
+    createEscrow --> fundEscrow["Fund Escrow Account"]
+    fundEscrow --> updateAuthority["Update Authority"]
+    updateAuthority --> endCreate["End Create Escrow"]
+    endCreate --> releaseEscrow["Release Escrow"]
+    releaseEscrow --> checkAuthority["Check Authority"]
+    checkAuthority --> releaseFunds["Release Funds"]
+    releaseFunds --> updateEscrow["Update Escrow Account"]
+    updateEscrow --> endRelease["End Release Escrow"]
+    subgraph Create Escrow
+        createEscrow
+        fundEscrow
+        updateAuthority
+        endCreate
+    end
+    subgraph Release Escrow
+        releaseEscrow
+        checkAuthority
+        releaseFunds
+        updateEscrow
+        endRelease
+    end

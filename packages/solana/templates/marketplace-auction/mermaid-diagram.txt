@@ -1,0 +1,23 @@
+flowchart TD
+    initialize["Initialize Auction"]
+    place_bid["Place Bid"]
+    settle["Settle Auction"]
+    initialize --> place_bid
+    place_bid --> settle
+    subgraph Auction Flow
+        initialize["Initialize Auction"] --> place_bid["Place Bid"]
+        place_bid --> settle["Settle Auction"]
+    end
+    subgraph Initialize Auction
+        initialize_seller["Seller"] --> initialize_auction["Initialize Auction"]
+        initialize_auction --> initialize_vault["Initialize Vault"]
+    end
+    subgraph Place Bid
+        place_bid["Place Bid"] --> update_auction["Update Auction"]
+        update_auction --> update_vault["Update Vault"]
+        update_vault --> refund_previous_bidder["Refund Previous Bidder"]
+    end
+    subgraph Settle Auction
+        settle["Settle Auction"] --> transfer_funds["Transfer Funds to Seller"]
+        transfer_funds --> update_auction_settled["Update Auction as Settled"]
+    end

@@ -1,0 +1,22 @@
+flowchart TD
+    initialize["Initialize Update"] --> updateMetadata["Update Metadata"]
+    updateMetadata --> updateMetadataAccounts["Update Metadata Accounts V2"]
+    updateMetadataAccounts --> checkUpdateAuthority["Check Update Authority"]
+    checkUpdateAuthority -.-> updateData["Update Data"]
+    updateData --> updateMetadataAccountsV2["Update Metadata Accounts V2 Cpi"]
+    updateMetadataAccountsV2 --> metadataUpdated["Metadata Updated"]
+    updateMetadata["Update Metadata"] --> inputName["Input Name"]
+    updateMetadata --> inputSymbol["Input Symbol"]
+    updateMetadata --> inputUri["Input Uri"]
+    inputName --> createData["Create Data V2"]
+    inputSymbol --> createData
+    inputUri --> createData
+    createData --> updateData
+    updateMetadata["Update Metadata"] --> accounts["Get Accounts"]
+    accounts --> metadataAccount["Get Metadata Account"]
+    accounts --> updateAuthorityAccount["Get Update Authority Account"]
+    accounts --> tokenMetadataProgramAccount["Get Token Metadata Program Account"]
+    metadataAccount --> updateMetadataAccountsV2
+    updateAuthorityAccount --> updateMetadataAccountsV2
+    tokenMetadataProgramAccount --> updateMetadataAccountsV2
+    metadataUpdated --> endProgram["End Program"]

@@ -1,0 +1,25 @@
+flowchart TD
+    initialize["Initialize Mint"] --> createMetadata["Create Metadata Accounts"]
+    createMetadata --> createNft["Create NFT"]
+    createNft --> finalize["Finalize NFT Creation"]
+    subgraph CreateNft
+        createMetadataAccounts["Create Metadata Accounts V3"] --> updateMetadata["Update Metadata"]
+        updateMetadata --> createToken["Create Token"]
+    end
+    subgraph Accounts
+        mint["Mint Account"] --> mintAuthority["Mint Authority"]
+        mintAuthority --> payer["Payer Account"]
+        payer --> systemProgram["System Program"]
+        systemProgram --> tokenProgram["Token Program"]
+        tokenProgram --> tokenMetadataProgram["Token Metadata Program"]
+    end
+    initialize ==> createMetadata
+    createMetadata -.-> createNft
+    createNft -.-> finalize
+    createMetadataAccounts -.-> updateMetadata
+    updateMetadata -.-> createToken
+    mint -.-> mintAuthority
+    mintAuthority -.-> payer
+    payer -.-> systemProgram
+    systemProgram -.-> tokenProgram
+    tokenProgram -.-> tokenMetadataProgram

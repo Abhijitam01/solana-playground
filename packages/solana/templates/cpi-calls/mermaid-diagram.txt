@@ -1,0 +1,13 @@
+flowchart TD
+    initialize["Initialize Transfer"]
+    --> transfer["Transfer Lamports"]
+    transfer --> systemProgram["Call System Program"]
+    systemProgram -.-> transferError["Handle Transfer Error"]
+    transfer --> success["Transfer Successful"]
+    transfer --> log["Log Transfer Amount"]
+    log["Log Transfer Amount"] ==> endProgram["End Program"]
+    subgraph TransferLamports
+        from["From Account"] --> to["To Account"]
+    end
+    from["From Account"] --> systemProgram["Call System Program"]
+    to["To Account"] --> systemProgram["Call System Program"]

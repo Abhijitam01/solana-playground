@@ -1,0 +1,22 @@
+flowchart TD
+    initialize["Initialize Counter"] --> createCounter[Create Counter Account]
+    createCounter --> setCounterValue[Set Counter Value]
+    setCounterValue --> setCounterAuthority[Set Counter Authority]
+    setCounterAuthority --> endInitialize[End Initialize]
+    increment["Increment Counter"] --> checkCounterOverflow[Check Counter Overflow]
+    checkCounterOverflow --> incrementCounterValue[Increment Counter Value]
+    incrementCounterValue --> endIncrement[End Increment]
+    subgraph Initialize Counter
+        initialize --> createCounter
+        createCounter --> setCounterValue
+        setCounterValue --> setCounterAuthority
+        setCounterAuthority --> endInitialize
+    end
+    subgraph Increment Counter
+        increment --> checkCounterOverflow
+        checkCounterOverflow --> incrementCounterValue
+        incrementCounterValue --> endIncrement
+    end
+    initialize -.-> increment
+    endInitialize -.-> increment
+    endIncrement -.-> initialize

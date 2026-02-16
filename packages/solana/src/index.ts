@@ -54,7 +54,7 @@ export async function loadTemplate(id: string): Promise<Template> {
   const basePath = join(TEMPLATES_DIR, id);
 
   try {
-    const [code, metadata, explanations, programMap, precomputedState, functionSpecs] =
+    const [code, metadata, explanations, programMap, precomputedState, functionSpecs, mermaidDiagram] =
       await Promise.all([
         readFile(join(basePath, "program/lib.rs"), "utf-8").catch((err) => {
           throw new Error(`Failed to read program code: ${err instanceof Error ? err.message : String(err)}`);
@@ -87,6 +87,7 @@ export async function loadTemplate(id: string): Promise<Template> {
             }
             throw new Error(`Invalid function specs: ${err instanceof Error ? err.message : String(err)}`);
           }),
+        readFile(join(basePath, "mermaid-diagram.txt"), "utf-8").catch(() => undefined),
       ]);
 
     // Enforce 100% explanation coverage for non-empty lines
@@ -112,6 +113,7 @@ export async function loadTemplate(id: string): Promise<Template> {
       programMap,
       functionSpecs,
       precomputedState,
+      mermaidDiagram,
     };
   } catch (error) {
     if (error instanceof Error && error.message.includes("ENOENT")) {

@@ -267,7 +267,8 @@ export function ProgramSidebar() {
         templateData?.metadata,
         templateData?.programMap,
         templateData?.functionSpecs,
-        templateData?.precomputedState
+        templateData?.precomputedState,
+        templateData?.mermaidDiagram
       );
 
       console.log("Program created with ID:", newProgram.id);

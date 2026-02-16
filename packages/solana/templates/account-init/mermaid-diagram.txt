@@ -1,0 +1,22 @@
+flowchart TD
+    initialize["Initialize Account"] --> createAccount["Create My Account"]
+    createAccount --> setUserAuthority["Set User Authority"]
+    setUserAuthority --> setData["Set Initial Data"]
+    setData --> endInitialization["End Initialization"]
+    update["Update Account"] --> checkAuthority["Check User Authority"]
+    checkAuthority --> updateData["Update Account Data"]
+    updateData --> endUpdate["End Update"]
+    subgraph Initialize Account
+        initialize --> createAccount
+        createAccount --> setUserAuthority
+        setUserAuthority --> setData
+        setData --> endInitialization
+    end
+    subgraph Update Account
+        update --> checkAuthority
+        checkAuthority --> updateData
+        updateData --> endUpdate
+    end
+    initialize -.-> update
+    endInitialization -.-> update
+    endUpdate -.-> initialize

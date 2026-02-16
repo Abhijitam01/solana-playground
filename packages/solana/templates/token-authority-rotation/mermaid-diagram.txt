@@ -1,0 +1,21 @@
+flowchart TD
+    initialize["Initialize State"] --> stateInitialized["State Initialized"]
+    stateInitialized --> rotateMintAuthority["Rotate Mint Authority"]
+    rotateMintAuthority --> checkCurrentAuthority["Check Current Authority"]
+    checkCurrentAuthority --> authorityValid["Authority Valid"] -.-> authorityInvalid["Authority Invalid"]
+    authorityInvalid --> error["Error: Unauthorized"]
+    authorityValid --> setNewAuthority["Set New Authority"]
+    setNewAuthority --> updateState["Update State"]
+    updateState --> rotationComplete["Rotation Complete"]
+    subgraph Initialize
+        initialize --> stateInitialized
+    end
+    subgraph RotateAuthority
+        rotateMintAuthority --> checkCurrentAuthority
+        checkCurrentAuthority --> authorityValid
+        authorityValid --> setNewAuthority
+        setNewAuthority --> updateState
+    end
+    subgraph ErrorHandling
+        authorityInvalid --> error
+    end

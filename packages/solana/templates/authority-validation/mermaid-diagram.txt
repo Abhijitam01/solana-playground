@@ -1,0 +1,22 @@
+flowchart TD
+    initialize["Initialize State"] --> stateInitialized["State Initialized"]
+    initialize --> setOperator["Set Operator"]
+    setOperator --> operatorUpdated["Operator Updated"]
+    setOperator -.-> execute["Execute Privileged Action"]
+    execute --> actionExecuted["Privileged Action Executed"]
+    subgraph AuthorityValidation
+        initialize
+        setOperator
+        execute
+    end
+    subgraph Accounts
+        state["Authority State"]
+        admin["Admin"]
+        operator["Operator"]
+    end
+    initialize --> state
+    setOperator --> state
+    execute --> state
+    admin --> setOperator
+    operator --> initialize
+    operator --> execute

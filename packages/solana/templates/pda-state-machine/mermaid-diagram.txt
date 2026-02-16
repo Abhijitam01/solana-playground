@@ -1,0 +1,15 @@
+flowchart TD
+    initialize["Initialize Machine"] --> startMachine[Start Machine]
+    startMachine --> idleState[Idle State]
+    idleState -.-> advanceState[Advance State]
+    advanceState --> runningState[Running State]
+    runningState -.-> advanceState
+    runningState -.-> resetState[Reset State]
+    advanceState --> completeState[Complete State]
+    completeState -.-> resetState
+    resetState --> idleState
+    startMachine["Start Machine"] -.-> initialize
+    completeState["Complete State"] -.-> endProgram[End Program]
+    endProgram["End Program"] 
+    idleState["Idle State"] -.-> endProgram
+    runningState["Running State"] -.-> endProgram

@@ -1,0 +1,17 @@
+flowchart TD
+    initialize["Initialize Update"] --> startUpdate["Start Update Metadata"]
+    startUpdate --> getData["Get Data (name, symbol, uri)"]
+    getData --> createData["Create DataV2"]
+    createData --> updateMetadata["Update Metadata Accounts V2"]
+    updateMetadata --> invokeUpdate["Invoke Update Metadata"]
+    invokeUpdate --> checkImmutable["Check Immutable"]
+    checkImmutable --> endUpdate["End Update Metadata"]
+    subgraph UpdateMetadata
+        update_authority["Update Authority"] --> metadata["Metadata Account"]
+    end
+    subgraph TokenMetadataProgram
+        token_metadata_program["Token Metadata Program"] --> updateMetadata
+    end
+    startUpdate -.-> update_authority
+    updateMetadata -.-> token_metadata_program
+    invokeUpdate ==> endUpdate
