@@ -57,7 +57,7 @@ export function TestPanel() {
   }, [monacoTheme]);
 
   const handleEditorDidMount = useCallback(
-    (editor: editor.IStandaloneCodeEditor, monaco: typeof Monaco) => {
+    (_editor: editor.IStandaloneCodeEditor, monaco: typeof Monaco) => {
       monacoRef.current = monaco;
       defineSolanaThemes(monaco);
       monaco.editor.setTheme(monacoTheme);
