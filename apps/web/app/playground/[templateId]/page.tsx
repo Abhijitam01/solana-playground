@@ -56,12 +56,13 @@ export default function PlaygroundPage() {
     shallow
   );
   const { toasts, dismissToast, error: showToastError } = useToast();
-  const { panels, toggleZenMode, sidebarVisible, toggleMobileSidebar } = useLayoutStore(
+  const { panels, toggleZenMode, sidebarVisible, toggleMobileSidebar, sidebarWidth } = useLayoutStore(
     (state) => ({
       panels: state.panels,
       toggleZenMode: state.toggleZenMode,
       sidebarVisible: state.sidebarVisible,
       toggleMobileSidebar: state.toggleMobileSidebar,
+      sidebarWidth: state.sidebarWidth,
     })
   );
   const { playgroundTheme } = useSettingsStore(
@@ -233,7 +234,10 @@ export default function PlaygroundPage() {
     return (
       <div className="h-screen flex bg-[#000000] text-[#cccccc]">
         {/* Left sidebar skeleton */}
-        <div className="hidden md:flex w-64 flex-shrink-0 border-r border-border/70 bg-card/60">
+        <div
+          className="hidden md:flex flex-shrink-0 border-r border-border/70 bg-card/60"
+          style={{ width: `${sidebarWidth}px` }}
+        >
           <div className="p-4 w-full space-y-4 animate-pulse">
             <div className="h-10 rounded-lg bg-[#1f2933]" />
             <div className="space-y-2">

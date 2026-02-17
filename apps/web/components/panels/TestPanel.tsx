@@ -1,14 +1,19 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import { useProgramStore } from "@/stores/programs";
 import { BrowserTestRunner } from "@/lib/test-runner";
 import { motion } from "framer-motion";
 import { Beaker, Play, CheckCircle2, XCircle, AlertCircle, Loader2 } from "lucide-react";
 import Editor from "@monaco-editor/react";
+import type { editor } from "monaco-editor";
+import type * as Monaco from "monaco-editor";
 import { useAnchorProgram } from "@/hooks/use-anchor-program";
 import { Badge } from "@/components/ui/Badge"; 
 import { HelpIcon } from "@/components/ui/HelpIcon";
+import { useSettingsStore } from "@/stores/settings";
+import { defineSolanaThemes } from "@/lib/monaco-themes";
+import { shallow } from "zustand/shallow";
 
 export function TestPanel() {
   const { activeProgram, updateProgramTestCode, setProgramTestResult } = useProgramStore(
@@ -19,10 +24,46 @@ export function TestPanel() {
     })
   );
 
+  const { theme, playgroundTheme } = useSettingsStore(
+    (state) => ({
+      theme: state.theme,
+      playgroundTheme: state.playgroundTheme,
+    }),
+    shallow
+  );
+
   const { program, provider } = useAnchorProgram();
 
   const [isRunning, setIsRunning] = useState(false);
   const [testRunner] = useState(() => new BrowserTestRunner());
+  const monacoRef = useRef<typeof Monaco | null>(null);
+
+  // Computed values
+  const monacoTheme = useMemo(() => {
+    if (playgroundTheme === "grid") {
+      return "solana-grid";
+    }
+    if (playgroundTheme === "matrix") {
+      return "solana-matrix";
+    }
+    return theme === "dark" ? "solana-dark" : "solana-light";
+  }, [theme, playgroundTheme]);
+
+  // Apply theme changes
+  useEffect(() => {
+    if (monacoRef.current) {
+      monacoRef.current.editor.setTheme(monacoTheme);
+    }
+  }, [monacoTheme]);
+
+  const handleEditorDidMount = useCallback(
+    (editor: editor.IStandaloneCodeEditor, monaco: typeof Monaco) => {
+      monacoRef.current = monaco;
+      defineSolanaThemes(monaco);
+      monaco.editor.setTheme(monacoTheme);
+    },
+    [monacoTheme]
+  );
 
   // Default test code if none exists
   const defaultTestCode = `
@@ -102,7 +143,8 @@ describe('${activeProgram?.name || "My Program"}', () => {
             <Editor
                 height="100%"
                 defaultLanguage="typescript"
-                theme="vs-dark" // We should use a custom theme ideally
+                theme={monacoTheme}
+                onMount={handleEditorDidMount}
                 value={activeProgram.testCode || defaultTestCode}
                 onChange={(val) => val !== undefined && updateProgramTestCode(activeProgram.id, val)}
                 options={{

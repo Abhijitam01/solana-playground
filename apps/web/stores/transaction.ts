@@ -5,6 +5,7 @@ export interface TransactionInstruction {
   programId: string;
   instructionName: string;
   accounts: {
+    name: string;
     pubkey: string;
     isSigner: boolean;
     isWritable: boolean;

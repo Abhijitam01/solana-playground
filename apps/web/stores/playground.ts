@@ -39,6 +39,7 @@ interface PlaygroundState {
     instruction?: string,
     stepId?: string
   ) => Promise<void>;
+  executeTransaction: (transaction: any) => Promise<void>;
 }
 
 const initialState = {
@@ -69,6 +70,7 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
   setIsExecuting: (executing) => set({ isExecuting: executing }),
   setCurrentFunctionSpec: (spec) => set({ currentFunctionSpec: spec }),
   executeScenario: async (scenario: string, instruction?: string, stepId?: string) => {
+    // ... existing implementation ...
     const templateId = get().templateId;
     if (!templateId) return;
     const executionMode = get().executionMode;
@@ -91,6 +93,7 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           templateId,
+          type: "scenario",
           scenario,
           instruction: instruction || scenario,
         }),
@@ -155,6 +158,47 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
           metadata: { scenario, instruction },
         });
       }
+    } finally {
+      set({ isExecuting: false });
+    }
+  },
+  executeTransaction: async (transaction: any) => {
+    const templateId = get().templateId;
+    if (!templateId) return;
+
+    set({ isExecuting: true, currentScenario: "custom-transaction" });
+    try {
+      const runnerUrl = process.env.NEXT_PUBLIC_RUNNER_URL || "http://localhost:3002";
+      const res = await fetch(`${runnerUrl}/execute`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          templateId,
+          type: "transaction",
+          transaction,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Execution failed (${res.status})`);
+      }
+
+      const result = await res.json();
+      set({ executionResult: result });
+    } catch (error) {
+      console.error("Transaction execution error:", error);
+      set({
+        executionResult: {
+          success: false,
+          scenario: "custom-transaction",
+          accountsBefore: [],
+          accountsAfter: [],
+          logs: [],
+          computeUnits: 0,
+          trace: [],
+          error: error instanceof Error ? error.message : String(error),
+        },
+      });
     } finally {
       set({ isExecuting: false });
     }

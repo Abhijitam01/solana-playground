@@ -1,4 +1,5 @@
 import { createWithEqualityFn } from "zustand/traditional";
+import { persist } from "zustand/middleware";
 
 export type PanelId =
   | "map"
@@ -38,58 +39,68 @@ const initialPanels: Record<PanelId, boolean> = {
   tests: false,
 };
 
-export const useLayoutStore = createWithEqualityFn<LayoutState>((set) => ({
-  panels: { ...initialPanels },
-  sidebarVisible: true,
-  mobileSidebarOpen: false,
-  // 5% wider than previous 256px default.
-  sidebarWidth: 269,
-  zenMode: false,
-  layoutMode: "code-only",
-  togglePanel: (panel) =>
-    set((state) => ({
-      panels: { ...state.panels, [panel]: !state.panels[panel] },
-    })),
-  setPanel: (panel, open) =>
-    set((state) => ({
-      panels: { ...state.panels, [panel]: open },
-    })),
-  closeAllPanels: () => set({ panels: { ...initialPanels }, layoutMode: "code-only" }),
-  toggleZenMode: () =>
-    set((state) => {
-      const nextZen = !state.zenMode;
-      return {
-        zenMode: nextZen,
-        sidebarVisible: !nextZen,
-        panels: nextZen ? { ...initialPanels } : { ...initialPanels },
-        layoutMode: "code-only",
-      };
+export const useLayoutStore = createWithEqualityFn<LayoutState>()(
+  persist(
+    (set) => ({
+      panels: { ...initialPanels },
+      sidebarVisible: true,
+      mobileSidebarOpen: false,
+      // 5% wider than previous 256px default.
+      sidebarWidth: 269,
+      zenMode: false,
+      layoutMode: "code-only",
+      togglePanel: (panel) =>
+        set((state) => ({
+          panels: { ...state.panels, [panel]: !state.panels[panel] },
+        })),
+      setPanel: (panel, open) =>
+        set((state) => ({
+          panels: { ...state.panels, [panel]: open },
+        })),
+      closeAllPanels: () => set({ panels: { ...initialPanels }, layoutMode: "code-only" }),
+      toggleZenMode: () =>
+        set((state) => {
+          const nextZen = !state.zenMode;
+          return {
+            zenMode: nextZen,
+            sidebarVisible: !nextZen,
+            panels: nextZen ? { ...initialPanels } : { ...initialPanels },
+            layoutMode: "code-only",
+          };
+        }),
+      setLayoutMode: (mode) =>
+        set(() => {
+          if (mode === "code-map") {
+            return {
+              layoutMode: mode,
+              panels: { ...initialPanels, map: true },
+            };
+          }
+          if (mode === "code-exec") {
+            return {
+              layoutMode: mode,
+              panels: { ...initialPanels, execution: true },
+            };
+          }
+          return {
+            layoutMode: "code-only",
+            panels: { ...initialPanels },
+          };
+        }),
+      toggleMobileSidebar: () =>
+        set((state) => ({
+          mobileSidebarOpen: !state.mobileSidebarOpen,
+        })),
+      setMobileSidebarOpen: (open) =>
+        set({ mobileSidebarOpen: open }),
+      setSidebarWidth: (width) =>
+        set({ sidebarWidth: Math.max(220, Math.min(520, Math.round(width))) }),
     }),
-  setLayoutMode: (mode) =>
-    set(() => {
-      if (mode === "code-map") {
-        return {
-          layoutMode: mode,
-          panels: { ...initialPanels, map: true },
-        };
-      }
-      if (mode === "code-exec") {
-        return {
-          layoutMode: mode,
-          panels: { ...initialPanels, execution: true },
-        };
-      }
-      return {
-        layoutMode: "code-only",
-        panels: { ...initialPanels },
-      };
-    }),
-  toggleMobileSidebar: () =>
-    set((state) => ({
-      mobileSidebarOpen: !state.mobileSidebarOpen,
-    })),
-  setMobileSidebarOpen: (open) =>
-    set({ mobileSidebarOpen: open }),
-  setSidebarWidth: (width) =>
-    set({ sidebarWidth: Math.max(220, Math.min(520, Math.round(width))) }),
-}));
+    {
+      name: "solana-playground-layout",
+      partialize: (state) => ({
+        sidebarWidth: state.sidebarWidth,
+      }),
+    }
+  )
+);

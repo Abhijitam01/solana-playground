@@ -51,6 +51,7 @@ export const ExecutionRequestSchema = z.object({
           instructionName: z.string(),
           accounts: z.array(
             z.object({
+              name: z.string(),
               pubkey: z.string(), // This is the label/identifier from frontend
               isSigner: z.boolean(),
               isWritable: z.boolean(),

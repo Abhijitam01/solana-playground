@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { useTemplates } from "@/hooks/use-templates";
 import { useRouter } from "next/navigation";
 import { useProgramStore } from "@/stores/programs";
@@ -150,7 +150,7 @@ export function ProgramSidebar() {
   }, [handleResizeMove]);
 
   const handleResizeDown = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: ReactMouseEvent<HTMLDivElement>) => {
       event.preventDefault();
       setIsResizing(true);
       document.body.style.cursor = "col-resize";
@@ -420,8 +420,7 @@ export function ProgramSidebar() {
           ? "bg-[#000000] bg-[linear-gradient(rgba(0,255,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,0,0.03)_1px,transparent_1px)] bg-[size:20px_20px]"
           : "bg-card/60"
         }`}
-        style={{ width: `${sidebarWidth}px` }}
-        style={{ top: 0, left: 0 }}
+        style={{ width: `${sidebarWidth}px`, top: 0, left: 0 }}
       >
         <div
           className={`hidden md:block absolute right-0 top-0 h-full w-1 cursor-col-resize z-20 transition-colors ${

@@ -5,6 +5,7 @@ import { usePlaygroundStore } from "@/stores/playground";
 import { useProgramStore } from "@/stores/programs";
 import { Badge } from "@/components/ui/Badge";
 import { HelpIcon } from "@/components/ui/HelpIcon";
+import { PdaCalculator } from "@/components/tools/PdaCalculator";
 import type { AccountState, AccountStateAfter, ExecutionScenario, Instruction } from "@solana-playground/types";
 import { shallow } from "zustand/shallow";
 
@@ -216,6 +217,10 @@ export function AccountInspectorPanel() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="pt-2">
+          <PdaCalculator defaultProgramId="" />
         </section>
       </div>
     </motion.div>

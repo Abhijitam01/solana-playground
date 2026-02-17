@@ -1,6 +1,6 @@
 import { Connection, Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
 import type { ExecutionResult, Template } from "@solana-playground/types";
-import type { ExecutionScenarioInput, ExecutionAdapter } from "../execution-engine";
+import type { ExecutionScenarioInput, ExecutionAdapter, ExecutionTransactionInput } from "../execution-types";
 import { ValidatorManager } from "../validator";
 import { ProgramCompiler } from "../compiler";
 import { StateCapture } from "../state-capture";
@@ -31,6 +31,8 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
   private accountCache: Map<string, PublicKey> = new Map();
   private signerCache: Map<string, Keypair> = new Map();
   private workspaceManager = new WorkspaceManager();
+  private lastLogs: string[] | null = null;
+  private lastComputeUnits: number | null = null;
 
   async executeScenario(input: ExecutionScenarioInput): Promise<ExecutionResult> {
     return this.executeCommon(input.template, input.scenarioName, async (program, programId, payer, stateCapture) => {
@@ -48,17 +50,10 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
   async executeTransaction(input: ExecutionTransactionInput): Promise<ExecutionResult> {
     const { template, transaction } = input;
     return this.executeCommon(template, "custom-transaction", async (program, programId, payer, stateCapture) => {
-      // Resolve accounts for all instructions
-      // For now, we'll assume a single instruction execution or sequential execution
-      // capturing state before/after the WHOLE transaction
-      
-      // We need to resolve accounts for the first instruction to capture "before" state of interest
-      // This is a bit tricky with multiple instructions. 
-      // Strategy: Collect ALL unique accounts across all instructions.
       
       const allLabels = new Map<string, PublicKey>();
       
-      // 1. Resolve all accounts for all instructions
+      // 1. Resolve all accounts for all instructions to capture state
       for (const inst of transaction.instructions) {
         const resolved = await this.resolveTransactionAccounts(inst, programId, payer);
         resolved.labels.forEach((l) => allLabels.set(l.label, l.address));
@@ -92,6 +87,7 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
     this.lastLogs = null;
     this.lastComputeUnits = null;
 
+    // TODO: A better check for supported templates logic?
     if (!SUPPORTED_TEMPLATES.has(template.id)) {
       return this.fail(
         scenarioName,
@@ -103,7 +99,7 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
 
     try {
       await this.ensureValidator();
-      const connection = this.getConnection();
+      const connection = await this.getConnection();
       const payer = await this.getPayer(connection);
 
       workspaceDir = await this.workspaceManager.create(template.id);
@@ -174,9 +170,6 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
     }
   }
 
-  private lastLogs: string[] | null = null;
-  private lastComputeUnits: number | null = null;
-
   private async executeWithPrerequisites(
     program: any,
     input: ExecutionScenarioInput,
@@ -221,7 +214,7 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
       .signers(resolved.signers)
       .rpc();
 
-    const connection = this.getConnection();
+    const connection = await this.getConnection();
     const tx = await connection.getTransaction(signature, {
       commitment: "confirmed",
       maxSupportedTransactionVersion: 0,
@@ -289,13 +282,63 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
         continue;
       }
 
-      throw new Error(`Account "${acc.name}" is not supported in live execution yet.`);
+      // Default fallback for unknown accounts: Generate a keypair
+       const keypair = Keypair.generate();
+       this.accountCache.set(acc.name, keypair.publicKey);
+       this.signerCache.set(acc.name, keypair);
+       accounts[acc.name] = keypair.publicKey;
+       labels.push({ address: keypair.publicKey, label: acc.name });
+       signers.push(keypair);
     }
 
     if (!signers.includes(payer)) {
       signers.unshift(payer);
     }
 
+    return { accounts, signers, labels };
+  }
+
+  private async resolveTransactionAccounts(
+    instruction: ExecutionTransactionInput["transaction"]["instructions"][number],
+    _programId: PublicKey,
+    payer: Keypair
+  ): Promise<ResolvedAccounts> {
+    const accounts: Record<string, PublicKey> = {};
+    const signers: Keypair[] = [];
+    const labels: Array<{ address: PublicKey; label: string }> = [];
+
+    const payerPubkey = payer.publicKey;
+
+    for (const reqAccount of instruction.accounts) {
+       // reqAccount.pubkey is the "Label" from the UI (e.g. "account-0")
+       // reqAccount.name is the IDL name!
+       
+       let pubkey: PublicKey;
+       let label = reqAccount.pubkey;
+
+       if (label === "system_program") {
+           pubkey = SystemProgram.programId;
+       } else if (label === "user" || label === "payer" || label === "authority") {
+           pubkey = payerPubkey;
+       } else if (this.accountCache.has(label)) {
+           pubkey = this.accountCache.get(label)!;
+           if (this.signerCache.has(label)) {
+               signers.push(this.signerCache.get(label)!);
+           }
+       } else {
+           // New account
+           const keypair = Keypair.generate();
+           this.accountCache.set(label, keypair.publicKey);
+           this.signerCache.set(label, keypair);
+           pubkey = keypair.publicKey;
+           signers.push(keypair);
+       }
+       
+       // Map to IDL name for Anchor
+       accounts[reqAccount.name] = pubkey; 
+       labels.push({ address: pubkey, label });
+    }
+    
     return { accounts, signers, labels };
   }
 
@@ -330,7 +373,7 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
     }
   }
 
-  private getConnection(): Connection {
+  private async getConnection(): Promise<Connection> {
     if (!this.connection) {
       if (!this.validatorManager) {
         throw new Error("Validator is not initialized");
@@ -385,10 +428,10 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
     return JSON.parse(content);
   }
 
-  private fail(input: ExecutionScenarioInput, message: string): ExecutionResult {
+  private fail(scenarioName: string, message: string): ExecutionResult {
     return {
       success: false,
-      scenario: input.scenarioName,
+      scenario: scenarioName,
       accountsBefore: [],
       accountsAfter: [],
       logs: [],
@@ -396,9 +439,5 @@ export class LocalValidatorAdapter implements ExecutionAdapter {
       trace: [],
       error: message,
     };
-  }
-
-  private unsupported(input: ExecutionScenarioInput, message: string): ExecutionResult {
-    return this.fail(input, message);
   }
 }

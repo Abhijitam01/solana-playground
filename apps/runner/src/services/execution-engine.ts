@@ -1,24 +1,9 @@
 import type { ExecutionRequest, ExecutionResult } from "@solana-playground/types";
-import type { Template } from "@solana-playground/types";
 import { loadTemplate } from "@solana-playground/solana";
 import { LocalValidatorAdapter } from "./execution/local-validator-adapter";
+import type { ExecutionAdapter, ExecutionScenarioInput, ExecutionTransactionInput } from "./execution-types";
 
-export interface ExecutionScenarioInput {
-  template: Template;
-  scenarioName: string;
-  instruction: string;
-  args: unknown[];
-}
-
-export interface ExecutionTransactionInput {
-  template: Template;
-  transaction: NonNullable<ExecutionRequest["transaction"]>;
-}
-
-export interface ExecutionAdapter {
-  executeScenario(input: ExecutionScenarioInput): Promise<ExecutionResult>;
-  executeTransaction(input: ExecutionTransactionInput): Promise<ExecutionResult>;
-}
+export type { ExecutionAdapter, ExecutionScenarioInput, ExecutionTransactionInput };
 
 export class ExecutionEngine {
   private readonly adapter: ExecutionAdapter;

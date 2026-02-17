@@ -20,11 +20,15 @@ import { registerSolanaCompletionProvider, registerSolanaHoverProvider } from "@
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 import { LayoutDashboard } from "lucide-react";
+import { defineSolanaThemes } from "@/lib/monaco-themes";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
-// Theme definition singleton
-let themesInitialized = false;
+const PANEL_ANIMATION = {
+  initial: { opacity: 0, x: -20 },
+  animate: { opacity: 1, x: 0 },
+  transition: { duration: 0.3, ease: "easeOut" },
+} as const;
 
 // Monaco editor configuration constants
 const EDITOR_CONFIG = {
@@ -35,201 +39,8 @@ const EDITOR_CONFIG = {
   maxSafeInteger: Number.MAX_SAFE_INTEGER,
 } as const;
 
-// Animation constants
-const PANEL_ANIMATION = {
-  initial: { opacity: 0, x: -20 },
-  animate: { opacity: 1, x: 0 },
-  transition: { duration: 0.3, ease: "easeOut" },
-} as const;
+// Theme definition moved to lib/monaco-themes.ts
 
-/**
- * Define custom Solana-themed Monaco editor themes
- */
-const defineSolanaThemes = (monaco: typeof Monaco): void => {
-  if (themesInitialized) return;
-
-  // Dark theme with Solana-inspired colors
-  monaco.editor.defineTheme("solana-dark", {
-    base: "vs-dark",
-    inherit: true,
-    rules: [
-      { token: "comment", foreground: "5c6b7a", fontStyle: "italic" },
-      { token: "keyword", foreground: "35c9a7", fontStyle: "bold" },
-      { token: "type.identifier", foreground: "7dd3fc" },
-      { token: "identifier", foreground: "e2e8f0" },
-      { token: "number", foreground: "f59e0b" },
-      { token: "string", foreground: "22c55e" },
-      { token: "delimiter", foreground: "94a3b8" },
-      { token: "operator", foreground: "38bdf8" },
-      { token: "function", foreground: "c084fc" },
-    ],
-    colors: {
-      "editor.background": "#0b0f14",
-      "editor.foreground": "#e2e8f0",
-      "editorLineNumber.foreground": "#334155",
-      "editorLineNumber.activeForeground": "#94a3b8",
-      "editor.lineHighlightBackground": "#0f172a",
-      "editor.selectionBackground": "#164e63",
-      "editor.inactiveSelectionBackground": "#0f2a35",
-      "editorCursor.foreground": "#22d3ee",
-      "editorIndentGuide.background1": "#1f2937",
-      "editorIndentGuide.activeBackground1": "#334155",
-      "editorWhitespace.foreground": "#1f2a37",
-      "editorGutter.background": "#0b0f14",
-      "editorOverviewRuler.border": "#0b0f14",
-      "editorWidget.background": "#0f172a",
-      "editorWidget.border": "#1f2937",
-      "editorSuggestWidget.background": "#0f172a",
-      "editorSuggestWidget.border": "#1f2937",
-      "editorSuggestWidget.selectedBackground": "#1e293b",
-      "editorSuggestWidget.foreground": "#e2e8f0",
-      "editorSuggestWidget.highlightForeground": "#22d3ee",
-      "editor.hoverHighlightBackground": "#0f172a",
-      "editorHoverWidget.background": "#0f172a",
-      "editorHoverWidget.border": "#1f2937",
-      "scrollbarSlider.background": "#1f293780",
-      "scrollbarSlider.hoverBackground": "#33415580",
-      "scrollbarSlider.activeBackground": "#47556980",
-    },
-  });
-
-  // Light theme with Solana-inspired colors
-  monaco.editor.defineTheme("solana-light", {
-    base: "vs",
-    inherit: true,
-    rules: [
-      { token: "comment", foreground: "64748b", fontStyle: "italic" },
-      { token: "keyword", foreground: "0f766e", fontStyle: "bold" },
-      { token: "type.identifier", foreground: "0284c7" },
-      { token: "identifier", foreground: "0f172a" },
-      { token: "number", foreground: "b45309" },
-      { token: "string", foreground: "15803d" },
-      { token: "delimiter", foreground: "64748b" },
-      { token: "operator", foreground: "0369a1" },
-      { token: "function", foreground: "7c3aed" },
-    ],
-    colors: {
-      "editor.background": "#f8fafc",
-      "editor.foreground": "#0f172a",
-      "editorLineNumber.foreground": "#94a3b8",
-      "editorLineNumber.activeForeground": "#475569",
-      "editor.lineHighlightBackground": "#eef2f7",
-      "editor.selectionBackground": "#bae6fd",
-      "editor.inactiveSelectionBackground": "#e2e8f0",
-      "editorCursor.foreground": "#0ea5e9",
-      "editorIndentGuide.background1": "#e2e8f0",
-      "editorIndentGuide.activeBackground1": "#cbd5e1",
-      "editorWhitespace.foreground": "#e2e8f0",
-      "editorGutter.background": "#f8fafc",
-      "editorOverviewRuler.border": "#f8fafc",
-      "editorWidget.background": "#ffffff",
-      "editorWidget.border": "#e2e8f0",
-      "editorSuggestWidget.background": "#ffffff",
-      "editorSuggestWidget.border": "#e2e8f0",
-      "editorSuggestWidget.selectedBackground": "#f1f5f9",
-      "editorSuggestWidget.foreground": "#0f172a",
-      "editorSuggestWidget.highlightForeground": "#0ea5e9",
-      "editor.hoverHighlightBackground": "#f1f5f9",
-      "editorHoverWidget.background": "#ffffff",
-      "editorHoverWidget.border": "#e2e8f0",
-      "scrollbarSlider.background": "#cbd5e180",
-      "scrollbarSlider.hoverBackground": "#94a3b880",
-      "scrollbarSlider.activeBackground": "#64748b80",
-    },
-  });
-
-  // Grid theme - black/grayish-black background
-  monaco.editor.defineTheme("solana-grid", {
-    base: "vs-dark",
-    inherit: true,
-    rules: [
-      { token: "comment", foreground: "6b7280", fontStyle: "italic" },
-      { token: "keyword", foreground: "34d399", fontStyle: "bold" },
-      { token: "type.identifier", foreground: "7dd3fc" },
-      { token: "identifier", foreground: "e5e7eb" },
-      { token: "number", foreground: "fbbf24" },
-      { token: "string", foreground: "4ade80" },
-      { token: "delimiter", foreground: "9ca3af" },
-      { token: "operator", foreground: "60a5fa" },
-      { token: "function", foreground: "c084fc" },
-    ],
-    colors: {
-      "editor.background": "#000000",
-      "editor.foreground": "#e5e7eb",
-      "editorLineNumber.foreground": "#4b5563",
-      "editorLineNumber.activeForeground": "#9ca3af",
-      "editor.lineHighlightBackground": "#252525",
-      "editor.selectionBackground": "#1e3a5f",
-      "editor.inactiveSelectionBackground": "#1a1a2e",
-      "editorCursor.foreground": "#34d399",
-      "editorIndentGuide.background1": "#2a2a2a",
-      "editorIndentGuide.activeBackground1": "#3a3a3a",
-      "editorWhitespace.foreground": "#2a2a2a",
-      "editorGutter.background": "#000000",
-      "editorOverviewRuler.border": "#000000",
-      "editorWidget.background": "#252525",
-      "editorWidget.border": "#3a3a3a",
-      "editorSuggestWidget.background": "#252525",
-      "editorSuggestWidget.border": "#3a3a3a",
-      "editorSuggestWidget.selectedBackground": "#2a2a2a",
-      "editorSuggestWidget.foreground": "#e5e7eb",
-      "editorSuggestWidget.highlightForeground": "#34d399",
-      "editor.hoverHighlightBackground": "#252525",
-      "editorHoverWidget.background": "#252525",
-      "editorHoverWidget.border": "#3a3a3a",
-      "scrollbarSlider.background": "#3a3a3a80",
-      "scrollbarSlider.hoverBackground": "#4a4a4a80",
-      "scrollbarSlider.activeBackground": "#5a5a5a80",
-    },
-  });
-
-  // Matrix theme - green matrix-style
-  monaco.editor.defineTheme("solana-matrix", {
-    base: "vs-dark",
-    inherit: true,
-    rules: [
-      { token: "comment", foreground: "00aa00", fontStyle: "italic" },
-      { token: "keyword", foreground: "00ff00", fontStyle: "bold" },
-      { token: "type.identifier", foreground: "00ff88" },
-      { token: "identifier", foreground: "00ff00" },
-      { token: "number", foreground: "88ff00" },
-      { token: "string", foreground: "00ff00" },
-      { token: "delimiter", foreground: "00aa00" },
-      { token: "operator", foreground: "00ff00" },
-      { token: "function", foreground: "00ff88" },
-    ],
-    colors: {
-      "editor.background": "#000000",
-      "editor.foreground": "#00ff00",
-      "editorLineNumber.foreground": "#003300",
-      "editorLineNumber.activeForeground": "#00ff00",
-      "editor.lineHighlightBackground": "#001100",
-      "editor.selectionBackground": "#003300",
-      "editor.inactiveSelectionBackground": "#001100",
-      "editorCursor.foreground": "#00ff00",
-      "editorIndentGuide.background1": "#001100",
-      "editorIndentGuide.activeBackground1": "#002200",
-      "editorWhitespace.foreground": "#001100",
-      "editorGutter.background": "#000000",
-      "editorOverviewRuler.border": "#000000",
-      "editorWidget.background": "#001100",
-      "editorWidget.border": "#003300",
-      "editorSuggestWidget.background": "#001100",
-      "editorSuggestWidget.border": "#003300",
-      "editorSuggestWidget.selectedBackground": "#002200",
-      "editorSuggestWidget.foreground": "#00ff00",
-      "editorSuggestWidget.highlightForeground": "#88ff00",
-      "editor.hoverHighlightBackground": "#001100",
-      "editorHoverWidget.background": "#001100",
-      "editorHoverWidget.border": "#003300",
-      "scrollbarSlider.background": "#00330080",
-      "scrollbarSlider.hoverBackground": "#00440080",
-      "scrollbarSlider.activeBackground": "#00550080",
-    },
-  });
-
-  themesInitialized = true;
-};
 
 /**
  * Enhanced CodePanel component with Monaco editor integration

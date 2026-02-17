@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { GripVertical, Plus, Trash2, Play, Copy, Check } from "lucide-react";
 import { useTransactionStore } from "@/stores/transaction";
+import { usePlaygroundStore } from "@/stores/playground";
 import { useTemplate } from "@/hooks/use-templates";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,6 +23,7 @@ export function TransactionBuilder() {
     removeAccount,
     reset,
   } = useTransactionStore();
+  const executeTransaction = usePlaygroundStore((state) => state.executeTransaction);
   const [copied, setCopied] = useState(false);
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
 
@@ -34,6 +36,7 @@ export function TransactionBuilder() {
       programId: "program",
       instructionName: firstInstruction.name,
       accounts: firstInstruction.accounts.map((acc: typeof firstInstruction.accounts[number], idx: number) => ({
+        name: acc.name,
         pubkey: `account-${idx}`,
         isSigner: acc.isSigner || false,
         isWritable: acc.isMut || false,
@@ -54,8 +57,20 @@ export function TransactionBuilder() {
   };
 
   const handleExecute = () => {
-    // TODO: Execute transaction
-    console.log("Executing transaction:", { instructions, accounts });
+    const transaction = {
+        instructions: instructions.map(inst => ({
+            programId: inst.programId,
+            instructionName: inst.instructionName,
+            accounts: inst.accounts.map(acc => ({
+                name: acc.name,
+                pubkey: acc.pubkey,
+                isSigner: acc.isSigner,
+                isWritable: acc.isWritable
+            })),
+            args: [] // TODO: Support args input in UI
+        }))
+    };
+    void executeTransaction(transaction);
   };
 
   const estimatedFee = instructions.length * 5000; // Simplified fee calculation
