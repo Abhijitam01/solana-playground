@@ -14,8 +14,6 @@ export default function robots(): MetadataRoute.Robots {
           '/auth/',
           '/dashboard/',
           '/my-code/',
-          '/instructor/',
-          '/cohorts/',
           '/styleguide/',
           '/_next/',
           '/admin/',
@@ -29,8 +27,6 @@ export default function robots(): MetadataRoute.Robots {
           '/auth/',
           '/dashboard/',
           '/my-code/',
-          '/instructor/',
-          '/cohorts/',
           '/styleguide/',
           '/_next/',
           '/admin/',
@@ -40,4 +36,3 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
-

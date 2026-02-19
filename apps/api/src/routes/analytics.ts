@@ -11,7 +11,6 @@ analyticsRouter.use(optionalAuthMiddleware);
 const AnalyticsEventSchema = z.object({
   sessionId: z.string().min(1),
   templateId: z.string().optional(),
-  cohortId: z.string().uuid().optional(),
   event: z.string().min(1),
   stepId: z.string().optional(),
   success: z.boolean().optional(),
@@ -39,7 +38,6 @@ analyticsRouter.post(
 
     const values = events.map((event) => ({
       userId: req.userId ?? null,
-      cohortId: event.cohortId ?? null,
       sessionId: event.sessionId,
       templateId: event.templateId ?? null,
       event: event.event,
@@ -65,16 +63,10 @@ analyticsRouter.get(
     }
 
     const templateId = typeof req.query.templateId === "string" ? req.query.templateId : null;
-    const cohortId = typeof req.query.cohortId === "string" ? req.query.cohortId : null;
-
     let events = await db.select().from(analyticsEvents);
 
     if (templateId) {
       events = events.filter((event) => event.templateId === templateId);
-    }
-
-    if (cohortId) {
-      events = events.filter((event) => event.cohortId === cohortId);
     }
 
     const summary = computeSummary(events);

@@ -1,6 +1,7 @@
 import { createWithEqualityFn } from "zustand/traditional";
 import type { ExecutionResult, FunctionSpec } from "@solana-playground/types";
 import { markFirstTxStart, markFirstTxSuccess, trackEvent } from "@/lib/analytics";
+import { useTerminalStore } from "@/stores/terminal";
 
 interface PlaygroundState {
   // Current template
@@ -73,6 +74,12 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
     // ... existing implementation ...
     const templateId = get().templateId;
     if (!templateId) return;
+    
+    // Terminal logging
+    const term = useTerminalStore.getState();
+    term.toggleTerminal(true);
+    term.writeln(`\x1b[38;2;60;165;250m[EXEC]\x1b[0m Running scenario: \x1b[1m${scenario}\x1b[0m...`);
+
     const executionMode = get().executionMode;
     const startedAt = Date.now();
     if (executionMode === "live") {
@@ -98,11 +105,31 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
           instruction: instruction || scenario,
         }),
       });
+
       if (!res.ok) {
         throw new Error(`Execution failed (${res.status})`);
       }
+
       const result = await res.json();
       set({ executionResult: result });
+      
+      // Log result to terminal
+      if (result.success) {
+        term.writeln(`\x1b[32m[SUCCESS]\x1b[0m Execution completed in ${Date.now() - startedAt}ms`);
+        term.writeln(`  • Compute Types: \x1b[36m${result.computeUnits}\x1b[0m`);
+        if (result.logs && result.logs.length > 0) {
+            term.writeln("  • Logs:");
+            result.logs.forEach((log: string) => term.writeln(`    \x1b[2m${log}\x1b[0m`));
+        }
+      } else {
+        term.writeln(`\x1b[31m[FAILED]\x1b[0m Execution failed`);
+        if (result.error) term.writeln(`  \x1b[31m${result.error}\x1b[0m`);
+        if (result.logs && result.logs.length > 0) {
+            term.writeln("  • Logs:");
+            result.logs.forEach((log: string) => term.writeln(`    \x1b[2m${log}\x1b[0m`));
+        }
+      }
+
       if (executionMode === "live") {
         const durationMs = Date.now() - startedAt;
         if (result?.success) {
@@ -136,6 +163,9 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
       }
     } catch (error) {
       console.error("Execution error:", error);
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      term.writeln(`\x1b[31m[ERROR]\x1b[0m ${errorMsg}`);
+      
       set({
         executionResult: {
           success: false,
@@ -145,7 +175,7 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
           logs: [],
           computeUnits: 0,
           trace: [],
-          error: error instanceof Error ? error.message : String(error),
+          error: errorMsg,
         },
       });
       if (executionMode === "live") {
@@ -166,6 +196,12 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
     const templateId = get().templateId;
     if (!templateId) return;
 
+    // Terminal logging
+    const term = useTerminalStore.getState();
+    term.toggleTerminal(true);
+    term.writeln(`\x1b[38;2;60;165;250m[TX]\x1b[0m Executing custom transaction...`);
+    const startedAt = Date.now();
+
     set({ isExecuting: true, currentScenario: "custom-transaction" });
     try {
       const runnerUrl = process.env.NEXT_PUBLIC_RUNNER_URL || "http://localhost:3002";
@@ -185,8 +221,28 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
 
       const result = await res.json();
       set({ executionResult: result });
+
+      // Log result to terminal
+      if (result.success) {
+        term.writeln(`\x1b[32m[SUCCESS]\x1b[0m Transaction confirmed in ${Date.now() - startedAt}ms`);
+        term.writeln(`  • Compute Units: \x1b[36m${result.computeUnits}\x1b[0m`);
+        if (result.logs && result.logs.length > 0) {
+            term.writeln("  • Logs:");
+            result.logs.forEach((log: string) => term.writeln(`    \x1b[2m${log}\x1b[0m`));
+        }
+      } else {
+        term.writeln(`\x1b[31m[FAILED]\x1b[0m Transaction failed`);
+        if (result.error) term.writeln(`  \x1b[31m${result.error}\x1b[0m`);
+        if (result.logs && result.logs.length > 0) {
+            term.writeln("  • Logs:");
+            result.logs.forEach((log: string) => term.writeln(`    \x1b[2m${log}\x1b[0m`));
+        }
+      }
     } catch (error) {
       console.error("Transaction execution error:", error);
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      term.writeln(`\x1b[31m[ERROR]\x1b[0m ${errorMsg}`);
+
       set({
         executionResult: {
           success: false,
@@ -196,7 +252,7 @@ export const usePlaygroundStore = createWithEqualityFn<PlaygroundState>((set, ge
           logs: [],
           computeUnits: 0,
           trace: [],
-          error: error instanceof Error ? error.message : String(error),
+          error: errorMsg,
         },
       });
     } finally {

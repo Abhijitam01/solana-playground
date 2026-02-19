@@ -388,28 +388,6 @@ Next.js 13+ App Router structure. Each folder/file represents a route.
 
 ---
 
-### `app/instructor/page.tsx`
-**Purpose**: Instructor dashboard.
-
-**What it does**:
-- Instructor-specific interface
-- Teaching tools
-
-**If removed**: Instructor page would not exist.
-
----
-
-### `app/cohorts/join/page.tsx`
-**Purpose**: Cohort joining page.
-
-**What it does**:
-- Allows users to join cohorts
-- Cohort management
-
-**If removed**: Cohort joining would not work.
-
----
-
 ### `app/styleguide/page.tsx`
 **Purpose**: Style guide page.
 
@@ -900,4 +878,3 @@ Zustand state management stores.
 - `test-results/` - Test output (regeneratable)
 - `tsconfig.tsbuildinfo` - Build cache (regeneratable)
 - Individual component files (would break specific features)
-

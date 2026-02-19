@@ -8,7 +8,6 @@ const API_URL = normalizeApiUrl(
 );
 
 const SESSION_KEY = "solana-playground-session";
-const COHORT_KEY = "solana-playground-cohort";
 const FIRST_TX_START_KEY = "solana-playground-first-tx-start";
 const FIRST_TX_DONE_KEY = "solana-playground-first-tx-done";
 
@@ -28,16 +27,6 @@ export function getSessionId(): string | null {
   const generated = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
   window.localStorage.setItem(SESSION_KEY, generated);
   return generated;
-}
-
-export function getCohortId(): string | null {
-  if (typeof window === "undefined") return null;
-  return window.localStorage.getItem(COHORT_KEY);
-}
-
-export function setCohortId(cohortId: string) {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(COHORT_KEY, cohortId);
 }
 
 export function markFirstTxStart() {
@@ -63,7 +52,6 @@ export async function trackEvent(input: AnalyticsEventInput): Promise<void> {
 
   const payload = {
     sessionId,
-    cohortId: getCohortId() || undefined,
     event: input.event,
     templateId: input.templateId,
     stepId: input.stepId,

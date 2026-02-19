@@ -12,6 +12,7 @@ import { useAnchorProgram } from "@/hooks/use-anchor-program";
 import { Badge } from "@/components/ui/Badge"; 
 import { HelpIcon } from "@/components/ui/HelpIcon";
 import { useSettingsStore } from "@/stores/settings";
+import { useTerminalStore } from "@/stores/terminal";
 import { defineSolanaThemes } from "@/lib/monaco-themes";
 import { shallow } from "zustand/shallow";
 
@@ -33,6 +34,7 @@ export function TestPanel() {
   );
 
   const { program, provider } = useAnchorProgram();
+  const terminal = useTerminalStore();
 
   const [isRunning, setIsRunning] = useState(false);
   const [testRunner] = useState(() => new BrowserTestRunner());
@@ -77,19 +79,51 @@ describe('${activeProgram?.name || "My Program"}', () => {
 });
 `;
 
+  useEffect(() => {
+    if (!activeProgram?.id) return;
+    if (activeProgram.testCode && activeProgram.testCode.trim().length > 0) return;
+    updateProgramTestCode(activeProgram.id, defaultTestCode.trim());
+  }, [activeProgram?.id, activeProgram?.testCode, defaultTestCode, updateProgramTestCode]);
+
   const handleRunTests = useCallback(async () => {
-    if (!activeProgram?.testCode || !program || !provider) return;
+    if (!activeProgram || !program || !provider) return;
+    const runtimeTestCode =
+      activeProgram.testCode && activeProgram.testCode.trim().length > 0
+        ? activeProgram.testCode
+        : defaultTestCode.trim();
     
     setIsRunning(true);
     try {
-      const result = await testRunner.run(activeProgram.testCode, program, provider);
+      terminal.toggleTerminal(true);
+      terminal.writeln(`\x1b[38;2;60;165;250m[TEST]\x1b[0m Running tests for ${activeProgram.name}...`);
+      if (!activeProgram.testCode || activeProgram.testCode.trim().length === 0) {
+        updateProgramTestCode(activeProgram.id, runtimeTestCode);
+      }
+      const result = await testRunner.run(runtimeTestCode, program, provider);
       setProgramTestResult(activeProgram.id, result);
+      if (result.stats.failures > 0) {
+        terminal.writeln(
+          `\x1b[31m[FAIL]\x1b[0m ${result.stats.passes} passed, ${result.stats.failures} failed`
+        );
+      } else {
+        terminal.writeln(`\x1b[32m[PASS]\x1b[0m All ${result.stats.passes} tests passed`);
+      }
     } catch (err) {
       console.error("Test execution failed:", err);
+      terminal.writeln(`\x1b[31m[ERROR]\x1b[0m ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setIsRunning(false);
     }
-  }, [activeProgram, program, provider, testRunner, setProgramTestResult]);
+  }, [
+    activeProgram,
+    defaultTestCode,
+    program,
+    provider,
+    testRunner,
+    setProgramTestResult,
+    terminal,
+    updateProgramTestCode,
+  ]);
 
   const stats = activeProgram?.lastTestResult?.stats;
 
@@ -127,8 +161,8 @@ describe('${activeProgram?.name || "My Program"}', () => {
         <div className="flex items-center gap-2">
             <button
                 onClick={handleRunTests}
-                disabled={isRunning || !program}
-                className={`btn-primary text-xs flex items-center gap-2 ${isRunning || !program ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isRunning}
+                className={`btn-primary text-xs flex items-center gap-2 ${isRunning ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
                 {isRunning ? <Loader2 className="w-3 h-3 animate-spin"/> : <Play className="w-3 h-3" />}
                 Run Tests

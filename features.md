@@ -18,8 +18,7 @@ This document lists the implemented features across the full codebase.
 - Playground index and template-specific playground routes.
 - My Code page for user saved code.
 - Concepts pages and learning-path-related concept layouts.
-- Paths and instructor routes.
-- Cohort join route.
+- Paths route.
 - Sitemap and robots route generation.
 - Error boundaries and not-found pages.
 
@@ -72,12 +71,21 @@ This document lists the implemented features across the full codebase.
 
 ## In-Browser Test Experience Features
 - Per-program editable test code in Test panel.
-- Mocha/Chai runtime integration in browser test runner.
+- Mocha-style (`describe/it/before/beforeEach/afterEach/after`) browser test runtime with Chai assertions.
 - Test run action from panel.
 - LeetCode-style pass/fail counters in panel UI.
 - Per-test result list with durations and error details.
 - Test definition error capture and display.
 - Template tests loaded into program sessions for template and template-derived custom programs.
+- Default test scaffold auto-seeded for new programs when missing.
+
+## Integrated Terminal Features
+- In-app xterm terminal panel docked at bottom of playground.
+- Terminal logging for live execution scenarios and custom transactions.
+- Terminal logging for test runs.
+- Terminal visibility toggled automatically when execution/test events start.
+- Buffered terminal output queue in store so logs emitted before terminal mount are flushed on attach.
+- Terminal clear action and auto-fit behavior on mount/resize/show.
 
 ## Template Test Coverage Features
 - Every template has non-generic behavioral test coverage in `packages/solana/templates/*/test.ts`.
@@ -134,7 +142,6 @@ This document lists the implemented features across the full codebase.
 - Progress routes.
 - Exercises routes.
 - Analytics routes.
-- Cohorts routes.
 - Centralized async error handling middleware.
 - Request logging middleware.
 - General rate limiting middleware.
@@ -215,4 +222,3 @@ This document lists the implemented features across the full codebase.
 - Function-spec typing.
 - Explanation typing.
 - Unified `Template` interface used across services.
-

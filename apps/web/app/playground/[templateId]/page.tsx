@@ -26,6 +26,7 @@ import { useLayoutStore } from "@/stores/layout";
 import { useSettingsStore } from "@/stores/settings";
 import { AnimatePresence, motion } from "framer-motion";
 import { OnboardingGuide } from "@/components/onboarding/OnboardingGuide";
+import { TerminalPanel } from "@/components/panels/TerminalPanel";
 import {
   Panel,
   PanelGroup,
@@ -426,6 +427,7 @@ export default function PlaygroundPage() {
           </div>
         </div>
       </div>
+      <TerminalPanel />
       <CommandPalette />
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
       <OnboardingGuide />

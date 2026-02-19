@@ -31,6 +31,25 @@ export function ProgramChecklistPanel() {
 
   const items = useMemo(() => activeProgram?.checklist ?? [], [activeProgram]);
   const hasChecklistItems = items.length > 0;
+  const fallbackItems = useMemo(() => {
+    if (!activeProgram) return [];
+    if (activeProgram.source === "custom") {
+      const todoLines = activeProgram.code
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.includes("TODO"))
+        .slice(0, 6)
+        .map((line) => line.replace(/^\/\/\s*/, ""));
+      if (todoLines.length > 0) {
+        return todoLines;
+      }
+    }
+    return [
+      "Implement at least one instruction body",
+      "Validate account constraints and signer checks",
+      "Run tests and fix any failing assertions",
+    ];
+  }, [activeProgram]);
   const todoCount = useMemo(() => {
     if (!activeProgram || activeProgram.source !== "custom") return 0;
     return activeProgram.code.split("\n").filter((line) => line.includes("TODO")).length;
@@ -110,12 +129,20 @@ export function ProgramChecklistPanel() {
                 </div>
               </>
             ) : (
-              <div className="text-sm text-muted-foreground leading-relaxed">
-                This program does not ship with checklist steps yet. Add a{" "}
-                <span className="font-mono text-foreground">checklist.json</span> to the template
-                folder under <span className="font-mono text-foreground">packages/solana/templates</span>{" "}
-                and export an array of strings, or rely on the fallback steps defined in the API.
-              </div>
+              <>
+                {fallbackItems.map((item) => (
+                  <div
+                    key={item}
+                    className="w-full text-left flex items-start gap-2 rounded-lg border border-border/70 bg-muted/20 px-3 py-2"
+                  >
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-muted-foreground" />
+                    <div className="text-sm text-foreground">{item}</div>
+                  </div>
+                ))}
+                <div className="text-xs text-muted-foreground pt-2">
+                  Checklist is generated from your current workspace and TODO items.
+                </div>
+              </>
             )}
           </motion.div>
         )}

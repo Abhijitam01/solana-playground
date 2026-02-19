@@ -129,7 +129,6 @@ apps/api/
   - `/progress`: Progress tracking
   - `/exercises`: Exercise routes
   - `/analytics`: Analytics routes
-  - `/cohorts`: Cohort routes
   - `/templates`: Template routes
   - `/execute`: Execution routes
 - Sets up 404 handler
@@ -306,21 +305,6 @@ apps/api/
 
 ---
 
-### `src/routes/cohorts.ts`
-**Purpose**: Cohort management routes.
-
-**Endpoints**:
-- Cohort-related endpoints
-
-**What it does**:
-- Manages learning cohorts
-- Cohort membership
-- Cohort progress
-
-**If removed**: Cohort features would not work.
-
----
-
 ## Services (`src/services/`)
 
 ### `src/services/cache.ts`
@@ -448,4 +432,3 @@ apps/api/
 - Requires `apps/runner` service running
 - Requires database (via `@solana-playground/db`)
 - Requires Gemini API key for AI features
-

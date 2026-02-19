@@ -8,7 +8,6 @@ import { authRouter } from "./routes/auth";
 import { progressRouter } from "./routes/progress";
 import { exercisesRouter } from "./routes/exercises";
 import { analyticsRouter } from "./routes/analytics";
-import { cohortsRouter } from "./routes/cohorts";
 import { errorHandler } from "./middleware/error-handler";
 import { generalRateLimit } from "./middleware/rate-limit";
 import { requestLogger } from "./middleware/logging";
@@ -48,7 +47,6 @@ export function createApp() {
   app.use("/progress", progressRouter);
   app.use("/exercises", exercisesRouter);
   app.use("/analytics", analyticsRouter);
-  app.use("/cohorts", cohortsRouter);
   app.use("/templates", templatesRouter);
   app.use("/templates", explainRouter);
   app.use("/execute", executeRouter);
@@ -67,4 +65,3 @@ export function createApp() {
 
 const app = createApp();
 export default app;
-
